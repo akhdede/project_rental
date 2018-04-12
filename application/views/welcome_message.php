@@ -1,4 +1,3 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
-oke
+<div class="col-12">
+    <span class="font-weight-bold">oke bosss</span>
+</div>
