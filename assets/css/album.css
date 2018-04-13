@@ -47,7 +47,7 @@ div .album-show {
 
 div .album-show:hover .album-light {
   position: relative;
-  opacity: 0.1;
+  opacity: 0.3;
   transition: all .4s ease;
   -webkit-transition: all .4s ease;
 }
@@ -66,4 +66,12 @@ div .album-show:hover .btn-danger {
 
 div .album-show .btn-danger {
   display: none;
+}
+
+div .album-show .album-background {
+  position: absolute;
+  margin: 0 auto;
+  z-index: 1000;
+  top: 43%;
+  left: 43%;
 }

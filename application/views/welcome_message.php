@@ -1,47 +1,15 @@
-<!-- ========================================== start of header ========================================== -->
-<header>
-    <div class="collapse bg-danger" id="navbarHeader">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-8 col-md-7 py-4">
-                    <h4 class="text-white">About</h4>
-                    <p class="text-black">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
-                </div>
-                <div class="col-sm-4 offset-md-1 py-4">
-                    <h4 class="text-white">Contact</h4>
-                    <ul class="list-unstyled">
-                        <li><span class="text-black">082348366034</span></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="navbar navbar-dark bg-danger box-shadow">
-        <div class="container d-flex justify-content-between">
-            <a href="#" class="navbar-brand d-flex align-items-center">
-                <span class="fa fa-car" style="margin-right: 10px;"></span>
-                <strong>CV. Garuda Jaya Totabuan</strong>
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
-    </div>
-</header>
-<!-- ========================================== end of header ========================================== -->
-
 <!-- ========================================== start of main ========================================== -->
-
 <main role="main">
 
     <!-- start jumbotron -->
     <section class="jumbotron text-center">
         <div class="container">
             <h1 class="jumbotron-heading">Selamat datang</h1>
-            <p class="lead text-muted">Untuk memesan kursi silahkan login terlebih dahulu. Jika belum punya akun segera lakukan pendaftaran.</p>
+            <p class="lead text-muted">Untuk memesan kursi silahkan login terlebih dahulu. Jika belum punya akun segera lakukan pendaftaran. Anda dapat memesan kursi tanpa melakukan pendaftaran, akan tetapi setiap kali melakukan pemesanan kursi anda harus selalu memasukkan identitas diri.</p>
             <p>
-                <a href="#" class="btn btn-primary btn-lg my-2">Login</a>
+                <a href="<?php echo base_url('user/login'); ?>" class="btn btn-primary btn-lg my-2">Login</a>
                 <a href="#" class="btn btn-danger btn-lg my-2">Daftar</a>
+                <a href="#" class="btn btn-secondary btn-lg my-2">Pesan Tanpa Daftar</a>
             </p>
         </div>
     </section>
@@ -53,11 +21,12 @@
 
                 <!-- start album -->
                 <?php foreach($mobil_tersedia as $mt){ ?>
-                    <div class="col-md-4 album-show">
+                    <div class="col-md-4 col-sm-12 album-show">
                         <button class="btn btn-danger btn-lg"><span class="fa fa-shopping-cart"></span> Pesan</button>
                         <span class="album-light">
-                            <div class="card mb-4 box-shadow">
+                            <div class="card mb-4 mb-12 box-shadow">
                                 <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
+                                <img class="album-background" src="<?php echo base_url('assets/img/album-background.png'); ?>" alt="">
                                 <div class="card-body" style="">
                                     <span class="card-text font-weight-bold text-dark">
                                         <h4 class="text-center"><?php echo $mt->merek.' ('.$mt->plat_nomor.') '; ?></h4>
@@ -73,7 +42,7 @@
                                     <small class="text-muted">
                                         <span class="text-secondary">Harga sewa : </span><br />
                                             <?php foreach($kursi_harga as $kh){ ?>
-                                                <span class="text-secondary"><?php echo '- Kursi '.$kh->posisi.' Rp.'.$kh->harga.'<i> ( '.$kh->keterangan.' )</i>'; ?></span><br />
+                                                <span class="text-secondary"><?php echo '- Kursi '.$kh->posisi.'<i> ( '.$kh->keterangan.' )</i> - Rp.'.$kh->harga; ?></span><br />
                                             <?php } ?>
                                         <span class="text-secondary">Ket :</span><br />
                                         <span class="fa fa-check text-success"></span> Belum dipesan<br />
@@ -92,15 +61,3 @@
 </main>
 <!-- ========================================== end of main ========================================== -->
 
-<!-- ========================================== start of footer ========================================== -->
-
-<footer class="text-muted">
-    <div class="container">
-        <p class="float-right">
-            <a href="#">Back to top</a>
-        </p>
-        <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-        <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
-    </div>
-</footer>
-<!-- ========================================== end of footer ========================================== -->

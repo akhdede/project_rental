@@ -6,6 +6,10 @@ class Welcome extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
+        $data = array(
+            'title' => 'CV. New Garuda Jaya Totabuan'
+        );
+		$this->load->view('layouts/header', $data);
         $this->load->model('welcome_model');
     }
 
