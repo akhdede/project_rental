@@ -52,6 +52,7 @@ CREATE TABLE `kursi_harga` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `posisi` varchar(10) NOT NULL,
   `harga` int(11) NOT NULL,
+  `keterangan` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -62,7 +63,7 @@ CREATE TABLE `kursi_harga` (
 
 LOCK TABLES `kursi_harga` WRITE;
 /*!40000 ALTER TABLE `kursi_harga` DISABLE KEYS */;
-INSERT INTO `kursi_harga` VALUES (1,'Depan',120000),(2,'Tengah',110000),(3,'Belakang',100000);
+INSERT INTO `kursi_harga` VALUES (1,'Depan',120000,'Kursi 1'),(2,'Tengah',110000,'Kursi 2, 3 & 4'),(3,'Belakang',100000,'Kursi 5, 6 & 7');
 /*!40000 ALTER TABLE `kursi_harga` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,7 +81,7 @@ CREATE TABLE `kursi_tersedia` (
   `status_order` int(1) NOT NULL DEFAULT '0',
   `status_bayar` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,7 +90,7 @@ CREATE TABLE `kursi_tersedia` (
 
 LOCK TABLES `kursi_tersedia` WRITE;
 /*!40000 ALTER TABLE `kursi_tersedia` DISABLE KEYS */;
-INSERT INTO `kursi_tersedia` VALUES (1,'DB 1234 KI',1,0,0),(2,'DB 1234 KI',2,0,0),(3,'DB 1234 KI',3,0,0),(4,'DB 1234 KI',4,0,0),(5,'DB 1234 KI',5,0,0),(6,'DB 1234 KI',6,0,0),(7,'DB 1234 KI',7,0,0);
+INSERT INTO `kursi_tersedia` VALUES (1,'DB 1234 KI',1,0,0),(2,'DB 1234 KI',2,0,0),(3,'DB 1234 KI',3,0,0),(4,'DB 1234 KI',4,0,0),(5,'DB 1234 KI',5,0,0),(6,'DB 1234 KI',6,1,0),(7,'DB 1234 KI',7,0,0),(8,'DB 1235 KI',1,1,0),(9,'DB 1235 KI',2,0,0),(10,'DB 1235 KI',3,0,0),(11,'DB 1235 KI',4,0,0),(12,'DB 1235 KI',5,0,0),(13,'DB 1235 KI',6,0,0),(14,'DB 1235 KI',7,0,0),(15,'DB 1236 KI',1,0,0),(16,'DB 1236 KI',2,0,0),(17,'DB 1236 KI',3,0,0),(18,'DB 1236 KI',4,0,0),(19,'DB 1236 KI',5,0,0),(20,'DB 1236 KI',6,0,0),(21,'DB 1236 KI',7,0,0);
 /*!40000 ALTER TABLE `kursi_tersedia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -108,7 +109,7 @@ CREATE TABLE `mobil_tersedia` (
   `id_sopir` int(11) NOT NULL,
   `tanggal` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,7 +118,7 @@ CREATE TABLE `mobil_tersedia` (
 
 LOCK TABLES `mobil_tersedia` WRITE;
 /*!40000 ALTER TABLE `mobil_tersedia` DISABLE KEYS */;
-INSERT INTO `mobil_tersedia` VALUES (1,'DB 1234 KI','Toyota Avanza','avanza.jpg',1,'2018-04-13');
+INSERT INTO `mobil_tersedia` VALUES (1,'DB 1234 KI','Toyota Avanza','avanza.jpg',1,'2018-04-13'),(2,'DB 1235 KI','Toyota Avanza','avanza.jpg',1,'2018-04-13'),(3,'DB 1236 KI','Toyota Avanza','avanza.jpg',1,'2018-04-13');
 /*!40000 ALTER TABLE `mobil_tersedia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -209,4 +210,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-12 23:47:51
+-- Dump completed on 2018-04-13 17:04:49
