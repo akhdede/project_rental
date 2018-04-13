@@ -16,6 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `costumers`
+--
+
+DROP TABLE IF EXISTS `costumers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `costumers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) NOT NULL,
+  `nama_lengkap` varchar(100) NOT NULL,
+  `nomor_handphone` int(14) NOT NULL,
+  `kabupaten_kota` varchar(30) NOT NULL,
+  `kecamatan` varchar(30) NOT NULL,
+  `desa_kelurahan` varchar(30) NOT NULL,
+  `alamat` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `costumers`
+--
+
+LOCK TABLES `costumers` WRITE;
+/*!40000 ALTER TABLE `costumers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `costumers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `daftar_mobil`
 --
 
@@ -63,7 +92,7 @@ CREATE TABLE `kursi_harga` (
 
 LOCK TABLES `kursi_harga` WRITE;
 /*!40000 ALTER TABLE `kursi_harga` DISABLE KEYS */;
-INSERT INTO `kursi_harga` VALUES (1,'Depan',120000,'Kursi 1'),(2,'Tengah',110000,'Kursi 2, 3 & 4'),(3,'Belakang',100000,'Kursi 5, 6 & 7');
+INSERT INTO `kursi_harga` VALUES (1,'Depan',120000,'Kursi 1'),(2,'Tengah',110000,'Kursi 2, 3 atau 4'),(3,'Belakang',100000,'Kursi 5, 6 atau 7');
 /*!40000 ALTER TABLE `kursi_harga` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +119,7 @@ CREATE TABLE `kursi_tersedia` (
 
 LOCK TABLES `kursi_tersedia` WRITE;
 /*!40000 ALTER TABLE `kursi_tersedia` DISABLE KEYS */;
-INSERT INTO `kursi_tersedia` VALUES (1,'DB 1234 KI',1,0,0),(2,'DB 1234 KI',2,0,0),(3,'DB 1234 KI',3,0,0),(4,'DB 1234 KI',4,0,0),(5,'DB 1234 KI',5,0,0),(6,'DB 1234 KI',6,1,0),(7,'DB 1234 KI',7,0,0),(8,'DB 1235 KI',1,1,0),(9,'DB 1235 KI',2,0,0),(10,'DB 1235 KI',3,0,0),(11,'DB 1235 KI',4,0,0),(12,'DB 1235 KI',5,0,0),(13,'DB 1235 KI',6,0,0),(14,'DB 1235 KI',7,0,0),(15,'DB 1236 KI',1,0,0),(16,'DB 1236 KI',2,0,0),(17,'DB 1236 KI',3,0,0),(18,'DB 1236 KI',4,0,0),(19,'DB 1236 KI',5,0,0),(20,'DB 1236 KI',6,0,0),(21,'DB 1236 KI',7,0,0);
+INSERT INTO `kursi_tersedia` VALUES (1,'DB 1234 KI',1,0,0),(2,'DB 1234 KI',2,0,0),(3,'DB 1234 KI',3,0,0),(4,'DB 1234 KI',4,0,0),(5,'DB 1234 KI',5,0,0),(6,'DB 1234 KI',6,1,0),(7,'DB 1234 KI',7,0,0),(8,'DB 1235 KI',1,1,0),(9,'DB 1235 KI',2,0,0),(10,'DB 1235 KI',3,0,0),(11,'DB 1235 KI',4,0,0),(12,'DB 1235 KI',5,0,0),(13,'DB 1235 KI',6,0,0),(14,'DB 1235 KI',7,0,0),(15,'DB 1236 KI',1,1,0),(16,'DB 1236 KI',2,1,0),(17,'DB 1236 KI',3,0,0),(18,'DB 1236 KI',4,0,0),(19,'DB 1236 KI',5,0,0),(20,'DB 1236 KI',6,0,0),(21,'DB 1236 KI',7,0,0);
 /*!40000 ALTER TABLE `kursi_tersedia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,6 +217,9 @@ CREATE TABLE `users` (
   `nama_lengkap` varchar(100) NOT NULL,
   `alamat` text NOT NULL,
   `nomor_handphone` int(14) NOT NULL,
+  `kabupaten_kota` varchar(30) NOT NULL,
+  `kecamatan` varchar(30) NOT NULL,
+  `desa_kelurahan` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -210,4 +242,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-13 17:04:49
+-- Dump completed on 2018-04-13 22:45:41
