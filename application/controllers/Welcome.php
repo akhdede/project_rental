@@ -14,7 +14,8 @@ class Welcome extends CI_Controller {
         $data = array(
             'content' => 'welcome_message',
             'mobil_tersedia' => $this->welcome_model->mobil_tersedia(),
-            'kursi_tersedia' => $this->welcome_model->kursi_tersedia()
+            'kursi_tersedia' => $this->welcome_model->kursi_tersedia(),
+            'kursi_harga' => $this->welcome_model->kursi_harga()
         );
 		$this->load->view('layouts/wrapper', $data);
 	}
