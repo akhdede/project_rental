@@ -1,18 +1,51 @@
 <!-- ========================================== start of footer ========================================== -->
-
-<footer class="text-muted">
-    <div class="container">
-        <p>Copyright &copy; <a href="https://newgarudajayatotabuan.com">New Garuda Jaya Totabuan</a></p>
-        <p>Jl. Hi. Zakaria Imban, Kel. Molinow, Kec. Kotamobagu Barat, Kota Kotamobagu.</p>
-    </div>
-</footer>
+<?php if($this->uri->segment(2) != 'get_provinsi') { ?>
+    <footer class="text-muted">
+        <div class="container">
+            <p>Copyright &copy; <a href="https://newgarudajayatotabuan.com">New Garuda Jaya Totabuan</a></p>
+            <p>Jl. Hi. Zakaria Imban, Kel. Molinow, Kec. Kotamobagu Barat, Kota Kotamobagu.</p>
+        </div>
+    </footer>
+<?php } ?>
 <!-- ========================================== end of footer ========================================== -->
-
-<script src="<?php echo base_url(); ?>assets/js/jquery.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="<?php echo base_url(); ?>assets/js/vendor/jquery-slim.min.js">')</script>
-<script src="<?php echo base_url(); ?>assets/js/vendor/popper.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/vendor/holder.min.js"></script>
-<script defer src="<?php echo base_url(); ?>assets/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery-3.3.1.min.js"></script>
+<script src="<?php echo base_url(); ?>/assets/js/vendor/popper.min.js"></script>
+<script src="<?php echo base_url(); ?>/assets/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>/assets/js/vendor/holder.min.js"></script>
+<script src="<?php echo base_url(); ?>/assets/js/jquery.autocomplete.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+  $( function() {
+    var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+    ];
+    $( "#provinsi" ).autocomplete({
+      source: availableTags
+    });
+  } );
+  </script>
 </body>
 </html>

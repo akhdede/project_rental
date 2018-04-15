@@ -23,6 +23,28 @@ class User extends CI_Controller {
         $data = array(
             'content' => 'user/view_login'
         );
+
         $this->load->view('layouts/wrapper', $data);
 	}
+
+	public function signup()
+	{
+        $data = array(
+            'content' => 'user/view_signup'
+        );
+
+        $this->load->view('layouts/wrapper', $data);
+	}
+
+    public function get_provinsi()
+    {
+        if(isset($_GET['term'])){
+            $result = $this->user_model->get_provinsi($_GET['term']);
+            if(count($result) > 0){
+                foreach($result as $p)
+                    $provinces[] = $p->name;
+                echo json_encode($provinces);
+            }
+        }
+    }
 }
