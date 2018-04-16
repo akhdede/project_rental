@@ -1,15 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
+<?php if($this->uri->segment(2) != 'get_regencies'){ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>CV. New Garuda Jaya Totabuan | Rental</title>
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/album.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> 
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
         *{
             font-family: 'Open Sans', sans-serif;
@@ -17,7 +17,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </style>
 </head>
 <body>    
-<!-- ========================================== start of header ========================================== -->
 <?php if($this->router->fetch_class() === 'welcome') { ?>
     <header>
         <div class="collapse bg-danger" id="navbarHeader">
@@ -50,22 +49,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </header>
 <?php } ?>
 <?php if($this->router->fetch_class() === 'user') { ?>
-    <?php if($this->uri->segment(2) != 'get_provinsi') { ?>
-        <header>
-            <div class="navbar navbar-dark bg-light box-shadow border-top border-bottom">
-                <div class="container d-flex justify-content-between">
-                    <a href="<?php echo base_url(); ?>" class="navbar-brand d-flex align-items-center text-dark">
-                        <span class="fa fa-car" style="margin-right: 10px;"></span>
-                        <strong><?php echo $title; ?></strong>
-                    </a>
-                    <?php if($this->uri->segment(1) == 'user' and $this->uri->segment(2) == 'login') { ?>
-                        <span class="nav-link">Silahkan login</span>
-                    <?php } elseif($this->uri->segment(1) == 'user' and $this->uri->segment(2) == 'signup') { ?>
-                        <span class="nav-link">Silahkan masukkan data diri anda</span>
-                    <?php  } ?>
-                </div>
+    <header>
+        <div class="navbar navbar-dark bg-light box-shadow border-top border-bottom">
+            <div class="container d-flex justify-content-between">
+                <a href="<?php echo base_url(); ?>" class="navbar-brand d-flex align-items-center text-dark">
+                    <span class="fa fa-car" style="margin-right: 10px;"></span>
+                    <strong><?php echo $title; ?></strong>
+                </a>
+                <?php if($this->uri->segment(1) == 'user' and $this->uri->segment(2) == 'login') { ?>
+                    <span class="nav-link">Silahkan login</span>
+                <?php } elseif($this->uri->segment(1) == 'user' and $this->uri->segment(2) == 'signup') { ?>
+                    <span class="nav-link">Silahkan masukkan data diri anda</span>
+                <?php  } ?>
             </div>
-        </header>
-    <?php } ?>
+        </div>
+    </header>
 <?php } ?>
-<!-- ========================================== end of header ========================================== -->
+<?php } ?>

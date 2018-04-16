@@ -30,21 +30,18 @@ class User extends CI_Controller {
 	public function signup()
 	{
         $data = array(
-            'content' => 'user/view_signup'
+            'content' => 'user/view_signup',
+            'provinces' => $this->user_model->get_provinces()
         );
 
         $this->load->view('layouts/wrapper', $data);
 	}
 
-    public function get_provinsi()
-    {
-        if(isset($_GET['term'])){
-            $result = $this->user_model->get_provinsi($_GET['term']);
-            if(count($result) > 0){
-                foreach($result as $p)
-                    $provinces[] = $p->name;
-                echo json_encode($provinces);
-            }
-        }
+    public function get_regencies(){
+        $id_province = $this->input->post('id_province');
+        $data = $this->user_model->get_regencies($id_province);
+        echo json_encode($data);
     }
+
+
 }

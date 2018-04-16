@@ -5,7 +5,7 @@
     <section class="jumbotron text-center">
         <div class="container">
             <h1 class="jumbotron-heading">Selamat datang</h1>
-            <p class="lead text-muted">Untuk memesan kursi silahkan login terlebih dahulu. Jika belum punya akun segera lakukan pendaftaran. Anda dapat memesan kursi tanpa melakukan pendaftaran, akan tetapi setiap kali melakukan pemesanan kursi anda harus selalu memasukkan identitas diri.</p>
+            <p class="lead text-muted">Untuk memesan kursi silahkan login terlebih dahulu. Jika belum punya akun segera lakukan pendaftaran.</p>
             <p>
                 <a href="<?php echo base_url('user/login'); ?>" class="btn btn-primary btn-lg my-2">Login</a>
                 <a href="<?php echo base_url('user/signup'); ?>" class="btn btn-danger btn-lg my-2">Daftar</a>

@@ -2,24 +2,32 @@
     <div class="col-md-4 offset-md-4" style="padding: 20px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.10);">
         <form>
             <div class="form-group">
-                <label for="email">Alamat Email</label>
-                <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Masukkan Alamat Email">
+                <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Alamat Email" style="border-radius: 0px;">
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" name="password" class="form-control" id="password" placeholder="Masukkan Password">
+                <input type="password" name="password" class="form-control" id="password" placeholder="Password" style="border-radius: 0px;">
             </div>
             <div class="form-group">
-                <label for="nama_lengkap">Nama Lengkap</label>
-                <input type="text" name="nama_lengkap" class="form-control" id="nama_lengkap" aria-describedby="emailHelp" placeholder="Masukkan Nama Lengkap">
+                <input type="text" name="nama_lengkap" class="form-control" id="nama_lengkap" aria-describedby="emailHelp" placeholder="Nama Lengkap" style="border-radius: 0px;">
             </div>
             <div class="form-group">
-                <label for="nomor_handphone">Nomor Handphone</label>
-                <input type="text" name="nomor_handphone" class="form-control" id="nomor_handphone" aria-describedby="emailHelp" placeholder="Masukkan Nomor Handphone">
+                <input type="text" name="nomor_handphone" class="form-control" id="nomor_handphone" aria-describedby="emailHelp" placeholder="Nomor Handphone" style="border-radius: 0px;">
             </div>
             <div class="form-group">
-                <label for="provinsi">Nama Provinsi</label>
-                <input type="text" name="provinsi" class="form-control" id="provinsi" aria-describedby="emailHelp" placeholder="Masukkan Nama Provinsi">
+				<select id="id_provinces" name="id_provinces" class="js-example-placeholder-single1 js-provinces form-control">
+                    <option value=""></option>
+                        <?php foreach($provinces as $p) { ?>
+                            <option value="<?php echo $p->id; ?>"><?php echo $p->name; ?></option>
+                        <?php } ?>
+                </select>
+            </div>
+            <div class="form-group">
+				<select id="id_regencies" name="id_regencies" class="js-example-placeholder-single2 js-regencies form-control">
+                    <option value=""></option>
+                        <?php foreach($regencies as $r) { ?>
+                            <option value="<?php echo $r->id; ?>"><?php echo $r->name; ?></option>
+                        <?php } ?>
+                </select>
             </div>
         </form>
     </div>
