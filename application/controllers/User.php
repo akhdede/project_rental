@@ -27,6 +27,26 @@ class User extends CI_Controller {
         $this->load->view('layouts/wrapper', $data);
 	}
 
+    public function login_action()
+    {
+        $email = $this->input->post('email');
+        $password = $this->input->post('password');
+
+        $where = array(
+            'email' => $email
+        );
+
+        $cek_login = $this->user_model->cek_login('users', $where)->num_rows();
+
+        if($cek_login > 0){
+            $data_user = $this->db->get_where('users', $where)->result();
+            echo $data_user[0]->email;
+            echo $data_user[0]->password;
+        }
+
+
+    }
+
 	public function signup()
 	{
         $data = array(
