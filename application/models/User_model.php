@@ -2,22 +2,17 @@
 
 class User_model extends CI_Model {
 
-    function users()
-    {
-        $sql = $this->db->query('SELECT email, password, nama_lengkap, kabupaten_kota, kecamatan, desa_kelurahan, alamat, nomor_handphone FROM users');
-        return $sql->result();
-    }
-
-    function get_provinces()
-    {
-        $query = $this->db->get('provinces');
+    function get_all_provinsi() {
+        $this->db->select('*');
+        $this->db->from('wilayah_provinsi');
+        $query = $this->db->get();
+        
         return $query->result();
     }
 
-    function get_regencies($id_province)
+    function signup_action($data, $table)
     {
-        $sql = $this->db->query("SELECT * FROM regencies WHERE province_id = '$id_province'");
-        return $sql->result();
+        $this->db->insert($table, $data);
     }
 
 }

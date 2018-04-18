@@ -20,42 +20,30 @@
 
     <!-- select2 script -->
     <script type="text/javascript">
-    $(".js-example-placeholder-single1").select2({
-        placeholder: "Nama Provinsi",
-        allowClear: true
-    });
-    
-    $(".js-example-placeholder-single2").select2({
-        placeholder: "Nama Kabupaten/Kota",
-        allowClear: true
-    });
-    </script>
-
-<script type="text/javascript">
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('#id_provinces').change(function(){
-            var id=$(this).val();
-            $.ajax({
-                url : "<?php echo base_url();?>user/get_regencies",
-                method : "POST",
-                data : {id_province: id_province},
-                async : false,
-                dataType : 'json',
-                success: function(data){
-                    var html = '';
-                    var i;
-                    for(i=0; i<data.length; i++){
-                        html += '<option>'+data[i].name+'</option>';
-                    }
-                    $('.id_regencies').html(html);
-                     
-                }
-            });
+        $(".select").select2({
         });
-    });
-</script>
-</script>
+    </script>
+	<script>
+        $(document).ready(function(){
+            $("#provinsi").change(function (){
+                var url = "<?php echo site_url('user/add_ajax_kab');?>/"+$(this).val();
+                $('#kabupaten').load(url);
+                return false;
+            })
+			
+			$("#kabupaten").change(function (){
+                var url = "<?php echo site_url('user/add_ajax_kec');?>/"+$(this).val();
+                $('#kecamatan').load(url);
+                return false;
+            })
+			
+			$("#kecamatan").change(function (){
+                var url = "<?php echo site_url('user/add_ajax_des');?>/"+$(this).val();
+                $('#desa').load(url);
+                return false;
+            })
+        });
+    </script>
 
 </body>
 </html>

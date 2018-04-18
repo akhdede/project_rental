@@ -31,17 +31,64 @@ class User extends CI_Controller {
 	{
         $data = array(
             'content' => 'user/view_signup',
-            'provinces' => $this->user_model->get_provinces()
+			'provinsi' => $this->user_model->get_all_provinsi()
         );
 
         $this->load->view('layouts/wrapper', $data);
 	}
 
-    public function get_regencies(){
-        $id_province = $this->input->post('id_province');
-        $data = $this->user_model->get_regencies($id_province);
-        echo json_encode($data);
+    public function signup_action()
+    {
+        $email = $this->input->post('email');
+        $password = password_hash($this->input->post('nama_lengkap'), PASSWORD_DEFAULT);
+        $nama_lengkap = $this->input->post('nama_lengkap');
+        $nomor_handphone = $this->input->post('nomor_handphone');
+        $provinsi = $this->input->post('provinsi');
+        $kabupaten = $this->input->post('kabupaten');
+        $kecamatan = $this->input->post('kecamatan');
+        $desa = $this->input->post('desa');
+        $alamat = $this->input->post('alamat');
+
+        $data = array(
+            'email' => $email,
+            'password' => $password,
+            'nama_lengkap' => $nama_lengkap,
+            'nomor_handphone' => $nomor_handphone,
+            'provinsi' => $provinsi,
+            'kabupaten' => $kabupaten,
+            'kecamatan' => $kecamatan,
+            'desa' => $desa,
+            'alamat' => $alamat
+        );
+
+        $this->user_model->signup_action($data, 'users');
+        redirect('user/login');
     }
 
-
+    function add_ajax_kab($id_prov){
+        $query = $this->db->get_where('wilayah_kabupaten',array('provinsi_id'=>$id_prov));
+        $data = "<option value=''>- Pilih Kabupaten -</option>";
+        foreach ($query->result() as $value) {
+            $data .= "<option value='".$value->id."'>".$value->nama."</option>";
+        }
+        echo $data;
+    }
+    
+    function add_ajax_kec($id_kab){
+        $query = $this->db->get_where('wilayah_kecamatan',array('kabupaten_id'=>$id_kab));
+        $data = "<option value=''> - Pilih Kecamatan - </option>";
+        foreach ($query->result() as $value) {
+            $data .= "<option value='".$value->id."'>".$value->nama."</option>";
+        }
+        echo $data;
+    }
+    
+    function add_ajax_des($id_kec){
+        $query = $this->db->get_where('wilayah_desa',array('kecamatan_id'=>$id_kec));
+        $data = "<option value=''> - Pilih Desa - </option>";
+        foreach ($query->result() as $value) {
+            $data .= "<option value='".$value->id."'>".$value->nama."</option>";
+        }
+        echo $data;
+    }
 }

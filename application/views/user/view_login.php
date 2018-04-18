@@ -9,7 +9,9 @@
                 <label for="exampleInputPassword1">Password</label>
                 <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Login</button>
         </form>
+        <p> <p>
+        Belum punya akun? silahkan <a href="<?php echo base_url('user/signup'); ?>">daftar</a>
     </div>
 </div>
