@@ -29,21 +29,17 @@ class User extends CI_Controller {
 
     public function login_action()
     {
-        $email = $this->input->post('email');
-        $password = $this->input->post('password');
-
-        $where = array(
-            'email' => $email
-        );
-
-        $cek_login = $this->user_model->cek_login('users', $where)->num_rows();
-
-        if($cek_login > 0){
-            $data_user = $this->db->get_where('users', $where)->result();
-            echo $data_user[0]->email;
-            echo $data_user[0]->password;
+        if($this->user_model->login($_POST['email'], $_POST['password']) == NULL){
+            $data['error'] = 'Email atau password salah!';
+            $this->load->view('user/view_login', $data);
+        }else{
+            $user = $this->db->get_where('users', array('email' => $_POST['email']))->result();
+            $_SESSION = array(
+                'nama_lengkap' => $user[0]->nama_lengkap,
+                'level' => $user[0]->level
+            );
+            redirect(base_url());
         }
-
 
     }
 
@@ -60,7 +56,7 @@ class User extends CI_Controller {
     public function signup_action()
     {
         $email = $this->input->post('email');
-        $password = password_hash($this->input->post('nama_lengkap'), PASSWORD_DEFAULT);
+        $password = password_hash($this->input->post('password'), PASSWORD_BCRYPT);
         $nama_lengkap = $this->input->post('nama_lengkap');
         $nomor_handphone = $this->input->post('nomor_handphone');
         $provinsi = $this->input->post('provinsi');
@@ -83,6 +79,12 @@ class User extends CI_Controller {
 
         $this->user_model->signup_action($data, 'users');
         redirect('user/login');
+    }
+
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect(base_url());
     }
 
     function add_ajax_kab($id_prov){

@@ -15,8 +15,18 @@ class User_model extends CI_Model {
         $this->db->insert($table, $data);
     }
 
-    function cek_login($table, $where)
+    function login($email, $password)
     {
-        return $this->db->get_where($table, $where);
+        $this->db->where('email', $email);
+        $account = $this->db->get('users')->row();
+
+        if($account != NULL){
+            if(password_verify($password, $account->password)){
+                return $account;
+            }else{
+                return NULL;
+            }
+        }
+        return NULL;
     }
 }

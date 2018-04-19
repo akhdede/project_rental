@@ -43,9 +43,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <span class="fa fa-car" style="margin-right: 10px;"></span>
                     <strong><?php echo $title; ?></strong>
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <?php if(isset($_SESSION['nama_lengkap'])){ ?>
+                    <span class="text-white"><?php echo date('D d M Y, g:i a'); ?></span><a href="<?php echo base_url('user/logout'); ?>" class="btn btn-light">Logout</a>
+                <?php }else{ ?>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                <?php } ?>
             </div>
         </div>
     </header>
