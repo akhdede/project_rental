@@ -47,12 +47,11 @@ div .album-show {
 
 div .album-show:hover .album-light {
   position: relative;
-  opacity: 0.3;
   transition: all .4s ease;
   -webkit-transition: all .4s ease;
 }
 
-div .album-show:hover .btn-danger {
+div .album-show:hover .btn-danger, div .album-show:hover .btn-secondary {
   margin: 0 auto;
   position: absolute;
   display: block;
@@ -64,7 +63,7 @@ div .album-show:hover .btn-danger {
   right: 35%;
 }
 
-div .album-show .btn-danger {
+div .album-show .btn-danger, div .album-show .btn-secondary {
   display: none;
 }
 
@@ -72,6 +71,6 @@ div .album-show .album-background {
   position: absolute;
   margin: 0 auto;
   z-index: 1000;
-  top: 43%;
+  top: 38%;
   left: 43%;
 }

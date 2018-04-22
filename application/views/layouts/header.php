@@ -1,7 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-<?php if($this->uri->segment(2) != 'get_regencies'){ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link rel="stylesheet" href="<?php echo base_url('assets/css/album.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/style.css'); ?>"/>
+    <link rel="stylesheet" href="<?php echo base_url('assets/fontawesome/css/fontawesome-all.css'); ?>"/>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> 
     <style>
         *{
@@ -19,7 +19,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </style>
 </head>
 <body>    
-<?php if($this->router->fetch_class() === 'welcome') { ?>
+<div id="test"></div>
+<?php if($this->router->fetch_class() == 'welcome' or $this->router->fetch_class() == 'order') { ?>
     <header>
         <div class="collapse bg-danger" id="navbarHeader">
             <div class="container">
@@ -70,5 +71,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
         </div>
     </header>
-<?php } ?>
 <?php } ?>
