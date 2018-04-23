@@ -44,18 +44,6 @@
         });
     </script>
     <script type="text/javascript">
-    $(document).ready(function () {
-        ajax_call = function() {
-            $.ajax({ //create an ajax request to load_page.php
-                type: "GET",
-                url: "<?php echo base_url('welcome/kursi_tersedia'); ?>",
-                dataType: "html", //expect html to be returned                
-                success: function (response) {
-                    $("#responsecontainer").html(response).fadeIn("slow");;
-                }
-            });
-        };
-    });
 
     $(function() {
         startRefresh();
@@ -65,6 +53,9 @@
         setTimeout(startRefresh,1000);
         $.get('<?php echo base_url('welcome/kursi_tersedia'); ?>', function(data) {
             $('#responsecontainer').html(data);    
+        });
+        $.get('<?php echo base_url('Order/kursi_order/'.$this->uri->segment(3)); ?>', function(data) {
+            $('#responsecontainer2').html(data);    
         });
     }
     </script>
