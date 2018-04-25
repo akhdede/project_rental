@@ -71,14 +71,14 @@ div .album-show .album-background {
   position: absolute;
   margin: 0 auto;
   z-index: 1000;
-  top: 38%;
-  left: 43%;
+  top: 40%;
+  left: 40%;
 }
 
 div .album-show .album-background2 {
   position: absolute;
   margin: 0 auto;
-  top: 48%;
-  left: 50%;
+  top: 52%;
+  left: 48%;
   width: 200px;
 }
