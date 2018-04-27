@@ -31,10 +31,11 @@ class Welcome extends CI_Controller {
             <div class="col-md-4 col-sm-12 album-show">';
                 // fungsi database untuk menghitung jumlah kursi yang di pesan
                 $cek_full = $this->db->get_where('kursi_tersedia', array('plat_nomor' => $mt->plat_nomor, 'status_order' => 1))->num_rows();
+                $cek_full2 = $this->db->get_where('kursi_tersedia', array('plat_nomor' => $mt->plat_nomor, 'status_order' => 2))->num_rows();
 
                 // jika jumlah kursi yang dipesan kurang dari 7 maka button pesan akan ditampilkan
-                if($cek_full < 7){
-                    echo '<a href="'.base_url('order/mobil/').strtolower($mt->plat_nomor).'" class="btn btn-danger btn-lg"><span class="fa fa-shopping-cart"></span> Pesan</a>';
+                if($cek_full + $cek_full2 < 7){
+                    echo '<a href="'.base_url('order/mobil/').strtolower($mt->plat_nomor).'" class="btn btn-primary btn-lg"><span class="fa fa-shopping-cart"></span> Pesan</a>';
                 }
                 echo'
                 <span class="album-light">
@@ -43,7 +44,7 @@ class Welcome extends CI_Controller {
 
                         // jika total kursi yang dipesan sudah lebih dari 6 maka akan menampilkan gambar sold out
                         if($cek_full > 6){
-                            echo '<img class="album-background" src="'.base_url('assets/img/album-background-sold.png').'" alt="" style="z-index: 20000;">';
+                            echo '<img class="album-background" src="'.base_url('assets/img/album-background-sold.png').'" alt="" style="width: 180px; z-index: 2000000;">';
                         }
 
                         echo'
@@ -60,10 +61,13 @@ class Welcome extends CI_Controller {
                                         if($kt->nomor_kursi == 1){
                                             if($kt->status_order == 0)
                                                 // jika kursi belum dipesan akan menampilkan button primary
-                                                echo '<button class="btn btn-primary btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
-                                            else
+                                                echo '<button class="btn btn-success btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
+                                            elseif($kt->status_order == 1)
                                                 // jika kursi sudah dipesan akan menampilkan button secondary
-                                                echo '<button class="btn btn-secondary btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
+                                                echo '<button class="btn btn-danger btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
+                                            elseif($kt->status_order == 2)
+                                                // jika kursi dalam proses pemesanan akan menampilkan button warning
+                                                echo '<button class="btn btn-warning btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
 
                                         }
                                     }
@@ -73,10 +77,13 @@ class Welcome extends CI_Controller {
                                         if(($kt->nomor_kursi > 1)  and ($kt->nomor_kursi < 5)){
                                             if($kt->status_order == 0)
                                                 // jika kursi belum dipesan akan menampilkan button primary
-                                                echo '<button class="btn btn-primary btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
-                                            else
+                                                echo '<button class="btn btn-success btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
+                                            elseif($kt->status_order == 1)
                                                 // jika kursi sudah dipesan akan menampilkan button secondary
-                                                echo '<button class="btn btn-secondary btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
+                                                echo '<button class="btn btn-danger btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
+                                            elseif($kt->status_order == 2)
+                                                // jika kursi dalam proses pemesanan akan menampilkan button warning
+                                                echo '<button class="btn btn-warning btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
                                         }
                                     }
                                     echo '<br>';
@@ -85,10 +92,13 @@ class Welcome extends CI_Controller {
                                         if(($kt->nomor_kursi > 4)  and ($kt->nomor_kursi < 8)){
                                             if($kt->status_order == 0)
                                                 // jika kursi belum dipesan akan menampilkan button primary
-                                                echo '<button class="btn btn-primary btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
-                                            else
+                                                echo '<button class="btn btn-success btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
+                                            elseif($kt->status_order == 1)
                                                 // jika kursi sudah dipesan akan menampilkan button secondary
-                                                echo '<button class="btn btn-secondary btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
+                                                echo '<button class="btn btn-danger btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
+                                            elseif($kt->status_order == 2)
+                                                // jika kursi dalam proses pemesanan akan menampilkan button warning
+                                                echo '<button class="btn btn-warning btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
                                         }
                                     }
                                 echo'
@@ -101,9 +111,12 @@ class Welcome extends CI_Controller {
                                     if($kt->status_order == 0) 
                                         // jika kursi belum dipesan akan menampilkan checklist berwarna hijau
                                         echo '<span class="fa fa-check text-success" style="margin-bottom: 7px;"></span><br>'; 
-                                    else  
+                                    elseif($kt->status_order == 1)
                                         // jika kursi sudah dipesan akan menampilkan cross berwarna merah
                                         echo '<span class="fa fa-times text-danger" style="margin-bottom: 7px;"></span><br>' ;
+                                    elseif($kt->status_order == 2)
+                                        // jika kursi dalam proses pemesanan akan menampilkan cross berwarna merah
+                                        echo '<span class="fa fa-exclamation text-warning" style="margin-bottom: 7px;"></span><br>' ;
                                 }
 
                             echo'
@@ -119,7 +132,8 @@ class Welcome extends CI_Controller {
                                 <hr>
                                 <span class="text-secondary">Ket :</span><br />
                                 <span class="fa fa-check text-success"></span> Belum dipesan<br />
-                                <span class="fa fa-times text-danger"></span> Sudah dipesan
+                                <span class="fa fa-times text-danger"></span> Sudah dipesan<br />
+                                <span class="fa fa-exclamation text-warning"></span> Dalam proses pemesanan
                             </small>
                         </div>
                     </div>

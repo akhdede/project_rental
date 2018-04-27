@@ -51,19 +51,19 @@ div .album-show:hover .album-light {
   -webkit-transition: all .4s ease;
 }
 
-div .album-show:hover .btn-danger {
+div .album-show:hover .btn-primary {
   margin: 0 auto;
   position: absolute;
   display: block;
   z-index: 10000;
   transition: all .4s ease;
   -webkit-transition: all .4s ease;
-  top: 50%;
+  top: 45%;
   left: 35%;
   right: 35%;
 }
 
-div .album-show .btn-danger {
+div .album-show .btn-primary {
   display: none;
 }
 
@@ -71,7 +71,7 @@ div .album-show .album-background {
   position: absolute;
   margin: 0 auto;
   z-index: 1000;
-  top: 40%;
+  top: 38%;
   left: 40%;
 }
 
@@ -79,6 +79,6 @@ div .album-show .album-background2 {
   position: absolute;
   margin: 0 auto;
   top: 52%;
-  left: 48%;
+  left: 60%;
   width: 200px;
 }
