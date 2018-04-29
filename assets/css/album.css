@@ -82,3 +82,8 @@ div .album-show .album-background2 {
   left: 60%;
   width: 200px;
 }
+
+a.kursi_order:hover {
+  color: grey;
+  text-decoration: none;
+}

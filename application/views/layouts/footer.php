@@ -47,6 +47,7 @@
 
     $(function() {
         startRefresh();
+        getKursi();
     });
 
     function startRefresh() {
@@ -54,10 +55,13 @@
         $.get('<?php echo base_url('welcome/kursi_tersedia'); ?>', function(data) {
             $('#responsecontainer').html(data);    
         });
-        $.get('<?php echo base_url('Order/kursi_order/'.$this->uri->segment(3)); ?>', function(data) {
+    }
+    function getKursi() {
+        $.get('<?php echo base_url('order/kursi_order/').$this->uri->segment(3).'/'.$this->uri->segment(4); ?>', function(data) {
             $('#responsecontainer2').html(data);    
         });
     }
+    
     </script>
 </body>
 </html>
