@@ -128,13 +128,13 @@ class Order extends CI_Controller {
                                         foreach($kursi_tersedia as $kt){
                                             if($kt->status_order == 0) 
                                                 // jika kursi belum dipesan akan menampilkan checklist berwarna hijau dan button primary pesan
-                                                echo '<p><span  class="text-secondary">Kursi '.$kt->nomor_kursi.'<a class="text-secondary font-weight-bold kursi_order" href="'.base_url('order/mobil/').strtolower($mt->plat_nomor).'/'.$kt->nomor_kursi.'"> ( <span class="text-success">pesan sekarang</span> )</a></span> <i class="fa fa-check text-success"></i></p>'; 
+                                                echo '<p><span  class="text-secondary">Kursi '.$kt->nomor_kursi.' ( <a class="text-secondary font-weight-bold kursi_order" href="'.base_url('order/mobil/').strtolower($mt->plat_nomor).'/'.$kt->nomor_kursi.'"><span class="text-success">pesan sekarang</span></a> )</span> <i class="fa fa-check text-success"></i></p>'; 
                                             elseif($kt->status_order == 1)
                                                 // jika kursi sudah dipesan akan menampilkan cross berwarna merah dan button secondary dipesan
-                                                echo '<p><span  class="text-secondary">Kursi '.$kt->nomor_kursi.' <b>( <span class="text-danger">sudah dipesan</span> )</b></span> <i class="fa fa-times text-danger"></i></p>'; 
+                                                echo '<p><span  class="text-secondary">Kursi '.$kt->nomor_kursi.' ( <b><span class="text-danger">sudah dipesan</span></b> )</span> <i class="fa fa-times text-danger"></i></p>'; 
                                             elseif($kt->status_order == 2)
                                                 // jika kursi dalam proses pemesanan akan menampilkan exclamation berwarna kuning dan button secondary dipesan
-                                                echo '<p><span  class="text-secondary">Kursi '.$kt->nomor_kursi.' <b>( <span class="text-warning">dalam proses</span> )</b></span> <i class="fa fa-exclamation text-warning"></i></p>'; 
+                                                echo '<p><span  class="text-secondary">Kursi '.$kt->nomor_kursi.' ( <b><span class="text-warning">dalam proses</span></b> )</span> <i class="fa fa-exclamation text-warning"></i></p>'; 
                                         }
                                     echo'
                                     </h6>
@@ -158,8 +158,20 @@ class Order extends CI_Controller {
             <div class="col-md-12">
                 <div class="col-md-4 col-sm-12 album-show">
                     <h5 class="text-secondary">Daftar Kursi</h5>';
-echo $this->uri->segment(4);
+                    echo $_SESSION['nama_lengkap'];
+                    $kursi = $this->uri->segment(4);
+                    if(isset($kursi)){
+                        if($kursi == 1)
+                            $_SESSION['kursi1'] = 1;
+                        if($kursi == 2)
+                            $_SESSION['kursi2'] = 2;
+                        if($kursi == 3)
+                            $_SESSION['kursi3'] = 3;
+                    }
 
+                    echo $_SESSION['kursi1'];
+                    echo $_SESSION['kursi2'];
+                    echo $_SESSION['kursi3'];
             echo'
                 </div>
             </div>';

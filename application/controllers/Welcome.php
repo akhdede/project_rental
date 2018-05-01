@@ -35,7 +35,18 @@ class Welcome extends CI_Controller {
 
                 // jika jumlah kursi yang dipesan kurang dari 7 maka button pesan akan ditampilkan
                 if($cek_full + $cek_full2 < 7){
-                    echo '<a href="'.base_url('order/mobil/').strtolower($mt->plat_nomor).'" class="btn btn-primary btn-lg"><span class="fa fa-shopping-cart"></span> Pesan</a>';
+                    echo '<a class="btn btn-primary btn-lg"';
+                    //jika user belum login
+                    if(!isset($_SESSION['nama_lengkap'])) 
+                    {
+                        echo 'href="'.base_url('order/mobil/').strtolower($mt->plat_nomor).'"';
+                        echo 'onclick="notLogin()"';
+                    }
+                    //jika sudah login
+                    else
+                        echo 'href="'.base_url('order/mobil/').strtolower($mt->plat_nomor).'"';
+                    echo '
+                    ><span class="fa fa-shopping-cart"></span> Pesan</a>';
                 }
                 echo'
                 <span class="album-light">

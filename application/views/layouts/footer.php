@@ -61,7 +61,10 @@
             $('#responsecontainer2').html(data);    
         });
     }
-    
+
+    function notLogin(){
+        alert("Silahkan login terlebih dahulu");
+    }
     </script>
 </body>
 </html>
