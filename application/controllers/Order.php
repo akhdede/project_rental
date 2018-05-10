@@ -128,7 +128,7 @@ class Order extends CI_Controller {
                                         foreach($kursi_tersedia as $kt){
                                             if($kt->status_order == 0) 
                                                 // jika kursi belum dipesan akan menampilkan checklist berwarna hijau dan button primary pesan
-                                                echo '<p><span  class="text-secondary">Kursi '.$kt->nomor_kursi.' ( <a class="text-secondary font-weight-bold kursi_order" href="'.base_url('order/mobil/').strtolower($mt->plat_nomor).'/'.$kt->nomor_kursi.'"><span class="text-success">pesan sekarang</span></a> )</span> <i class="fa fa-check text-success"></i></p>'; 
+                                                echo '<p><span  class="text-secondary">Kursi '.$kt->nomor_kursi.' <a class="btn btn-success btn-sm" href="'.base_url('order/mobil/').strtolower($mt->plat_nomor).'/'.$kt->nomor_kursi.'">pesan sekarang</a></span> <i class="fa fa-check text-success"></i></p>'; 
                                             elseif($kt->status_order == 1)
                                                 // jika kursi sudah dipesan akan menampilkan cross berwarna merah dan button secondary dipesan
                                                 echo '<p><span  class="text-secondary">Kursi '.$kt->nomor_kursi.' ( <b><span class="text-danger">sudah dipesan</span></b> )</span> <i class="fa fa-times text-danger"></i></p>'; 
@@ -157,21 +157,29 @@ class Order extends CI_Controller {
             echo'
             <div class="col-md-12">
                 <div class="col-md-4 col-sm-12 album-show">
-                    <h5 class="text-secondary">Daftar Kursi</h5>';
-                    echo $_SESSION['nama_lengkap'];
-                    $kursi = $this->uri->segment(4);
-                    if(isset($kursi)){
-                        if($kursi == 1)
-                            $_SESSION['kursi1'] = 1;
-                        if($kursi == 2)
-                            $_SESSION['kursi2'] = 2;
-                        if($kursi == 3)
-                            $_SESSION['kursi3'] = 3;
-                    }
-
-                    echo $_SESSION['kursi1'];
-                    echo $_SESSION['kursi2'];
-                    echo $_SESSION['kursi3'];
+                    <h5 class="text-secondary">Daftar Kursi</h5>
+                    <table class="table table-responsive">
+                      <thead>
+                        <tr>
+                          <td>No. Kursi</td>
+                          <td>Harga</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>Rp. 120.000</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>Rp. 110.000</td>
+                        </tr>
+                        <tr>
+                          <td>Total</td>
+                          <td>Rp. 230.000</td>
+                        </tr>
+                      </tbody>
+                    </table>';
             echo'
                 </div>
             </div>';
@@ -179,4 +187,3 @@ class Order extends CI_Controller {
     }
 
 }
-
