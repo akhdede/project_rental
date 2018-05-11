@@ -57,7 +57,7 @@ class Order extends CI_Controller {
 
                 echo'
                 <div class="col-md-12">
-                    <div class="col-md-8 col-sm-12 album-show">
+                    <div class="col-md-5 col-sm-12 album-show">
                         <span class="album-light">
                             <div class="card mb-4 mb-12 box-shadow">
                                 <img class="card-img-top" src="'.base_url('assets/img/avanza.jpg').'" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">';
@@ -70,8 +70,8 @@ class Order extends CI_Controller {
                                 echo'
                                 <div class="card-body">
                                     <span class="card-text font-weight-bold text-dark">
-                                        <h2 class="text-center">'.$mt->merek.' ('.$mt->plat_nomor.')</h2>
-                                    </span><br />
+                                        <h4 class="text-center">'.$mt->merek.' ('.$mt->plat_nomor.')</h4>
+                                    </span>
                                     <h6>
                                         <div class="album-background2">';
                                             // fungsi database untuk menampilkan kursi yang tersedia berdasarkan url yang ditangkap
@@ -81,13 +81,13 @@ class Order extends CI_Controller {
                                                 if($kt->nomor_kursi == 1){
                                                     if($kt->status_order == 0)
                                                         // jika kursi belum dipesan akan menampilkan button primary
-                                                        echo '<button class="btn btn-info btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
+                                                        echo '<button class="btn btn-info btn-md" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
                                                     elseif($kt->status_order == 1)
                                                         // jika kursi sudah dipesan akan menampilkan button secondary
-                                                        echo '<button class="btn btn-secondary btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
+                                                        echo '<button class="btn btn-secondary btn-md" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
                                                     elseif($kt->status_order == 2)
                                                         // jika kursi dalam proses pemesanan akan menampilkan button warning
-                                                        echo '<button class="btn btn-secondary btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
+                                                        echo '<button class="btn btn-secondary btn-md" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
 
                                                 }
                                             }
@@ -97,13 +97,13 @@ class Order extends CI_Controller {
                                                 if(($kt->nomor_kursi > 1)  and ($kt->nomor_kursi < 5)){
                                                     if($kt->status_order == 0)
                                                         // jika kursi belum dipesan akan menampilkan button primary
-                                                        echo '<button class="btn btn-info btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
+                                                        echo '<button class="btn btn-info btn-md" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
                                                     elseif($kt->status_order == 1)
                                                         // jika kursi sudah dipesan akan menampilkan button secondary
-                                                        echo '<button class="btn btn-secondary btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
+                                                        echo '<button class="btn btn-secondary btn-md" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
                                                     elseif($kt->status_order == 2)
                                                         // jika kursi dalam proses pemesanan akan menampilkan button warning
-                                                        echo '<button class="btn btn-secondary btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
+                                                        echo '<button class="btn btn-secondary btn-md" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
                                                 }
                                             }
                                             echo '<br>';
@@ -112,13 +112,13 @@ class Order extends CI_Controller {
                                                 if(($kt->nomor_kursi > 4)  and ($kt->nomor_kursi < 8)){
                                                     if($kt->status_order == 0)
                                                         // jika kursi belum dipesan akan menampilkan button primary
-                                                        echo '<button class="btn btn-info btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
+                                                        echo '<button class="btn btn-info btn-md" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
                                                     elseif($kt->status_order == 1)
                                                         // jika kursi sudah dipesan akan menampilkan button secondary
-                                                        echo '<button class="btn btn-secondary btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
+                                                        echo '<button class="btn btn-secondary btn-md" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
                                                     elseif($kt->status_order == 2)
                                                         // jika kursi dalam proses pemesanan akan menampilkan button warning
-                                                        echo '<button class="btn btn-secondary btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
+                                                        echo '<button class="btn btn-secondary btn-md" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
                                                 }
                                             }
                                         echo'
@@ -128,25 +128,16 @@ class Order extends CI_Controller {
                                         foreach($kursi_tersedia as $kt){
                                             if($kt->status_order == 0) 
                                                 // jika kursi belum dipesan akan menampilkan checklist berwarna hijau dan button primary pesan
-                                                echo '<p><span  class="text-secondary">Kursi '.$kt->nomor_kursi.' <a class="btn btn-success btn-sm" href="'.base_url('order/mobil/').strtolower($mt->plat_nomor).'/'.$kt->nomor_kursi.'">pesan sekarang</a></span> <i class="fa fa-check text-success"></i></p>'; 
+                                                echo '<span  class="text-secondary">Kursi '.$kt->nomor_kursi.' <a class="btn btn-info btn-sm" href="'.base_url('order/mobil/').strtolower($mt->plat_nomor).'/'.$kt->nomor_kursi.'" onclick="pesan_kursi()" style="margin-bottom: 3px;">pesan sekarang</a></span> <i class="fa fa-check text-success"></i><br />'; 
                                             elseif($kt->status_order == 1)
                                                 // jika kursi sudah dipesan akan menampilkan cross berwarna merah dan button secondary dipesan
-                                                echo '<p><span  class="text-secondary">Kursi '.$kt->nomor_kursi.' ( <b><span class="text-danger">sudah dipesan</span></b> )</span> <i class="fa fa-times text-danger"></i></p>'; 
+                                                echo '<span  class="text-secondary">Kursi '.$kt->nomor_kursi.' <b><span class="btn btn-secondary btn-sm disabled" style="margin-bottom: 3px;">sudah dipesan</span></b></span> <i class="fa fa-times text-danger"></i><br />'; 
                                             elseif($kt->status_order == 2)
                                                 // jika kursi dalam proses pemesanan akan menampilkan exclamation berwarna kuning dan button secondary dipesan
-                                                echo '<p><span  class="text-secondary">Kursi '.$kt->nomor_kursi.' ( <b><span class="text-warning">dalam proses</span></b> )</span> <i class="fa fa-exclamation text-warning"></i></p>'; 
+                                                echo '<span  class="text-secondary">Kursi '.$kt->nomor_kursi.' <b><span class="btn btn-secondary btn-sm disabled" style="margin-bottom: 3px;">dalam proses</span></b></span> <i class="fa fa-exclamation text-warning"></i><br />'; 
                                         }
                                     echo'
                                     </h6>
-                                    <hr>
-                                    <small class="text-muted">
-                                        <span class="text-secondary">Harga sewa : </span><br />';
-                                            // menampilkan keterangan harga sewa
-                                            foreach($kursi_harga as $kh){
-                                                echo '<span class="text-secondary">- Kursi '.$kh->posisi.'<i> ( '.$kh->keterangan.' )</i> - Rp.'.number_format("$kh->harga","0",",",".").' </span><br />';
-                                            }
-                                    echo'
-                                    </small>
                                 </div>
                             </div>
                         </span>
@@ -154,33 +145,42 @@ class Order extends CI_Controller {
                 </div>';
             }
 
+            $email = $_SESSION['email'];
+            $order = $this->db->get_where('order_detail', array('costumers' => $email))->result();
+            $total = $this->db->query("SELECT SUM(harga) as harga FROM order_detail WHERE costumers = '$email'")->result();
+
             echo'
             <div class="col-md-12">
-                <div class="col-md-4 col-sm-12 album-show">
-                    <h5 class="text-secondary">Daftar Kursi</h5>
-                    <table class="table table-responsive">
+                <div class="col-md-7 col-sm-12 album-show">
+                    <hr>
+                    <h5 class="font-weight-bold">DAFTAR PESANAN</h5>
+                    <hr>
+                    <table class="table table-bordered">
                       <thead>
-                        <tr>
-                          <td>No. Kursi</td>
-                          <td>Harga</td>
+                        <tr class="font-weight-bold">
+                          <td width=300>Plat Nomor</td>
+                          <td width=300>Nomor Kursi</td>
+                          <td width=300>Harga</td>
                         </tr>
-                      </thead>
-                      <tbody>
+                      </thead>';
+                      foreach($order as $o){
+                        echo'
+                        <tbody>
+                          <tr>
+                            <td>'.$o->plat_nomor.'</td>
+                            <td>'.$o->nomor_kursi.'</td>
+                            <td>Rp. '.number_format("$o->harga","0",",",".").'</td>
+                          </tr>
+                        </tbody>';
+                      }
+                        echo'
                         <tr>
-                          <td>1</td>
-                          <td>Rp. 120.000</td>
+                          <td class="text-center" colspan=2><b>Total Bayar</b></td>
+                          <td><b>Rp. '.number_format($total[0]->harga,"0",",",".").'</b></td>
                         </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Rp. 110.000</td>
-                        </tr>
-                        <tr>
-                          <td>Total</td>
-                          <td>Rp. 230.000</td>
-                        </tr>
-                      </tbody>
                     </table>';
             echo'
+                <a href="#" class="btn btn-success text-right">Bayar</a>
                 </div>
             </div>';
         }

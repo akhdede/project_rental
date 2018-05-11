@@ -36,6 +36,7 @@ class User extends CI_Controller {
             $user = $this->db->get_where('users', array('email' => $_POST['email']))->result();
             $_SESSION = array(
                 'nama_lengkap' => $user[0]->nama_lengkap,
+                'email' => $user[0]->email,
                 'level' => $user[0]->level
             );
             redirect(base_url());
