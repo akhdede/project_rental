@@ -58,7 +58,7 @@
     }
     function getKursi() {
         setTimeout(getKursi,1000);
-        $.get('<?php echo base_url('order/kursi_order/').$this->uri->segment(3); ?>', function(data) {
+        $.get('<?php echo base_url('order/kursi_order/').$this->uri->segment(3).'/'.$this->uri->segment(4); ?>', function(data) {
             $('#responsecontainer2').html(data);    
         });
     }

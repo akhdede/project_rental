@@ -145,6 +145,16 @@ class Order extends CI_Controller {
                 </div>';
             }
 
+            // tambah pesanan
+            $mobil = $this->uri->segment(3);
+            $kursi = $this->uri->segment(4);
+
+            $kursi_array[] = array(1, 2, 3, 4, 5, 6, 7);
+            
+            echo $kursi_array;
+
+
+            // view pesanan
             $email = $_SESSION['email'];
             $order = $this->db->get_where('order_detail', array('costumers' => $email))->result();
             $total = $this->db->query("SELECT SUM(harga) as harga FROM order_detail WHERE costumers = '$email'")->result();
