@@ -58,13 +58,17 @@
     }
     function getKursi() {
         setTimeout(getKursi,1000);
-        $.get('<?php echo base_url('order/kursi_order/').$this->uri->segment(3).'/'.$this->uri->segment(4); ?>', function(data) {
+        $.get('<?php echo base_url('order/kursi_order/').$this->uri->segment(3).'/'.$this->uri->segment(4).'/'.$this->uri->segment(5); ?>', function(data) {
             $('#responsecontainer2').html(data);    
         });
     }
 
     function notLogin(){
         alert("Silahkan login terlebih dahulu");
+    }
+
+    function batalPesan(){
+      return confirm('Apakah anda akan membatalkan pesanan ini?');
     }
     </script>
 </body>

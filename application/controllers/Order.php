@@ -128,7 +128,7 @@ class Order extends CI_Controller {
                                         foreach($kursi_tersedia as $kt){
                                             if($kt->status_order == 0) 
                                                 // jika kursi belum dipesan akan menampilkan checklist berwarna hijau dan button primary pesan
-                                                echo '<span  class="text-secondary">Kursi '.$kt->nomor_kursi.' <a class="btn btn-info btn-sm" href="'.base_url('order/mobil/').strtolower($mt->plat_nomor).'/'.$kt->nomor_kursi.'" onclick="pesan_kursi()" style="margin-bottom: 3px;">pesan sekarang</a></span> <i class="fa fa-check text-success"></i><br />'; 
+                                                echo '<span  class="text-secondary">Kursi '.$kt->nomor_kursi.' <a class="btn btn-info btn-sm" href="'.base_url('order/mobil/').strtolower($mt->plat_nomor).'/'.$kt->nomor_kursi.'/add" onclick="pesan_kursi()" style="margin-bottom: 3px;">pesan sekarang</a></span> <i class="fa fa-check text-success"></i><br />'; 
                                             elseif($kt->status_order == 1)
                                                 // jika kursi sudah dipesan akan menampilkan cross berwarna merah dan button secondary dipesan
                                                 echo '<span  class="text-secondary">Kursi '.$kt->nomor_kursi.' <b><span class="btn btn-secondary btn-sm disabled" style="margin-bottom: 3px;">sudah dipesan</span></b></span> <i class="fa fa-times text-danger"></i><br />'; 
@@ -148,15 +148,48 @@ class Order extends CI_Controller {
             // tambah pesanan
             $mobil = $this->uri->segment(3);
             $kursi = $this->uri->segment(4);
+            $aksi = $this->uri->segment(5);
 
-            $kursi_array[] = array(1, 2, 3, 4, 5, 6, 7);
+            $kursi_array = [1, 2, 3, 4, 5, 6, 7];
             
-            echo $kursi_array;
+            if($kursi != null){
+              if(in_array($kursi, $kursi_array)) {
+                $email = $_SESSION['email'];
+                $tanggal = date('d-m-Y');
 
+                if($kursi == 1)
+                  $harga = 120000;
+                elseif($kursi == 2 or $kursi == 3 or $kursi == 4)
+                  $harga = 110000;
+                elseif($kursi == 5 or $kursi == 6 or $kursi == 7)
+                  $harga = 100000;
+
+                $insert_data = array(
+                  'plat_nomor' => strtoupper($mobil),
+                  'nomor_kursi' => $kursi,
+                  'costumers' => $email,
+                  'harga' => $harga,
+                  'tanggal_pesan' => $tanggal
+                );
+
+                $cek_kursi = $this->db->get_where('order_detail', array('plat_nomor' => $mobil, 'nomor_kursi' => $kursi))->result();
+
+                if(count($cek_kursi) < 1)
+                  if($aksi == 'add')
+                    $this->db->insert('order_detail', $insert_data);
+              }
+              else {
+                echo '<span class="text-danger">Nomor kursi tidak tersedia!</span>';
+              }
+            }
+
+            //delete pesanan
+            if($aksi == 'delete')
+              $delete_kursi = $this->db->delete('order_detail', array('plat_nomor' => $mobil, 'nomor_kursi' => $kursi));
 
             // view pesanan
             $email = $_SESSION['email'];
-            $order = $this->db->get_where('order_detail', array('costumers' => $email))->result();
+            $order = $this->db->get_where('order_detail', array('costumers' => $email, 'is_proses' => 0))->result();
             $total = $this->db->query("SELECT SUM(harga) as harga FROM order_detail WHERE costumers = '$email'")->result();
 
             echo'
@@ -171,6 +204,7 @@ class Order extends CI_Controller {
                           <td width=300>Plat Nomor</td>
                           <td width=300>Nomor Kursi</td>
                           <td width=300>Harga</td>
+                          <td width>Hapus</td>
                         </tr>
                       </thead>';
                       foreach($order as $o){
@@ -180,6 +214,7 @@ class Order extends CI_Controller {
                             <td>'.$o->plat_nomor.'</td>
                             <td>'.$o->nomor_kursi.'</td>
                             <td>Rp. '.number_format("$o->harga","0",",",".").'</td>
+                            <td align="center"><a  onclick="javascript: return confirm(\'Apakah anda akan membatalkan pesanan ini?\')" href="'.base_url('order/mobil/').strtolower($o->plat_nomor).'/'.$o->nomor_kursi.'/delete"><span class="fa fa-trash"></span></a></td>
                           </tr>
                         </tbody>';
                       }
@@ -190,10 +225,19 @@ class Order extends CI_Controller {
                         </tr>
                     </table>';
             echo'
-                <a href="#" class="btn btn-success text-right">Bayar</a>
+                <a href="'.base_url('order/confirm_payment').'" class="btn btn-success text-right">Bayar</a>
                 </div>
             </div>';
         }
+    }
+
+    public function confirm_payment()
+    {
+        $data = array(
+            'title' => 'CV. New Garuda Jaya Totabuan',
+            'content' => 'order/confirm_payment'
+        );
+		$this->load->view('layouts/wrapper', $data);
     }
 
 }
