@@ -9,7 +9,7 @@
                     foreach($bayar as $b){
                         echo $b->harga.'<br>';
                     }
-                    echo date('dmy').'001';
+                    $last_kode = $this->db->query("SELECT kode FROM order_detail WHERE tanggal_pesan='$tanggal' ORDER BY kode DESC LIMIT 1");
                     ?>
                 </div>
                 <!-- end album -->

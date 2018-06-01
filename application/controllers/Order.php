@@ -150,12 +150,15 @@ class Order extends CI_Controller {
             $kursi = $this->uri->segment(4);
             $aksi = $this->uri->segment(5);
 
+            $tanggal = date('d-m-Y');
+
+            $last_kode = $this->db->query("SELECT kode FROM order_detail ORDER BY kode DESC LIMIT 1")->result();
+
             $kursi_array = [1, 2, 3, 4, 5, 6, 7];
             
             if($kursi != null){
               if(in_array($kursi, $kursi_array)) {
                 $email = $_SESSION['email'];
-                $tanggal = date('d-m-Y');
 
                 if($kursi == 1)
                   $harga = 120000;
@@ -164,6 +167,15 @@ class Order extends CI_Controller {
                 elseif($kursi == 5 or $kursi == 6 or $kursi == 7)
                   $harga = 100000;
 
+                if(count($last_kode[0]->kode) == 0){
+                    $kode = date('Ymd').'0001';
+                }
+                else{
+                    $no = substr($last_kode[0]->kode, 8, 4)+1;
+                    $kode = date('Ymd').sprintf('%04s', $no);
+                }
+
+                echo $kode;
 
                 $insert_data = array(
                   'plat_nomor' => strtoupper($mobil),
@@ -171,7 +183,7 @@ class Order extends CI_Controller {
                   'costumers' => $email,
                   'harga' => $harga,
                   'tanggal_pesan' => $tanggal,
-                  'kode' => 112
+                  'kode' => $kode
                 );
 
                 $cek_kursi = $this->db->get_where('order_detail', array('plat_nomor' => $mobil, 'nomor_kursi' => $kursi))->result();
