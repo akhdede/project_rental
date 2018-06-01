@@ -164,19 +164,23 @@ class Order extends CI_Controller {
                 elseif($kursi == 5 or $kursi == 6 or $kursi == 7)
                   $harga = 100000;
 
+
                 $insert_data = array(
                   'plat_nomor' => strtoupper($mobil),
                   'nomor_kursi' => $kursi,
                   'costumers' => $email,
                   'harga' => $harga,
-                  'tanggal_pesan' => $tanggal
+                  'tanggal_pesan' => $tanggal,
+                  'kode' => 112
                 );
 
                 $cek_kursi = $this->db->get_where('order_detail', array('plat_nomor' => $mobil, 'nomor_kursi' => $kursi))->result();
 
                 if(count($cek_kursi) < 1)
-                  if($aksi == 'add')
-                    $this->db->insert('order_detail', $insert_data);
+                    if($aksi == 'add'){
+                        if($this->db->insert('order_detail', $insert_data))
+                            $this->db->query("UPDATE kursi_tersedia SET status_order=2 WHERE plat_nomor='$mobil' and nomor_kursi='$kursi'");
+                    }
               }
               else {
                 echo '<span class="text-danger">Nomor kursi tidak tersedia!</span>';
@@ -185,7 +189,9 @@ class Order extends CI_Controller {
 
             //delete pesanan
             if($aksi == 'delete')
-              $delete_kursi = $this->db->delete('order_detail', array('plat_nomor' => $mobil, 'nomor_kursi' => $kursi));
+                if($this->db->delete('order_detail', array('plat_nomor' => $mobil, 'nomor_kursi' => $kursi)))
+                    $this->db->query("UPDATE kursi_tersedia SET status_order=0 WHERE plat_nomor='$mobil' and nomor_kursi='$kursi'");
+
 
             // view pesanan
             $email = $_SESSION['email'];
@@ -233,9 +239,14 @@ class Order extends CI_Controller {
 
     public function confirm_payment()
     {
+        $where = array(
+            'costumers' => $_SESSION['email'],
+            'is_proses' => 0
+        );
         $data = array(
             'title' => 'CV. New Garuda Jaya Totabuan',
-            'content' => 'order/confirm_payment'
+            'content' => 'order/confirm_payment',
+            'bayar' => $this->order_model->confirm_payment($where)
         );
 		$this->load->view('layouts/wrapper', $data);
     }

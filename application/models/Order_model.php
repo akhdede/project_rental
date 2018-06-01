@@ -18,5 +18,11 @@ class Order_model extends CI_Model {
         $sql = $this->db->get('kursi_harga');
         return $sql->result();
     }
+
+    public function confirm_payment($where)
+    {
+        $sql = $this->db->get_where('order_detail', $where);
+        return $sql->result();
+    }
 }
 
