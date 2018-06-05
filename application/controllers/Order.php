@@ -18,8 +18,8 @@ class Order extends CI_Controller {
 
         $cek_full2 = $this->db->get_where('kursi_tersedia', array('plat_nomor' => $plat_nomor, 'status_order' => 2))->num_rows();
 
-        if($cek_full > 6 or $cek_full2 > 6 or $cek_full + $cek_full2 > 6)
-            redirect('welcome');
+        // if($cek_full > 6 or $cek_full2 > 6 or $cek_full + $cek_full2 > 6)
+        //     redirect('welcome');
 
         $this->load->model('order_model');
     }
@@ -35,9 +35,6 @@ class Order extends CI_Controller {
 
     public function kursi_order($url)
     {
-        if(empty($url))
-            echo 'Mohon maaf, kursi terakhir dalam proses pemesanan. <a href="'.base_url('welcome').'"> Click untuk mereload</a>';
-        else{
 
             // menangkap plat nomor pada url
             $where = array('plat_nomor' => $url);
@@ -143,22 +140,19 @@ class Order extends CI_Controller {
                         </span>
                     </div>
                 </div>';
-            }
 
             // tambah pesanan
             $mobil = $this->uri->segment(3);
             $kursi = $this->uri->segment(4);
             $aksi = $this->uri->segment(5);
 
-            $tanggal = date('d-m-Y');
 
-            $last_kode = $this->db->query("SELECT kode FROM order_detail ORDER BY kode DESC LIMIT 1")->result();
+            $email = $_SESSION['email'];
 
             $kursi_array = [1, 2, 3, 4, 5, 6, 7];
             
             if($kursi != null){
               if(in_array($kursi, $kursi_array)) {
-                $email = $_SESSION['email'];
 
                 if($kursi == 1)
                   $harga = 120000;
@@ -167,23 +161,12 @@ class Order extends CI_Controller {
                 elseif($kursi == 5 or $kursi == 6 or $kursi == 7)
                   $harga = 100000;
 
-                if(count($last_kode[0]->kode) == 0){
-                    $kode = date('Ymd').'0001';
-                }
-                else{
-                    $no = substr($last_kode[0]->kode, 8, 4)+1;
-                    $kode = date('Ymd').sprintf('%04s', $no);
-                }
-
-                echo $kode;
 
                 $insert_data = array(
                   'plat_nomor' => strtoupper($mobil),
                   'nomor_kursi' => $kursi,
                   'costumers' => $email,
                   'harga' => $harga,
-                  'tanggal_pesan' => $tanggal,
-                  'kode' => $kode
                 );
 
                 $cek_kursi = $this->db->get_where('order_detail', array('plat_nomor' => $mobil, 'nomor_kursi' => $kursi))->result();
@@ -210,55 +193,84 @@ class Order extends CI_Controller {
             $order = $this->db->get_where('order_detail', array('costumers' => $email, 'is_proses' => 0))->result();
             $total = $this->db->query("SELECT SUM(harga) as harga FROM order_detail WHERE costumers = '$email'")->result();
 
-            echo'
-            <div class="col-md-12">
-                <div class="col-md-7 col-sm-12 album-show">
-                    <hr>
-                    <h5 class="font-weight-bold">DAFTAR PESANAN</h5>
-                    <hr>
-                    <table class="table table-bordered">
-                      <thead>
-                        <tr class="font-weight-bold">
-                          <td width=300>Plat Nomor</td>
-                          <td width=300>Nomor Kursi</td>
-                          <td width=300>Harga</td>
-                          <td width>Hapus</td>
-                        </tr>
-                      </thead>';
-                      foreach($order as $o){
-                        echo'
-                        <tbody>
-                          <tr>
-                            <td>'.$o->plat_nomor.'</td>
-                            <td>'.$o->nomor_kursi.'</td>
-                            <td>Rp. '.number_format("$o->harga","0",",",".").'</td>
-                            <td align="center"><a  onclick="javascript: return confirm(\'Apakah anda akan membatalkan pesanan ini?\')" href="'.base_url('order/mobil/').strtolower($o->plat_nomor).'/'.$o->nomor_kursi.'/delete"><span class="fa fa-trash"></span></a></td>
-                          </tr>
-                        </tbody>';
-                      }
-                        echo'
-                        <tr>
-                          <td class="text-center" colspan=2><b>Total Bayar</b></td>
-                          <td><b>Rp. '.number_format($total[0]->harga,"0",",",".").'</b></td>
-                        </tr>
-                    </table>';
-            echo'
-                <a href="'.base_url('order/confirm_payment').'" class="btn btn-success text-right">Bayar</a>
-                </div>
-            </div>';
+            if(!empty($order[0]->costumers)){
+                echo'
+                <div class="col-md-12">
+                    <div class="col-md-7 col-sm-12 album-show">
+                        <hr>
+                        <h5 class="font-weight-bold">DAFTAR PESANAN</h5>
+                        <hr>
+
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr class="font-weight-bold">
+                              <td width=300>Plat Nomor</td>
+                              <td width=300>Nomor Kursi</td>
+                              <td width=300>Harga</td>
+                              <td width>Hapus</td>
+                            </tr>
+                          </thead>';
+                          foreach($order as $o){
+                            echo'
+                            <tbody>
+                              <tr>
+                                <td>'.$o->plat_nomor.'</td>
+                                <td>'.$o->nomor_kursi.'</td>
+                                <td>Rp. '.number_format("$o->harga","0",",",".").'</td>
+                                <td align="center"><a  onclick="javascript: return confirm(\'Apakah anda akan membatalkan pesanan ini?\')" href="'.base_url('order/mobil/').strtolower($o->plat_nomor).'/'.$o->nomor_kursi.'/delete"><span class="fa fa-trash"></span></a></td>
+                              </tr>
+                            </tbody>';
+                          }
+                            echo'
+                            <tr>
+                              <td class="text-center" colspan=2><b>Total Bayar</b></td>
+                              <td><b>Rp. '.number_format($total[0]->harga,"0",",",".").'</b></td>
+                            </tr>
+                        </table>';
+                echo'
+                    <a href="'.base_url('order/confirm_order').'" class="btn btn-success text-right">Lanjut keproses pembayaran</a>
+                    </div>
+                </div>';
+            }
+            else{
+                echo'
+                <div class="col-md-12">
+                    <div class="col-md-7 col-sm-12 album-show">
+                        <h5>Anda belum melakukan pemesanan, silahkan klik tombol \'<b>pesan sekarang</b>\' untuk memesan kursi.</h5>
+                    </div>
+                </div>';
+            }
         }
     }
 
-    public function confirm_payment()
+    public function confirm_order()
     {
         $where = array(
             'costumers' => $_SESSION['email'],
-            'is_proses' => 0
+            'is_proses' => 1
         );
+
+        $email = $_SESSION['email'];
+
+        $ada = $this->db->query("SELECT kode, tanggal_pesan FROM order_detail WHERE costumers='$email' and tanggal_pesan IS NULL LIMIT 1")->result();
+        
+        $us = $this->db->query("SELECT id FROM users WHERE email='$email'")->result();
+        $no = $us[0]->id;
+        $kode = date('ymdhis').sprintf("%02s",$no);
+
+        $tanggal = date('d-m-Y h:i:s');
+
+
+        if($ada[0]->tanggal_pesan == null)
+            $this->db->query("UPDATE order_detail SET kode='$kode', tanggal_pesan='$tanggal', is_proses=1 WHERE costumers='$email' and tanggal_pesan IS NULL");
+
         $data = array(
             'title' => 'CV. New Garuda Jaya Totabuan',
-            'content' => 'order/confirm_payment',
-            'bayar' => $this->order_model->confirm_payment($where)
+            'content' => 'order/confirm_order',
+            'bayar' => $this->order_model->confirm_order($where),
+            'group_order' => $this->order_model->group_order($where),
+            'get_kode' => $this->order_model->get_kode($where),
+            'total' => $this->order_model->total_bayar($email)
         );
 		$this->load->view('layouts/wrapper', $data);
     }
