@@ -50,6 +50,19 @@ class Order_model extends CI_Model {
         return $this->db->query("UPDATE order_detail SET kode='$kode' WHERE costumers='$email'");
     }
 
+    public function cancel_order($kode)
+    {
+        $order = $this->db->query("SELECT plat_nomor, nomor_kursi FROM order_detail WHERE kode='$kode'")->result();
+
+        foreach($order as $o){
+            $this->db->query("UPDATE kursi_tersedia SET status_order=0 WHERE plat_nomor='$o->plat_nomor' and nomor_kursi='$o->nomor_kursi'");
+        }
+
+        $this->db->where('kode', $kode);
+        $this->db->delete('order_detail');
+        return true;
+    }
+
 
 }
 

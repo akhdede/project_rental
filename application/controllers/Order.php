@@ -223,8 +223,13 @@ class Order extends CI_Controller {
                           }
                             echo'
                             <tr>
-                              <td class="text-center" colspan=2><b>Total Bayar</b></td>
-                              <td><b>Rp. '.number_format($total[0]->harga,"0",",",".").'</b></td>
+                            <td class="text-center" colspan=2><b>Total Bayar</b></td>';
+                            foreach($total as $t){
+                                if($t->tanggal_pesan == null){
+                                    echo '<td><b>Rp. '.number_format($t->harga,"0",",",".").'</b></td>';
+                                }
+                            }
+                            echo '
                             </tr>
                         </table>';
                 echo'
@@ -273,6 +278,14 @@ class Order extends CI_Controller {
             'total' => $this->order_model->total_bayar($email)
         );
 		$this->load->view('layouts/wrapper', $data);
+    }
+
+    public function cancel_order()
+    {
+        $kode = $this->uri->segment(3);
+        $this->order_model->cancel_order($kode);
+
+        redirect('order/confirm_order');
     }
 
 }
