@@ -191,7 +191,7 @@ class Order extends CI_Controller {
             // view pesanan
             $email = $_SESSION['email'];
             $order = $this->db->get_where('order_detail', array('costumers' => $email, 'is_proses' => 0))->result();
-            $total = $this->db->query("SELECT SUM(harga) as harga FROM order_detail WHERE costumers = '$email'")->result();
+            $total = $this->db->query("SELECT SUM(harga) as harga FROM order_detail WHERE costumers = '$email' and kode is null")->result();
 
             if(!empty($order[0]->costumers)){
                 echo'
@@ -217,7 +217,7 @@ class Order extends CI_Controller {
                                 <td>'.$o->plat_nomor.'</td>
                                 <td>'.$o->nomor_kursi.'</td>
                                 <td>Rp. '.number_format("$o->harga","0",",",".").'</td>
-                                <td align="center"><a  onclick="javascript: return confirm(\'Apakah anda akan membatalkan pesanan ini?\')" href="'.base_url('order/mobil/').strtolower($o->plat_nomor).'/'.$o->nomor_kursi.'/delete"><span class="fa fa-trash"></span></a></td>
+                                <td align="center"><a  onclick="javascript: return confirm(\'Apakah anda akan menghapus pesanan ini?\')" href="'.base_url('order/mobil/').strtolower($o->plat_nomor).'/'.$o->nomor_kursi.'/delete"><span class="fa fa-trash"></span></a></td>
                               </tr>
                             </tbody>';
                           }
@@ -286,6 +286,69 @@ class Order extends CI_Controller {
         $this->order_model->cancel_order($kode);
 
         redirect('order/confirm_order');
+    }
+
+    public function count_order()
+    {
+        $email = $_SESSION['email'];
+        $count_order = $this->db->query("SELECT * FROM order_detail WHERE costumers='$email' and confirm_by_admin=0 and tanggal_pesan IS NOT NULL GROUP BY tanggal_pesan")->num_rows();
+
+        echo '('.$count_order.')';
+    }
+
+    public function link_order()
+    {
+        $email = $_SESSION['email'];
+        $link_order = $this->db->query("SELECT * FROM order_detail WHERE costumers='$email' and confirm_by_admin=0 and tanggal_pesan IS NOT NULL GROUP BY tanggal_pesan");
+        $total = $this->db->query("SELECT SUM(harga) as harga, kode FROM order_detail WHERE costumers = '$email' and tanggal_pesan IS NOT NULL GROUP BY tanggal_pesan")->result();
+
+        if($link_order->num_rows() > 0){
+            foreach($link_order->result() as $lo){
+                foreach($total as $t){
+                    if($lo->kode == $t->kode){
+                        echo '<a href='.base_url("order/confirm_order").' class="dropdown-item">'.$lo->kode.' - Rp.'.number_format("$t->harga","0",",",".").'<br>';
+                    }
+                }
+            }
+        }
+        else{
+            echo '<span class="dropdown-item">Pesanan belum ada!</span>';
+        }
+    }
+
+    public function count_message()
+    {
+        $email = $_SESSION['email'];
+        $count_message = $this->db->query("SELECT * FROM order_detail WHERE costumers='$email' and order_status=0 and tanggal_pesan IS NOT NULL GROUP BY tanggal_pesan");
+
+        echo '('.$count_message->num_rows().')';
+    }
+
+    public function link_message()
+    {
+        $email = $_SESSION['email'];
+        $link_message = $this->db->query("SELECT * FROM order_detail WHERE costumers='$email' GROUP BY tanggal_pesan");
+
+        if(!empty($link_message->result())){
+            foreach($link_message->result() as $lm){
+                if($lm->confirm_by_admin == 1)
+                    echo '<a href='.base_url('order/message').' class="dropdown-item">Pesanan dengan kode pesan <b>'.$lm->kode.'</b> telah dikonfirmasi.<br>';
+                elseif($lm->confirm_by_admin == 2)
+                    echo '<a href='.base_url('order/message').' class="dropdown-item">Pesanan dengan kode pesan <b>'.$lm->kode.'</b> telah kadaluarsa.<br>';
+                else
+                    echo '<a href='.base_url('order/message').' class="dropdown-item">Segera lakukan pembayaran! kode pesan <b>'.$lm->kode.'</b><br>';
+            }
+        }
+        else{
+            echo '<span class="dropdown-item">Belum ada pemberitahuan!</span>';
+        }
+
+    }
+
+    public function update_status_order()
+    {
+        $email = $_SESSION['email'];
+        $this->db->query("UPDATE order_detail SET order_status=1 WHERE costumers='$email' and order_status=0");
     }
 
 }

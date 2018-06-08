@@ -43,12 +43,52 @@
             })
         });
     </script>
-    <script type="text/javascript">
 
+    <script type="text/javascript">
     $(function() {
+        countMessage();
+        linkMessage();
         startRefresh();
         getKursi();
+        countOrder();
+        linkOrder();
     });
+
+
+
+    function countMessage() {
+        setTimeout(countMessage,1000);
+        $.get('<?php echo base_url('order/count_message'); ?>', function(data) {
+            $('#count_message').html(data);    
+        });
+    }
+
+    function update_status_order() {
+        $.get('<?php echo base_url('order/update_status_order'); ?>', function(data) {
+            $('#update_status_order').html(data);    
+        });
+    }
+
+    function linkMessage() {
+        setTimeout(linkMessage,1000);
+        $.get('<?php echo base_url('order/link_message'); ?>', function(data) {
+            $('#link_message').html(data);    
+        });
+    }
+
+    function countOrder() {
+        setTimeout(countOrder,1000);
+        $.get('<?php echo base_url('order/count_order'); ?>', function(data) {
+            $('#count_order').html(data);    
+        });
+    }
+
+    function linkOrder() {
+        setTimeout(linkOrder,1000);
+        $.get('<?php echo base_url('order/link_order'); ?>', function(data) {
+            $('#link_order').html(data);    
+        });
+    }
 
     function startRefresh() {
         setTimeout(startRefresh,1000);
@@ -56,6 +96,7 @@
             $('#responsecontainer').html(data);    
         });
     }
+
     function getKursi() {
         setTimeout(getKursi,1000);
         $.get('<?php echo base_url('order/kursi_order/').$this->uri->segment(3).'/'.$this->uri->segment(4).'/'.$this->uri->segment(5); ?>', function(data) {

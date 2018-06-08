@@ -38,8 +38,8 @@
                                 </table>
                                 Silahkan melakukan pembayaran langsung ke Pangkalan CV. New Garuda Jaya Totabuan.<br>
                                 Kode pemesanan anda : <?php foreach($get_kode as $b){ if($go->tanggal_pesan == $b->tanggal_pesan){echo '<b>'.$b->kode.'</b>';}} ?> (tunjukkan kode ini saat melakukan pembayaran).<br><br>
-                                <a href="<?php echo 'cancel_order/'.$go->kode ?>" class="btn btn-danger btn-sm text-white">Batalkan pesanan</a>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="<?php echo 'cancel_order/'.$go->kode ?>" onclick="javascript: return confirm('Apakah anda akan membatalkan pesanan ini?')" class="btn btn-danger btn-sm text-white">Batalkan pesanan</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <?php foreach($get_kode as $gk){?>
                                     <?php if($go->tanggal_pesan == $gk->tanggal_pesan){ ?>
                                         Dipesan pada tanggal <?php echo str_replace(' ',' pukul ', $gk->tanggal_pesan); ?></b><br><br>
@@ -48,9 +48,7 @@
                         </div>
                     <?php } ?>
                 <?php }else{ ?>
-                    <div class="col-md-8 offset-md-2" style="margin-top:20px; padding: 20px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.10);">
-                        <h4>Harap melakukan pemesanan terlebih dahulu!</h4>
-                    </div>
+                    <?php redirect('welcome')?>
                 <?php } ?>
                 <!-- end album -->
             </div>

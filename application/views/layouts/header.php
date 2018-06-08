@@ -45,7 +45,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <strong><?php echo $title; ?></strong>
                 </a>
                 <?php if(isset($_SESSION['nama_lengkap'])){ ?>
-                    <span class="text-white fa fa-envelope fa-lg"></span><span class="text-white fa fa-shopping-cart fa-lg"></span><a href="<?php echo base_url('user/logout'); ?>" class="btn btn-light">Logout</a>
+                    <div class="btn-group">
+                        <a href="#" onclick="update_status_order()" class="text-white fa fa-envelope fa-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-decoration: none;"><span class="badge badge-danger"><div id="count_message"></div></span></a>
+                        <div class="dropdown-menu dropdown-menu-right" id="link_message"></div>
+                    </div>
+
+                    <div class="btn-group">
+                        <a href="#" class="text-white fa fa-shopping-cart fa-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-decoration: none;"><span class="badge badge-danger"><div id="count_order"></div></span></a>
+                        <div class="dropdown-menu dropdown-menu-right" id="link_order"></div>
+                    </div>
+                    <a href="<?php echo base_url('user/logout'); ?>" class="btn btn-light">Logout</a>
                 <?php }else{ ?>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
