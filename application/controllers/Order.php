@@ -252,7 +252,8 @@ class Order extends CI_Controller {
     {
         $where = array(
             'costumers' => $_SESSION['email'],
-            'is_proses' => 1
+            'is_proses' => 1,
+            'confirm_by_admin' => 0
         );
 
         $email = $_SESSION['email'];
@@ -266,8 +267,19 @@ class Order extends CI_Controller {
         $tanggal = date('d-m-Y h:i:s');
 
 
-        if($ada[0]->tanggal_pesan == null)
-            $this->db->query("UPDATE order_detail SET kode='$kode', tanggal_pesan='$tanggal', is_proses=1 WHERE costumers='$email' and tanggal_pesan IS NULL");
+        if($ada[0]->tanggal_pesan == null){
+            $cek = $this->db->query("SELECT * FROM order_detail WHERE costumers='$email'")->num_rows();
+
+            if($cek > 0){
+                $query = $this->db->query("UPDATE order_detail SET kode='$kode', tanggal_pesan='$tanggal', is_proses=1 WHERE costumers='$email' and tanggal_pesan IS NULL");
+                if($query)
+                    $this->add_pesan();
+            }
+            else{
+                redirect('welcome');
+            }
+        }
+
 
         $data = array(
             'title' => 'CV. New Garuda Jaya Totabuan',
@@ -283,6 +295,11 @@ class Order extends CI_Controller {
     public function cancel_order()
     {
         $kode = $this->uri->segment(3);
+
+        $this->db->query("UPDATE order_detail SET confirm_by_admin=3 WHERE kode='$kode'");
+
+        $this->add_pesan();
+        
         $this->order_model->cancel_order($kode);
 
         redirect('order/confirm_order');
@@ -300,13 +317,62 @@ class Order extends CI_Controller {
     {
         $email = $_SESSION['email'];
         $link_order = $this->db->query("SELECT * FROM order_detail WHERE costumers='$email' and confirm_by_admin=0 and tanggal_pesan IS NOT NULL GROUP BY tanggal_pesan");
-        $total = $this->db->query("SELECT SUM(harga) as harga, kode FROM order_detail WHERE costumers = '$email' and tanggal_pesan IS NOT NULL GROUP BY tanggal_pesan")->result();
+        $total = $this->db->query("SELECT SUM(harga) as harga, kode, tanggal_pesan FROM order_detail WHERE costumers = '$email' and tanggal_pesan IS NOT NULL GROUP BY tanggal_pesan")->result();
 
         if($link_order->num_rows() > 0){
             foreach($link_order->result() as $lo){
                 foreach($total as $t){
                     if($lo->kode == $t->kode){
-                        echo '<a href='.base_url("order/confirm_order").' class="dropdown-item">'.$lo->kode.' - Rp.'.number_format("$t->harga","0",",",".").'<br>';
+                    $tanggal_pesan = $t->tanggal_pesan;
+
+                    $tanggal = substr($tanggal_pesan, 0, 2);
+                    $tahun = substr($tanggal_pesan, 6, 4);
+                    $jam = substr($tanggal_pesan, 11, 2);
+                    $menit = substr($tanggal_pesan, 14, 2);
+
+                    $bulan = substr($tanggal_pesan, 3, 2);
+
+                    switch($bulan){
+                        case '01':
+                            $bulan_indo = 'Januari';
+                            break;
+                        case '02':
+                            $bulan_indo = 'Februari';
+                            break;
+                        case '03':
+                            $bulan_indo = 'Maret';
+                            break;
+                        case '04':
+                            $bulan_indo = 'April';
+                            break;
+                        case '05':
+                            $bulan_indo = 'Mei';
+                            break;
+                        case '06':
+                            $bulan_indo = 'Juni';
+                            break;
+                        case '07':
+                            $bulan_indo = 'Juli';
+                            break;
+                        case '08':
+                            $bulan_indo = 'Agustus';
+                            break;
+                        case '09':
+                            $bulan_indo = 'September';
+                            break;
+                        case '10':
+                            $bulan_indo = 'Oktober';
+                            break;
+                        case '11':
+                            $bulan_indo = 'November';
+                            break;
+                        case '12':
+                            $bulan_indo = 'Desember';
+                            break;
+                    };
+
+                    $tanggal_indo = $tanggal.' '.$bulan_indo.' '.$tahun.' pukul '.$jam.':'.$menit;
+                        echo '<a href='.base_url("order/confirm_order").' class="dropdown-item"><b>'.$lo->kode.' - Rp.'.number_format("$t->harga","0",",",".").'</b><br><small class="text-muted">'.$tanggal_indo.'</small>';
                     }
                 }
             }
@@ -319,36 +385,154 @@ class Order extends CI_Controller {
     public function count_message()
     {
         $email = $_SESSION['email'];
-        $count_message = $this->db->query("SELECT * FROM order_detail WHERE costumers='$email' and order_status=0 and tanggal_pesan IS NOT NULL GROUP BY tanggal_pesan");
+        $count_message = $this->db->query("SELECT * FROM order_message WHERE costumers='$email' and message_status=0");
 
         echo '('.$count_message->num_rows().')';
+    }
+
+    private function add_pesan()
+    {
+
+        $email = $_SESSION['email'];
+        $order_pesan = $this->db->query("SELECT * FROM order_detail WHERE costumers='$email'")->result();
+
+        foreach($order_pesan as $op){
+            if($op->confirm_by_admin == 0){
+                $kode_pesan = $op->kode;
+                $isi_pesan = 'Segera lakukan pembayaran! kode pesanan anda <b>'.$op->kode.'.</b>';
+                $confirm_kode = 0;
+                $tanggal = date('d-m-Y h:i:s');
+                $costumers = $email;
+            }
+            elseif($op->confirm_by_admin == 1){
+                $kode_pesan = $op->kode;
+                $isi_pesan = 'Pesanan dengan kode <b>'.$op->kode.'.</b> telah dikonfirmasi! Terimakasih.';
+                $confirm_kode = 1;
+                $tanggal = date('d-m-Y h:i:s');
+                $costumers = $email;
+            }
+            elseif($op->confirm_by_admin == 2){
+                $kode_pesan = $op->kode;
+                $isi_pesan = 'Pesanan dengan kode <b>'.$op->kode.'.</b> telah kadaluarsa!';
+                $confirm_kode = 2;
+                $tanggal = date('d-m-Y h:i:s');
+                $costumers = $email;
+            }
+            elseif($op->confirm_by_admin == 3){
+                $kode_pesan = $op->kode;
+                $isi_pesan = 'Anda telah membatalkan pesanan dengan kode <b>'.$op->kode.'</b>.';
+                $confirm_kode = 3;
+                $tanggal = date('d-m-Y h:i:s');
+                $costumers = $email;
+            }
+        }
+
+        $cek_message = $this->db->query("SELECT * FROM order_message WHERE kode='$kode_pesan'")->result_array();
+
+        $array_kode = array();
+        $array_confirm = array();
+
+        foreach($cek_message as $cm){
+            $array_kode[] = $cm['kode'];
+            $array_confirm[] = $cm['confirm_kode'];
+        }
+
+        $insert = array(
+            'kode' => $kode_pesan,
+            'isi_pesan' => $isi_pesan,
+            'confirm_kode' => $confirm_kode,
+            'tanggal_message' => $tanggal,
+            'costumers' => $costumers
+        );
+    
+        if(!in_array($confirm_kode, $array_confirm)){
+            $this->db->insert('order_message', $insert);
+        }
     }
 
     public function link_message()
     {
         $email = $_SESSION['email'];
-        $link_message = $this->db->query("SELECT * FROM order_detail WHERE costumers='$email' GROUP BY tanggal_pesan");
 
-        if(!empty($link_message->result())){
+        $link_message = $this->db->query("SELECT * FROM order_message WHERE costumers='$email' ORDER BY tanggal_message DESC");
+
+        if($link_message->num_rows() > 0){
             foreach($link_message->result() as $lm){
-                if($lm->confirm_by_admin == 1)
-                    echo '<a href='.base_url('order/message').' class="dropdown-item">Pesanan dengan kode pesan <b>'.$lm->kode.'</b> telah dikonfirmasi.<br>';
-                elseif($lm->confirm_by_admin == 2)
-                    echo '<a href='.base_url('order/message').' class="dropdown-item">Pesanan dengan kode pesan <b>'.$lm->kode.'</b> telah kadaluarsa.<br>';
-                else
-                    echo '<a href='.base_url('order/message').' class="dropdown-item">Segera lakukan pembayaran! kode pesan <b>'.$lm->kode.'</b><br>';
+                $tanggal_pesan = $lm->tanggal_message;
+
+                $tanggal = substr($tanggal_pesan, 0, 2);
+                $tahun = substr($tanggal_pesan, 6, 4);
+                $jam = substr($tanggal_pesan, 11, 2);
+                $menit = substr($tanggal_pesan, 14, 2);
+                $bulan = substr($tanggal_pesan, 3, 2);
+                switch($bulan){
+                    case '01':
+                        $bulan_indo = 'Januari';
+                        break;
+                    case '02':
+                        $bulan_indo = 'Februari';
+                        break;
+                    case '03':
+                        $bulan_indo = 'Maret';
+                        break;
+                    case '04':
+                        $bulan_indo = 'April';
+                        break;
+                    case '05':
+                        $bulan_indo = 'Mei';
+                        break;
+                    case '06':
+                        $bulan_indo = 'Juni';
+                        break;
+                    case '07':
+                        $bulan_indo = 'Juli';
+                        break;
+                    case '08':
+                        $bulan_indo = 'Agustus';
+                        break;
+                    case '09':
+                        $bulan_indo = 'September';
+                        break;
+                    case '10':
+                        $bulan_indo = 'Oktober';
+                        break;
+                    case '11':
+                        $bulan_indo = 'November';
+                        break;
+                    case '12':
+                        $bulan_indo = 'Desember';
+                        break;
+                };
+
+                $tanggal_indo = $tanggal.' '.$bulan_indo.' '.$tahun.' pukul '.$jam.':'.$menit;
+
+                echo '<a href="'.base_url('order/message').'" class="dropdown-item">'.$lm->isi_pesan.'<br><small class="text-muted">'.$tanggal_indo.'</small></a>';
             }
         }
         else{
-            echo '<span class="dropdown-item">Belum ada pemberitahuan!</span>';
+            echo '<span class="dropdown-item">Pesanan belum ada!</span>';
         }
-
     }
 
-    public function update_status_order()
+    public function update_message_status()
     {
         $email = $_SESSION['email'];
-        $this->db->query("UPDATE order_detail SET order_status=1 WHERE costumers='$email' and order_status=0");
+        $this->db->query("UPDATE order_message SET message_status=1 WHERE costumers='$email' and message_status=0");
+    }
+
+    public function message()
+    {
+        $where = array(
+            'costumers' => $_SESSION['email']
+        );
+
+        $data = array(
+            'title' => 'CV. New Garuda Jaya Totabuan',
+            'content' => 'order/message',
+            'message' => $this->order_model->message($where)
+        );
+		$this->load->view('layouts/wrapper', $data);
+
     }
 
 }

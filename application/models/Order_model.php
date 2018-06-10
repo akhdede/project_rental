@@ -63,6 +63,10 @@ class Order_model extends CI_Model {
         return true;
     }
 
+    public function message($where)
+    {
+        return $this->db->get_where('order_message', $where);
+    }
 
 }
 

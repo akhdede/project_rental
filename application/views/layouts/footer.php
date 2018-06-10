@@ -63,9 +63,9 @@
         });
     }
 
-    function update_status_order() {
-        $.get('<?php echo base_url('order/update_status_order'); ?>', function(data) {
-            $('#update_status_order').html(data);    
+    function update_message_status() {
+        $.get('<?php echo base_url('order/update_message_status'); ?>', function(data) {
+            $('#update_message_status').html(data);    
         });
     }
 
