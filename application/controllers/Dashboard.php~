@@ -1,0 +1,169 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Dashboard extends CI_Controller {
+
+  function __construct(){
+		error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+    parent::__construct();
+    $data = array( 'title' => 'Administrator page',
+                   'header' => 'ADMINISTRATOR PAGE',
+                   'content_header' => 'CV. GARUDA JAYA TOTABUAN'
+                 );
+    $this->load->view('layout/admin/header', $data);
+    $this->load->model('dashboard_model');
+  }
+
+  // start of fungsi list
+	public function index()
+	{
+    $data['isi'] = 'dashboard/index.php';
+		$this->load->view('layout/admin/wrapper', $data);
+	}
+
+	public function list()
+	{
+    $jumlah_data = $this->dashboard_model->jumlah_data();
+    $config['base_url'] = base_url().'dashboard/list/';
+    $config['first_url'] = '0';
+    $config['total_rows'] = $jumlah_data;
+    $config['per_page'] = 5;
+    $config['full_tag_open'] = '<div><ul class="pagination pagination-small pagination-centered">';
+    $config['full_tag_close'] = '</ul></div>';
+
+    $config['first_link'] = '&laquo; First';
+    $config['first_tag_open'] = '<li class="prev page">';
+    $config['first_tag_close'] = '</li>';
+
+    $config['last_link'] = 'Last &raquo;';
+    $config['last_tag_open'] = '<li class="next page">';
+    $config['last_tag_close'] = '</li>';
+
+    $config['next_link'] = 'Next &rarr;';
+    $config['next_tag_open'] = '<li class="next page">';
+    $config['next_tag_close'] = '</li>';
+
+    $config['prev_link'] = '&larr; Previous';
+    $config['prev_tag_open'] = '<li class="prev page">';
+    $config['prev_tag_close'] = '</li>';
+
+    $config['cur_tag_open'] = '<li class="active"><a href="#">';
+    $config['cur_tag_close'] = '</a></li>';
+
+    $config['num_tag_open'] = '<li class="page">';
+    $config['num_tag_close'] = '</li>';
+    if($this->input->post('by') == NULL){
+      $by = FALSE;
+    }else{
+      $by = $this->input->post('by');
+    }
+    $this->pagination->initialize($config);
+    $from = $this->uri->segment(3);
+    $data = array( 'isi' => 'dashboard/list.php',
+                   'listMbl' => $this->dashboard_model->data($config['per_page'], $from),
+                   'filterMbl' => $this->dashboard_model->filter($by),
+                   'found' => $this->dashboard_model->found($by),
+                   'error' => ' '
+                 );
+    $this->load->view('layout/admin/wrapper', $data);
+	}
+
+  public function edit($id){
+    $where = array('id' => $id);
+    $data = array( 'isi' => 'dashboard/edit_list.php',
+                   'editList' => $this->dashboard_model->edit('mobil_details', $where)->result()
+                 );
+    $this->load->view('layout/admin/wrapper', $data);
+  }
+
+  public function update(){
+    $this->form_validation->set_rules('plat', 'Plat no.', 'required');
+    $this->form_validation->set_rules('merek', 'Merek', 'required');
+
+    $id = $this->input->post('id');
+    $plat_no = $this->input->post('plat');
+    $merek = $this->input->post('merek');
+    $url = $this->do_upload();
+    $where = $id;
+
+    if($this->form_validation->run() == TRUE && $url == NULL){
+      $url = $this->input->post('gambar');
+      $this->dashboard_model->update($plat_no, $merek, $url, $where);
+      $sukses = $this->session->set_flashdata('message', '<div class="alert alert-success" id="danger-alert"> <button type="button" class="close" data-dismiss="alert">x</button><strong>Data berhasil diubah!</strong></div>');
+      echo $sukses;
+    // }elseif($this->form_validation->run() == TRUE && $this->do_upload() == TRUE){
+    }else{
+      if(in_array($bknGbr, "jpg","jpeg","png")){
+        $sukses = $this->session->set_flashdata('message', '<div class="alert alert-danger" id="danger-aler"> <button type="button" class="close" data-dismiss="alert">x</button><strong>Data berhasil diubah!'.$url.'</strong></div>');
+        echo $sukses;
+      }else{
+        $this->dashboard_model->update($plat_no, $merek, $url, $where);
+        $sukses = $this->session->set_flashdata('message', '<div class="alert alert-success" id="danger-aler"> <button type="button" class="close" data-dismiss="alert">x</button><strong>Data berhasil diubah!'.$url.'</strong></div>');
+        echo $sukses;
+      }
+    // }else{
+    //   echo $this->session->set_flashdata('message', '<div class="alert alert-danger" id="danger-alert"> <button type="button" class="close" data-dismiss="alert">x</button><strong>'.validation_errors().'</strong></div>');
+    }
+    redirect('dashboard/list');
+  }
+
+  public function delete($id){
+    $this->dashboard_model->delete($id);
+    echo $this->session->set_flashdata('message', '<div class="alert alert-success" id="danger-alert"> <button type="button" class="close" data-dismiss="alert">x</button><strong>Data berhasil dihapus!</strong></div>');
+    redirect('dashboard/list');
+  }
+
+  public function save(){
+    $this->_set_rules();
+
+    $url = $this->do_upload();
+    $plat_no = $this->input->post('plat');
+    $merek = $this->input->post('merek');
+    $bknGbr = $this->bkn_gmbr();
+
+    if($this->form_validation->run() == TRUE){
+      if(in_array($bknGbr, array("jpg", "jpeg", "png"))){
+        $this->dashboard_model->save($plat_no, $merek, $url);
+        $sukses = '<div class="alert alert-success" id="success-alert"> <button type="button" class="close" data-dismiss="alert">x</button><strong>Data berhasil ditambahkan!</strong></div>';
+        echo $this->session->set_flashdata('message', $sukses);
+      }else{
+        echo $this->session->set_flashdata('message', '<div class="alert alert-danger" id="danger-alert"> <button type="button" class="close" data-dismiss="alert">x</button><strong>Data gagal ditambahkan! type file bukan salah satu dari jpg, jpeg atau png.</strong></div>');
+      }
+    }else{
+      echo $this->session->set_flashdata('message', '<div class="alert alert-danger" id="danger-alert"> <button type="button" class="close" data-dismiss="alert">x</button><strong>'.validation_errors().'</strong></div>');
+    }
+    redirect('dashboard/list');
+  }
+
+  private function do_upload(){
+    $type = explode('.', $_FILES["img"]["name"]);
+    $type = $type[count($type)-1];
+    $url = "./img_upload/".uniqid(rand()).'.'.$type;
+
+    if(!in_array($type, array("jpg", "jpeg", "png"))){
+      echo "file bukan gambar";
+    }else{
+      if(is_uploaded_file($_FILES["img"]["tmp_name"]))
+        if(move_uploaded_file($_FILES["img"]["tmp_name"], $url))
+          return $url;
+    }
+    
+    return "";
+  }
+
+  private function bkn_gmbr(){
+    $type = explode('.', $_FILES["img"]["name"]);
+    $ext= $type[count($type)-1];
+    return $ext;
+  }
+
+  private function _set_rules(){
+    $this->form_validation->set_rules('plat', 'Plat no.', 'required');
+    $this->form_validation->set_rules('merek', 'Merek', 'required');
+    if (empty($_FILES['img']['name'])) {
+      $this->form_validation->set_rules('img', 'Gambar', 'required');
+    }
+  }
+
+  // end of fungsi list
+}

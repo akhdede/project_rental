@@ -1,8 +1,8 @@
--- MySQL dump 10.16  Distrib 10.1.29-MariaDB, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.15  Distrib 10.0.34-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: rental
 -- ------------------------------------------------------
--- Server version	10.1.29-MariaDB-6
+-- Server version	10.0.34-MariaDB-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -55,9 +55,10 @@ CREATE TABLE `daftar_mobil` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `plat_nomor` varchar(10) NOT NULL,
   `merek` varchar(30) NOT NULL,
-  `foto` varchar(50) NOT NULL,
+  `img` varchar(41) DEFAULT NULL,
+  `tanggal_aktif` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +67,7 @@ CREATE TABLE `daftar_mobil` (
 
 LOCK TABLES `daftar_mobil` WRITE;
 /*!40000 ALTER TABLE `daftar_mobil` DISABLE KEYS */;
-INSERT INTO `daftar_mobil` VALUES (1,'DB 1234 KI','Toyota Avanza','avanza.jpg');
+INSERT INTO `daftar_mobil` VALUES (25,'DB1111KK','Daihatsu Xenia','./img_upload/4703614095b1d5c41143e7.jpg','2018-06-10 17:13:37');
 /*!40000 ALTER TABLE `daftar_mobil` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -119,7 +120,7 @@ CREATE TABLE `kursi_tersedia` (
 
 LOCK TABLES `kursi_tersedia` WRITE;
 /*!40000 ALTER TABLE `kursi_tersedia` DISABLE KEYS */;
-INSERT INTO `kursi_tersedia` VALUES (44,'DB1234KI',1,0,0),(45,'DB1234KI',2,0,0),(46,'DB1234KI',3,0,0),(47,'DB1234KI',4,0,0),(48,'DB1234KI',5,0,0),(49,'DB1234KI',6,0,0),(50,'DB1234KI',7,0,0),(51,'DB1234KB',1,1,0),(52,'DB1234KB',2,2,0),(53,'DB1234KB',3,0,0),(54,'DB1234KB',4,0,0),(55,'DB1234KB',5,0,0),(56,'DB1234KB',6,0,0),(57,'DB1234KB',7,0,0),(58,'DB1234KK',1,0,0),(59,'DB1234KK',2,0,0),(60,'DB1234KK',3,0,0),(61,'DB1234KK',4,0,0),(62,'DB1234KK',5,0,0),(63,'DB1234KK',6,0,0),(64,'DB1234KK',7,0,0);
+INSERT INTO `kursi_tersedia` VALUES (44,'DB1234KI',1,0,0),(45,'DB1234KI',2,0,0),(46,'DB1234KI',3,0,0),(47,'DB1234KI',4,0,0),(48,'DB1234KI',5,0,0),(49,'DB1234KI',6,0,0),(50,'DB1234KI',7,0,0),(51,'DB1234KB',1,0,0),(52,'DB1234KB',2,0,0),(53,'DB1234KB',3,0,0),(54,'DB1234KB',4,0,0),(55,'DB1234KB',5,0,0),(56,'DB1234KB',6,0,0),(57,'DB1234KB',7,0,0),(58,'DB1234KK',1,0,0),(59,'DB1234KK',2,0,0),(60,'DB1234KK',3,0,0),(61,'DB1234KK',4,0,0),(62,'DB1234KK',5,0,0),(63,'DB1234KK',6,0,0),(64,'DB1234KK',7,0,0);
 /*!40000 ALTER TABLE `kursi_tersedia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -137,6 +138,7 @@ CREATE TABLE `mobil_tersedia` (
   `foto_mobil` varchar(50) NOT NULL,
   `id_sopir` int(11) NOT NULL,
   `tanggal` date NOT NULL,
+  `sudah_jalan` varchar(1) DEFAULT 'n',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -147,7 +149,7 @@ CREATE TABLE `mobil_tersedia` (
 
 LOCK TABLES `mobil_tersedia` WRITE;
 /*!40000 ALTER TABLE `mobil_tersedia` DISABLE KEYS */;
-INSERT INTO `mobil_tersedia` VALUES (4,'DB1234KI','Toyota Avanza','avanza.jpg',1,'2018-04-20'),(5,'DB1234KB','Daihatsu Xenia','xenia.jpg',1,'2018-04-20'),(6,'DB1234KK','Kijang Innova','innova.jpg',1,'2018-04-20');
+INSERT INTO `mobil_tersedia` VALUES (4,'DB1234KI','Toyota Avanza','avanza.jpg',1,'2018-04-20','y'),(5,'DB1234KB','Daihatsu Xenia','xenia.jpg',1,'2018-04-20','y'),(6,'DB1234KK','Kijang Innova','innova.jpg',1,'2018-04-20','y');
 /*!40000 ALTER TABLE `mobil_tersedia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -160,12 +162,17 @@ DROP TABLE IF EXISTS `order_detail`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `order_detail` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_costumer` int(11) NOT NULL,
-  `plat_nomor_mobil` varchar(10) NOT NULL,
+  `plat_nomor` varchar(10) NOT NULL,
   `nomor_kursi` int(1) NOT NULL,
-  `tanggal_pesan` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `costumers` varchar(100) NOT NULL,
+  `harga` varchar(20) NOT NULL,
+  `tanggal_pesan` varchar(30) DEFAULT NULL,
+  `is_proses` int(1) NOT NULL DEFAULT '0',
+  `kode` varchar(30) DEFAULT NULL,
+  `confirm_by_admin` int(1) DEFAULT '0',
+  `tanggal_confirm` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,6 +182,35 @@ CREATE TABLE `order_detail` (
 LOCK TABLES `order_detail` WRITE;
 /*!40000 ALTER TABLE `order_detail` DISABLE KEYS */;
 /*!40000 ALTER TABLE `order_detail` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `order_message`
+--
+
+DROP TABLE IF EXISTS `order_message`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `order_message` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `kode` varchar(30) NOT NULL,
+  `isi_pesan` text NOT NULL,
+  `confirm_kode` int(1) NOT NULL,
+  `message_status` int(1) NOT NULL,
+  `costumers` varchar(100) NOT NULL,
+  `tanggal_message` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `order_message`
+--
+
+LOCK TABLES `order_message` WRITE;
+/*!40000 ALTER TABLE `order_message` DISABLE KEYS */;
+INSERT INTO `order_message` VALUES (43,'18060910194308','Segera lakukan pembayaran! kode pesanan anda <b>18060910194308.</b>',0,1,'akhdede@gmail.com','09-06-2018 10:19:43'),(44,'18060910200008','Segera lakukan pembayaran! kode pesanan anda <b>18060910200008.</b>',0,1,'akhdede@gmail.com','09-06-2018 10:20:00'),(45,'18060910313908','Segera lakukan pembayaran! kode pesanan anda <b>18060910313908.</b>',0,1,'akhdede@gmail.com','09-06-2018 10:31:39'),(46,'18060910315608','Segera lakukan pembayaran! kode pesanan anda <b>18060910315608.</b>',0,1,'akhdede@gmail.com','09-06-2018 10:31:56'),(47,'18060910455908','Segera lakukan pembayaran! kode pesanan anda <b>18060910455908.</b>',0,1,'akhdede@gmail.com','09-06-2018 10:45:59'),(48,'18060910455908','Anda telah membatalkan pesanan dengan kode <b>18060910455908.</b>.',3,1,'akhdede@gmail.com','09-06-2018 10:46:06'),(49,'18060910493109','Segera lakukan pembayaran! kode pesanan anda <b>18060910493109.</b>',0,1,'ekha_potabuga@gmail.com','09-06-2018 10:49:32'),(50,'18060910503108','Segera lakukan pembayaran! kode pesanan anda <b>18060910503108.</b>',0,1,'akhdede@gmail.com','09-06-2018 10:50:31'),(51,'18060910503108','Anda telah membatalkan pesanan dengan kode <b>18060910503108</b>.',3,1,'akhdede@gmail.com','09-06-2018 10:56:31'),(52,'18060910580508','Segera lakukan pembayaran! kode pesanan anda <b>18060910580508.</b>',0,1,'akhdede@gmail.com','09-06-2018 10:58:05'),(53,'18060910493109','Anda telah membatalkan pesanan dengan kode <b>18060910493109</b>.',3,1,'ekha_potabuga@gmail.com','09-06-2018 11:01:32'),(54,'18060910580508','Anda telah membatalkan pesanan dengan kode <b>18060910580508</b>.',3,1,'akhdede@gmail.com','09-06-2018 11:18:02'),(55,'18061004411508','Segera lakukan pembayaran! kode pesanan anda <b>18061004411508.</b>',0,1,'akhdede@gmail.com','10-06-2018 04:41:15'),(56,'18061004411508','Anda telah membatalkan pesanan dengan kode <b>18061004411508</b>.',3,1,'akhdede@gmail.com','10-06-2018 06:15:15');
+/*!40000 ALTER TABLE `order_message` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -346,4 +382,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-10 21:15:24
+-- Dump completed on 2018-06-11  1:14:24
