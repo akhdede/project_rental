@@ -15,7 +15,7 @@
           'id' => 'plat',
           'placeholder' => 'Plat no.',
           'onkeydown' => 'upperCaseF(this)',
-          'value' => $e->plat_no,
+          'value' => $e->plat_nomor,
           'title' => 'Plat nomor harus diisi!'
           ));?>
         </div>

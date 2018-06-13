@@ -7,12 +7,14 @@ class Driver extends CI_Controller {
 		error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
     parent::__construct();
 
+    if($_SESSION['level'] != 1)
+        redirect(base_url('user/login'));
 
     $data = array( 'title' => 'Administrator page',
                    'header' => 'ADMINISTRATOR PAGE',
                    'content_header' => 'CV. NEW GARUDA JAYA TOTABUAN'
                  );
-    $this->load->view('layout/admin/header', $data);
+    $this->load->view('layouts/admin/header', $data);
     $this->load->model('admin/driver_model');
   }
 
@@ -21,20 +23,20 @@ class Driver extends CI_Controller {
     $data = array( 'isi' => 'admin/driver/index.php',
                    'driver' => $this->driver_model->tmplDriver()
                  );
-    $this->load->view('layout/admin/wrapper', $data);
+    $this->load->view('layouts/admin/wrapper', $data);
   }
 
   public function add(){
     $data = array( 'isi' => 'admin/driver/add.php');
-    $this->load->view('layout/admin/wrapper', $data);
+    $this->load->view('layouts/admin/wrapper', $data);
   }
 
   public function edit($id){
     $where = array('id' => $id);
     $data = array( 'isi' => 'admin/driver/edit.php',
-                   'editdriver' => $this->driver_model->edit('driver', $where)->result()
+                   'editdriver' => $this->driver_model->edit('sopir', $where)->result()
                  );
-    $this->load->view('layout/admin/wrapper', $data);
+    $this->load->view('layouts/admin/wrapper', $data);
   }
 
   public function save(){
@@ -60,7 +62,7 @@ class Driver extends CI_Controller {
       echo $this->session->set_flashdata('message', '<div class="alert alert-danger" id="danger-alert"> <button type="button" class="close" data-dismiss="alert">x</button><strong>'.validation_errors().'</strong></div>');
     }
     $data = array( 'isi' => 'admin/driver/add.php');
-    $this->load->view('layout/admin/wrapper', $data);
+    $this->load->view('layouts/admin/wrapper', $data);
   }
 
   public function update(){

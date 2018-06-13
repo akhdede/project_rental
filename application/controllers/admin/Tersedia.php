@@ -7,12 +7,13 @@ class Tersedia extends CI_Controller {
 		error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
     parent::__construct();
 
-
+    if($_SESSION['level'] != 1)
+        redirect(base_url('user/login'));
     $data = array( 'title' => 'Administrator page',
                    'header' => 'ADMINISTRATOR PAGE',
                    'content_header' => 'CV. NEW GARUDA JAYA TOTABUAN'
                  );
-    $this->load->view('layout/admin/header', $data);
+    $this->load->view('layouts/admin/header', $data);
     $this->load->model('admin/tersedia_model');
   }
 
@@ -25,7 +26,7 @@ class Tersedia extends CI_Controller {
                   'getDriver' => $this->tersedia_model->getDriver()->result(),
                   'krsStatus' => $this->tersedia_model->krsStatus()
                  );
-    $this->load->view('layout/admin/wrapper', $data);
+    $this->load->view('layouts/admin/wrapper', $data);
   }
 
 	public function kursi_tersedia()
@@ -35,7 +36,7 @@ class Tersedia extends CI_Controller {
                   'mblTersedia' => $this->tersedia_model->mblTersedia(),
                   'krsStatus' => $this->tersedia_model->krsStatus()
                  );
-    $this->load->view('layout/admin/wrapper', $data);
+    $this->load->view('layouts/admin/wrapper', $data);
   }
 
   public function get($id){
@@ -50,13 +51,16 @@ class Tersedia extends CI_Controller {
 
   public function addMobil(){
     $idDrv = $this->input->post('driver_id');
-    $plat_no = $this->input->post('plat_no');
+    $plat_no = $this->input->post('plat_nomor');
+    $merek = $this->input->post('merek');
+    $img = $this->input->post('img');
+    $tanggal_tersedia = $this->input->post('tanggal_tersedia');
 
     if($idDrv == NULL){
       $sukses = $this->session->set_flashdata('message', '<div class="alert alert-danger" id="success-alert"> <button type="button" class="close" data-dismiss="alert">x</button><strong>Driver harus dipilih!</strong></div>');
       echo $sukses;
     }else{
-      $this->tersedia_model->insert($plat_no, $idDrv);
+      $this->tersedia_model->insert($plat_no, $merek, $img, $tanggal_tersedia, $idDrv);
 
       $i = 1;
       for ($no_kursi = $i; $no_kursi < 8; $no_kursi++) {
@@ -71,9 +75,9 @@ class Tersedia extends CI_Controller {
   }
 
   public function delete(){
-    $plat_no = $this->uri->segment(4);
-    $this->tersedia_model->mblBatal($plat_no);
-    $this->tersedia_model->krsBatal($plat_no);
+    $plat_nomor = $this->uri->segment(4);
+    $this->tersedia_model->mblBatal($plat_nomor);
+    $this->tersedia_model->krsBatal($plat_nomor);
     redirect('admin/tersedia');
   }
 
@@ -81,15 +85,15 @@ class Tersedia extends CI_Controller {
   public function kursi(){
     $this->_set_rules();
 
-    $plat_no = $this->input->post('plat_no');
-    $no_kursi = $this->input->post('no_kursi');
+    $plat_nomor = $this->input->post('plat_nomor');
+    $nomor_kursi = $this->input->post('nomor_kursi');
     $costumer = $this->input->post('costumer');
-    $ket = $this->input->post('ket');
-    $stts_bayar = $this->input->post('stts_bayar');
+    $keterangan = $this->input->post('keterangan');
+    $status_bayar = $this->input->post('status_bayar');
     $status = 1;
 
     if($this->form_validation->run() == TRUE){
-      $this->tersedia_model->krsUpdate($status, $plat_no, $no_kursi, $costumer, $ket, $stts_bayar);
+      $this->tersedia_model->krsUpdate($status, $plat_nomor, $nomor_kursi, $costumer, $keterangan, $status_bayar);
       echo $this->session->set_flashdata('message', '<div class="alert alert-success" id="success-alert"> <button type="button" class="close" data-dismiss="alert">x</button><strong>Pesan berhasil ditambahkan!</strong></div>');
     }else{
       echo $this->session->set_flashdata('message', '<div class="alert alert-danger" id="danger-alert"> <button type="button" class="close" data-dismiss="alert">x</button><strong>'.validation_errors().'</strong></div>');

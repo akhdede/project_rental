@@ -6,6 +6,7 @@ class User extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
+
         $data = array(
             'title' => 'CV. New Garuda Jaya Totabuan'
         );
@@ -39,7 +40,10 @@ class User extends CI_Controller {
                 'email' => $user[0]->email,
                 'level' => $user[0]->level
             );
-            redirect(base_url());
+            if($_SESSION['level'] == 0)
+                redirect(base_url());
+            elseif($_SESSION['level'] == 1)
+                redirect(base_url('admin/dashboard'));
         }
 
     }
@@ -84,6 +88,9 @@ class User extends CI_Controller {
 
     public function logout()
     {
+        unset($_SESSION['email']);
+        unset($_SESSION['nama_lengkap']);
+        unset($_SESSION['level']);
         $this->session->sess_destroy();
         redirect(base_url());
     }

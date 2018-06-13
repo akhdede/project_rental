@@ -29,9 +29,4 @@
 
   <a href="<?php echo base_url('admin/download') ?>" onclick="javascript: return confirm('Apakah anda akan merekap transaksi hari ini?')"><button class="btn btn-primary">Rekap</button></a>
 
-  <a <?php if($this->uri->segment(3) != 'backup') { ?> 
-  onclick="javascript: return alert('Harap lakukan backup dan rekap terlebih dahulu!')" 
-  <?php } else { ?>
-  onclick="javascript: return confirm('Data transaksi hari ini akan terhapus, pastikan anda sudah merekapnya! apakah anda yakin?')"href="<?php echo base_url('admin/dashboard/new') ?>"
-  <?php } ?> ><button class="btn btn-primary"> New day</button></a>
 </div>

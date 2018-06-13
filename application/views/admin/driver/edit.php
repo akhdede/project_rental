@@ -9,16 +9,16 @@
       <div class="col-sm-6">
         <label for="nama_lgkp">Nama Lengkap</label>
         <input type="hidden" value="<?php echo $e->id ?>" name="id">
-        <input type="hidden" value="<?php echo $e->image ?>" name="gambar">
-        <input class="form-control" type="text" placeholder="Nama Lengkap" name="nama_lgkp" value="<?php echo $e->nama_lgkp ?>">
+        <input type="hidden" value="<?php echo $e->img ?>" name="gambar">
+        <input class="form-control" type="text" placeholder="Nama Lengkap" name="nama_lgkp" value="<?php echo $e->nama_lengkap ?>">
       </div>
       <div class="col-sm-4">
         <label for="tempat_lhr">Tempat Lahir</label>
-        <input class="form-control" type="text" placeholder="Tempat Lahir" name="tempat_lhr" value="<?php echo $e->tempat_lhr ?>">
+        <input class="form-control" type="text" placeholder="Tempat Lahir" name="tempat_lhr" value="<?php echo $e->tempat_lahir ?>">
       </div>
       <div class="col-sm-2">
         <label for="tanggal_lhr">Tanggal Lahir</label>
-        <input class="form-control" type="date" name="tanggal_lhr" value="<?php echo $e->tanggal_lhr ?>">
+        <input class="form-control" type="date" name="tanggal_lhr" value="<?php echo $e->tanggal_lahir ?>">
       </div>
       <div class="col-sm-12">&nbsp;</div>
       <div class="col-sm-8">
@@ -27,7 +27,7 @@
       </div>
       <div class="col-sm-2">
         <label for="pas_foto">Pas Foto</label>
-        <img src="<?php echo base_url($e->image) ?>" class="thumbnail">
+        <img src="<?php echo base_url($e->img) ?>" class="thumbnail">
         <input type="file" name="pas_foto">
       </div>
     </div>

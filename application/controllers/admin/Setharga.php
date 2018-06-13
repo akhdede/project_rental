@@ -7,12 +7,14 @@ class Setharga extends CI_Controller {
 		error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
     parent::__construct();
 
+    if($_SESSION['level'] != 1)
+        redirect(base_url('user/login'));
 
     $data = array( 'title' => 'Administrator page',
                    'header' => 'ADMINISTRATOR PAGE',
                    'content_header' => 'CV. NEW GARUDA JAYA TOTABUAN'
                  );
-    $this->load->view('layout/admin/header', $data);
+    $this->load->view('layouts/admin/header', $data);
     $this->load->model('admin/setharga_model');
   }
 
@@ -22,7 +24,7 @@ class Setharga extends CI_Controller {
     $data = array('isi' => 'admin/setHarga/harga.php',
                   'vHarga' => $this->setharga_model->vHarga()
                  );
-    $this->load->view('layout/admin/wrapper', $data);
+    $this->load->view('layouts/admin/wrapper', $data);
   }
 
 	public function editharga()
@@ -31,7 +33,7 @@ class Setharga extends CI_Controller {
     $data = array('isi' => 'admin/setHarga/edit_harga.php',
                   'eHarga' => $this->setharga_model->eHarga($id)
                  );
-    $this->load->view('layout/admin/wrapper', $data);
+    $this->load->view('layouts/admin/wrapper', $data);
   }
 
   public function update(){

@@ -2,17 +2,17 @@
 class Driver_model extends CI_Model{
   //  menampilkan daftar driver
   function tmplDriver(){
-    $query = $this->db->query('SELECT id, nama_lgkp, tempat_lhr, DATE_FORMAT(tanggal_lhr,"%d-%m-%Y") as tanggal_lhr, alamat, image FROM driver');
+    $query = $this->db->query('SELECT id, nama_lengkap, tempat_lahir, DATE_FORMAT(tanggal_lahir,"%d-%m-%Y") as tanggal_lahir, alamat, img FROM sopir');
     return $query->result();
   }
 
-  function save($nama_lgkp, $tempat, $tanggal, $alamat, $url){
-    $this->db->set('nama_lgkp', $nama_lgkp);
-    $this->db->set('tempat_lhr', $tempat);
-    $this->db->set('tanggal_lhr', $tanggal);
+  function save($nama_lengkap, $tempat, $tanggal, $alamat, $url){
+    $this->db->set('nama_lengkap', $nama_lengkap);
+    $this->db->set('tempat_lahir', $tempat);
+    $this->db->set('tanggal_lahir', $tanggal);
     $this->db->set('alamat', $alamat);
-    $this->db->set('image', $url);
-    $this->db->insert('driver');
+    $this->db->set('img', $url);
+    $this->db->insert('sopir');
   }
 
   function edit($table, $where){
@@ -20,13 +20,13 @@ class Driver_model extends CI_Model{
   }
 
   function update($nama, $tempat, $tanggal, $alamat, $url, $where){
-    $query = $this->db->query("UPDATE driver SET nama_lgkp='$nama', tempat_lhr='$tempat', tanggal_lhr='$tanggal', alamat='$alamat', image='$url' WHERE id=$where");
+    $query = $this->db->query("UPDATE sopir SET nama_lengkap='$nama', tempat_lahir='$tempat', tanggal_lahir='$tanggal', alamat='$alamat', img='$url' WHERE id=$where");
     return $query;
   }
 
   function delete($id){
     $this->db->where(array('id' => $id));
-    $this->db->delete('driver');
+    $this->db->delete('sopir');
   }
 }
 

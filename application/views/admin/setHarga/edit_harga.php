@@ -8,10 +8,10 @@
       <?php foreach($eHarga as $e) { ?>
         <input type="hidden" name="id" value="<?php echo $e->id ?>">
         <div class="col-md-4">
-          <label for="kursi">Kursi <?php echo $e->kursi_posisi ?>:</label>
+          <label for="kursi">Kursi <?php echo $e->posisi ?>:</label>
         </div>
         <div class="col-md-4">
-          <input type="text" name="harga" class="form-control" value="<?php echo $e->kursi_hrg ?>">
+          <input type="text" name="harga" class="form-control" value="<?php echo $e->harga ?>">
         </div>
         <div class="col-md-2">
           <button type="submit" class="btn btn-primary">Update</button>

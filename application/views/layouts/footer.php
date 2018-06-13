@@ -54,8 +54,6 @@
         linkOrder();
     });
 
-
-
     function countMessage() {
         setTimeout(countMessage,1000);
         $.get('<?php echo base_url('order/count_message'); ?>', function(data) {

@@ -30,8 +30,8 @@ class Welcome extends CI_Controller {
             echo'
             <div class="col-md-4 col-sm-12 album-show">';
                 // fungsi database untuk menghitung jumlah kursi yang di pesan
-                $cek_full = $this->db->get_where('kursi_tersedia', array('plat_nomor' => $mt->plat_nomor, 'status_order' => 1))->num_rows();
-                $cek_full2 = $this->db->get_where('kursi_tersedia', array('plat_nomor' => $mt->plat_nomor, 'status_order' => 2))->num_rows();
+                $cek_full = $this->db->get_where('kursi_tersedia', array('plat_nomor' => $mt->plat_nomor, 'status' => 1))->num_rows();
+                $cek_full2 = $this->db->get_where('kursi_tersedia', array('plat_nomor' => $mt->plat_nomor, 'status' => 2))->num_rows();
 
                 // jika jumlah kursi yang dipesan kurang dari 7 maka button pesan akan ditampilkan
                 if($cek_full + $cek_full2 < 7){
@@ -70,13 +70,13 @@ class Welcome extends CI_Controller {
                                     // menampilkan button posisi kursi pertama
                                     foreach($kursi_tersedia as $kt){
                                         if($kt->nomor_kursi == 1){
-                                            if($kt->status_order == 0)
+                                            if($kt->status == 0)
                                                 // jika kursi belum dipesan akan menampilkan button primary
                                                 echo '<button class="btn btn-info btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
-                                            elseif($kt->status_order == 1)
+                                            elseif($kt->status == 1)
                                                 // jika kursi sudah dipesan akan menampilkan button secondary
                                                 echo '<button class="btn btn-secondary btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
-                                            elseif($kt->status_order == 2)
+                                            elseif($kt->status == 2)
                                                 // jika kursi dalam proses pemesanan akan menampilkan button warning
                                                 echo '<button class="btn btn-secondary btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
 
@@ -86,13 +86,13 @@ class Welcome extends CI_Controller {
                                     // menampilkan button posisi kursi kedua sampai keempat
                                     foreach($kursi_tersedia as $kt){
                                         if(($kt->nomor_kursi > 1)  and ($kt->nomor_kursi < 5)){
-                                            if($kt->status_order == 0)
+                                            if($kt->status == 0)
                                                 // jika kursi belum dipesan akan menampilkan button primary
                                                 echo '<button class="btn btn-info btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
-                                            elseif($kt->status_order == 1)
+                                            elseif($kt->status == 1)
                                                 // jika kursi sudah dipesan akan menampilkan button secondary
                                                 echo '<button class="btn btn-secondary btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
-                                            elseif($kt->status_order == 2)
+                                            elseif($kt->status == 2)
                                                 // jika kursi dalam proses pemesanan akan menampilkan button warning
                                                 echo '<button class="btn btn-secondary btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
                                         }
@@ -101,13 +101,13 @@ class Welcome extends CI_Controller {
                                     // menampilkan button posisi kursi kelima sampai ketujuh
                                     foreach($kursi_tersedia as $kt){
                                         if(($kt->nomor_kursi > 4)  and ($kt->nomor_kursi < 8)){
-                                            if($kt->status_order == 0)
+                                            if($kt->status == 0)
                                                 // jika kursi belum dipesan akan menampilkan button primary
                                                 echo '<button class="btn btn-info btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
-                                            elseif($kt->status_order == 1)
+                                            elseif($kt->status == 1)
                                                 // jika kursi sudah dipesan akan menampilkan button secondary
                                                 echo '<button class="btn btn-secondary btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
-                                            elseif($kt->status_order == 2)
+                                            elseif($kt->status == 2)
                                                 // jika kursi dalam proses pemesanan akan menampilkan button warning
                                                 echo '<button class="btn btn-secondary btn-lg" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
                                         }
@@ -119,13 +119,13 @@ class Welcome extends CI_Controller {
                                 // menampilkan status nomor kursi
                                 foreach($kursi_tersedia as $kt){
                                     echo '&nbsp;&nbsp;<span class="text-secondary"> Kursi '.$kt->nomor_kursi.' : </span>';
-                                    if($kt->status_order == 0) 
+                                    if($kt->status == 0) 
                                         // jika kursi belum dipesan akan menampilkan checklist berwarna hijau
                                         echo '<span class="fa fa-check text-success" style="margin-bottom: 7px;"></span><br>'; 
-                                    elseif($kt->status_order == 1)
+                                    elseif($kt->status == 1)
                                         // jika kursi sudah dipesan akan menampilkan cross berwarna merah
                                         echo '<span class="fa fa-times text-danger" style="margin-bottom: 7px;"></span><br>' ;
-                                    elseif($kt->status_order == 2)
+                                    elseif($kt->status == 2)
                                         // jika kursi dalam proses pemesanan akan menampilkan cross berwarna merah
                                         echo '<span class="fa fa-exclamation text-warning" style="margin-bottom: 7px;"></span><br>' ;
                                 }

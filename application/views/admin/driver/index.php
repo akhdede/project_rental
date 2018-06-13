@@ -19,11 +19,11 @@
     <tr>
       <tbody>
         <td><?php echo $no++ ?></td>
-        <td><?php echo $t->nama_lgkp; ?></td>
-        <td><?php echo $t->tempat_lhr; ?></td>
-        <td><?php echo $t->tanggal_lhr; ?></td>
+        <td><?php echo $t->nama_lengkap; ?></td>
+        <td><?php echo $t->tempat_lahir; ?></td>
+        <td><?php echo $t->tanggal_lahir; ?></td>
         <td><?php echo $t->alamat; ?></td>
-        <td><img src="<?php echo base_url($t->image) ?>" class="thumbnail" width="100px"></td>
+        <td><img src="<?php echo base_url($t->img) ?>" class="thumbnail" width="100px"></td>
         <td>
           <a href="<?php echo base_url('admin/driver/edit/'.$t->id); ?>"><span class="glyphicon glyphicon-pencil"><span></span></a> | 
           <a href="<?php echo base_url('admin/driver/delete/'.$t->id); ?>" onclick="javascript: return confirm('Are you sure delete this data?')"><span class="glyphicon glyphicon-trash"></span></a>

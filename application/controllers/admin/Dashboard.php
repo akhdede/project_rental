@@ -7,11 +7,14 @@ class Dashboard extends CI_Controller {
 		error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
     parent::__construct();
 
+    if($_SESSION['level'] != 1)
+        redirect(base_url('user/login'));
+
     $data = array( 'title' => 'Administrator page',
                    'header' => 'ADMINISTRATOR PAGE',
                    'content_header' => 'CV. NEW GARUDA JAYA TOTABUAN'
                  );
-    $this->load->view('layout/admin/header', $data);
+    $this->load->view('layouts/admin/header', $data);
     $this->load->model('admin/dashboard_model');
   }
 
@@ -23,7 +26,7 @@ class Dashboard extends CI_Controller {
                    'jmlMblJalan' => $this->dashboard_model->jmlMblJalan(),
                    'jmldriver' => $this->dashboard_model->jmldriver()
                  );
-    $this->load->view('layout/admin/wrapper', $data);
+    $this->load->view('layouts/admin/wrapper', $data);
 
     $backup = $this->input->post('backup');
     $new = $this->input->post('new');
@@ -41,7 +44,7 @@ class Dashboard extends CI_Controller {
                    'jmlMblJalan' => $this->dashboard_model->jmlMblJalan(),
                    'jmldriver' => $this->dashboard_model->jmldriver()
                  );
-    $this->load->view('layout/admin/wrapper', $data);
+    $this->load->view('layouts/admin/wrapper', $data);
     $this->backup_action();
   }
 
@@ -56,13 +59,9 @@ class Dashboard extends CI_Controller {
 		$backup =& $this->dbutil->backup($prefs); 
 
 		$db_name = 'backup-on-'. date("d-m-Y-H-i-s") .'.zip';
-    $save = '/var/www/html/rental/backup/'.$db_name;
+    $save = '/home/dee/rental/backup/'.$db_name;
 
 		write_file($save, $backup); 
   }
 
-  public function new(){
-    $this->dashboard_model->new();
-    redirect('admin/dashboard');
-  }
 }

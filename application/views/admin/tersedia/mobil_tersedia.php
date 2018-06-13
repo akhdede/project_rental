@@ -26,11 +26,11 @@
             <tbody>
               <tr height="50px">
                 <td><?php echo $no++ ?></td>
-                <td><?php echo $md->plat_no ?></td>
+                <td><?php echo $md->plat_nomor ?></td>
                 <td><?php echo $md->merek ?></td>
                 <td>
                   <!-- start of modals -->
-                  <div class="modal fade" id="<?php echo $md->plat_no ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                  <div class="modal fade" id="<?php echo $md->plat_nomor ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -40,12 +40,16 @@
                         <div class="modal-body">
                         <form action="<?php echo base_url('admin/tersedia/addMobil')?>" method="post">
                             <div class="form-group">
-                              <input type="hidden" name="plat_no" value="<?php echo $md->plat_no ?>">
+                                <input type="hidden" name="plat_nomor" value="<?php echo $md->plat_nomor ?>">
+                                <input type="hidden" name="merek" value="<?php echo $md->merek ?>">
+                                <input type="hidden" name="img" value="<?php echo $md->img ?>">
+                                <?php $tanggal_tersedia = date('d-m-Y h:i:s'); ?>
+                                <input type="hidden" name="tanggal_tersedia" value="<?php echo $tanggal_tersedia ?>">
                               <label for="driver_id" class="control-label">Nama Driver</label>
                                 <select class="form-control" name="driver_id">
                                   <option value="">- pilihan -</option>
                                   <?php foreach($getDriver as $g){ ?>
-                                    <option <?php foreach($mblTersedia as $mt){ if(in_array($g->id,array($mt->driver_id))){echo "disabled";} } ?> value="<?php echo $g->id ?>"><?php echo $g->nama_lgkp ?></option>
+                                    <option <?php foreach($mblTersedia as $mt){ if(in_array($g->id,array($mt->id_sopir))){echo "disabled";} } ?> value="<?php echo $g->id ?>"><?php echo $g->nama_lengkap ?></option>
                                   <?php } ?>
                                 </select>
                             </div>
@@ -59,14 +63,14 @@
                     </div>
                   </div>
                   <!-- end of modals -->
-                  <button data-toggle="modal" data-target="#<?php echo $md->plat_no ?>" type="button" class="btn btn-primary btn-sm"
+                  <button data-toggle="modal" data-target="#<?php echo $md->plat_nomor ?>" type="button" class="btn btn-primary btn-sm"
                       <?php foreach($mblTersedia as $mt) { ?>
-                        <?php if($md->plat_no == $mt->plat_no) { echo "disabled"; } ?>
+                        <?php if($md->plat_nomor == $mt->plat_nomor) { echo "disabled"; } ?>
                       <?php } ?>
                       >Ya</button>
                   <?php foreach($mblTersedia as $mt) { ?>
-                    <?php if($md->plat_no == $mt->plat_no) { ?>
-                      <a href="<?php echo base_url('admin/tersedia/delete/').$mt->plat_no ?>" onclick="javascript: return confirm('Apakah anda yakin akan membatalkan mobil ini?')">
+                    <?php if($md->plat_nomor == $mt->plat_nomor) { ?>
+                      <a href="<?php echo base_url('admin/tersedia/delete/').$mt->plat_nomor ?>" onclick="javascript: return confirm('Apakah anda yakin akan membatalkan mobil ini?')">
                         <input type="button" class="btn btn-danger btn-sm" value="Batal">
                       </a>
                     <?php } ?>
@@ -74,14 +78,14 @@
                 </td>
                 <td>
                 <?php foreach($mblTersedia as $mt) { ?>
-                  <?php if($md->plat_no == $mt->plat_no) { ?>
-                    <a href="<?php echo base_url().'admin/tersedia/mblJalan/'.$mt->plat_no.'/y' ?>" onclick="javascript: return confirm('Apakah anda yakin bahwa mobil ini sudah berangkat?')"><input type="button" class="btn btn-primary btn-sm" value="Ya" <?php if($mt->sdh_jln == 'y'){echo "disabled";}?>></a>
+                  <?php if($md->plat_nomor == $mt->plat_nomor) { ?>
+                    <a href="<?php echo base_url().'admin/tersedia/mblJalan/'.$mt->plat_nomor.'/y' ?>" onclick="javascript: return confirm('Apakah anda yakin bahwa mobil ini sudah berangkat?')"><input type="button" class="btn btn-primary btn-sm" value="Ya" <?php if($mt->sudah_jalan == 'y'){echo "disabled";}?>></a>
                   <?php } ?>
                 <?php } ?>
                 <?php foreach($mblTersedia as $mt) { ?>
-                  <?php if($md->plat_no == $mt->plat_no) { ?>
-                    <a href="<?php echo base_url().'admin/tersedia/mblJalan/'.$mt->plat_no.'/n' ?>" onclick="javascript: return confirm('Apakah anda yakin akan membatalkan keberangkatan mobil ini?')">
-                      <input type="button" class="btn btn-primary btn-sm" value="Batal" <?php if($mt->sdh_jln == 'n'){echo "disabled";}?>>
+                  <?php if($md->plat_nomor == $mt->plat_nomor) { ?>
+                    <a href="<?php echo base_url().'admin/tersedia/mblJalan/'.$mt->plat_nomor.'/n' ?>" onclick="javascript: return confirm('Apakah anda yakin akan membatalkan keberangkatan mobil ini?')">
+                      <input type="button" class="btn btn-primary btn-sm" value="Batal" <?php if($mt->sudah_jalan == 'n'){echo "disabled";}?>>
                     </a>
                   <?php } ?>
                 <?php } ?>

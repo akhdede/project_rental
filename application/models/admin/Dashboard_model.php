@@ -20,8 +20,4 @@ class Dashboard_model extends CI_Model {
    return $query->jml;
   }
 
- function new() {
-   $this->db->query('DELETE FROM mobil_tersedia');
-   $this->db->query('DELETE FROM kursi_tersedia');
- }
 }
