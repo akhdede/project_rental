@@ -52,15 +52,19 @@ class Order_model extends CI_Model {
 
     public function cancel_order($kode)
     {
-        $order = $this->db->query("SELECT plat_nomor, nomor_kursi FROM order_detail WHERE kode='$kode'")->result();
+        $order = $this->db->query("SELECT plat_nomor, nomor_kursi, confirm_by_admin FROM order_detail WHERE kode='$kode'")->result();
 
         foreach($order as $o){
-            $this->db->query("UPDATE kursi_tersedia SET status=0 WHERE plat_nomor='$o->plat_nomor' and nomor_kursi='$o->nomor_kursi'");
-        }
+            if($o->confirm_by_admin != 1){
+                $this->db->query("UPDATE kursi_tersedia SET status=0, costumer=NULL, kode_pesanan=NULL WHERE plat_nomor='$o->plat_nomor' and nomor_kursi='$o->nomor_kursi'");
 
-        $this->db->where('kode', $kode);
-        $this->db->delete('order_detail');
-        return true;
+                $this->db->where('kode', $kode);
+                $this->db->delete('order_detail');
+
+
+                return true;
+            }
+        }
     }
 
     public function message($where)

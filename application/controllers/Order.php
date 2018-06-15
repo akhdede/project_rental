@@ -250,15 +250,16 @@ class Order extends CI_Controller {
 
     public function confirm_order()
     {
+
         $where = array(
             'costumers' => $_SESSION['email'],
-            'is_proses' => 1,
-            'confirm_by_admin' => 0
+            'confirm_by_admin' => null,
+            'is_proses' => 1
         );
 
         $email = $_SESSION['email'];
 
-        $ada = $this->db->query("SELECT kode, tanggal_pesan FROM order_detail WHERE costumers='$email' and tanggal_pesan IS NULL LIMIT 1")->result();
+        $ada = $this->db->query("SELECT kode, tanggal_pesan FROM order_detail WHERE costumers='$email' and tanggal_pesan IS NULL")->result();
         
         $us = $this->db->query("SELECT id FROM users WHERE email='$email'")->result();
         $no = $us[0]->id;
@@ -272,6 +273,15 @@ class Order extends CI_Controller {
 
             if($cek > 0){
                 $query = $this->db->query("UPDATE order_detail SET kode='$kode', tanggal_pesan='$tanggal', is_proses=1 WHERE costumers='$email' and tanggal_pesan IS NULL");
+                $cek_order_detail = $this->db->query("SELECT * FROM order_detail")->result();
+                $update_kursi_tersedia = $this->db->query("SELECT * FROM kursi_tersedia")->result();
+
+                foreach($cek_order_detail as $cod){
+                    foreach($update_kursi_tersedia as $ukt){
+                        $this->db->query("UPDATE kursi_tersedia SET kode_pesanan='$cod->kode' WHERE kode_pesanan IS NULL and plat_nomor='$cod->plat_nomor' and nomor_kursi='$cod->nomor_kursi'");
+                    }
+                }
+
                 if($query)
                     $this->add_pesan();
             }
@@ -294,21 +304,65 @@ class Order extends CI_Controller {
 
     public function cancel_order()
     {
+        $email = $_SESSION['email'];
         $kode = $this->uri->segment(3);
 
-        $this->db->query("UPDATE order_detail SET confirm_by_admin=3 WHERE kode='$kode'");
 
-        $this->add_pesan();
+
+        $this->db->query("UPDATE order_detail SET confirm_by_admin=2 WHERE kode='$kode' and confirm_by_admin IS NULL");
+
+        $order_pesan = $this->db->query("SELECT * FROM order_detail WHERE kode='$kode'")->result();
+
+        foreach($order_pesan as $op){
+            if($op->confirm_by_admin == 2){
+                $kode_pesan = $op->kode;
+                $isi_pesan = 'Anda telah membatalkan pesanan dengan kode <b>'.$op->kode.'</b>.';
+                $confirm_kode = 2;
+                $tanggal = date('d-m-Y h:i:s');
+                $costumers = $email;
+            }
+        }
+
+        $cek_message = $this->db->query("SELECT * FROM order_message WHERE kode='$kode_pesan'")->result_array();
+
+        $array_kode = array();
+        $array_confirm = array();
+
+        foreach($cek_message as $cm){
+            $array_kode[] = $cm['kode'];
+            $array_confirm[] = $cm['confirm_kode'];
+        }
+
+
+        $insert = array(
+            'kode' => $kode_pesan,
+            'isi_pesan' => $isi_pesan,
+            'confirm_kode' => $confirm_kode,
+            'tanggal_message' => $tanggal,
+            'costumers' => $costumers
+        );
+
+    
+        if(array('kode'=>null)){
+            redirect('welcome');
+        }
+        else{
+            if(!in_array($confirm_kode, $array_confirm)){
+                $this->db->insert('order_message', $insert);
+            }
+        }
+
         
         $this->order_model->cancel_order($kode);
 
         redirect('order/confirm_order');
+
     }
 
     public function count_order()
     {
         $email = $_SESSION['email'];
-        $count_order = $this->db->query("SELECT * FROM order_detail WHERE costumers='$email' and confirm_by_admin=0 and tanggal_pesan IS NOT NULL GROUP BY tanggal_pesan")->num_rows();
+        $count_order = $this->db->query("SELECT * FROM order_detail WHERE costumers='$email' and confirm_by_admin IS NULL and tanggal_pesan IS NOT NULL GROUP BY tanggal_pesan")->num_rows();
 
         echo '('.$count_order.')';
     }
@@ -316,7 +370,7 @@ class Order extends CI_Controller {
     public function link_order()
     {
         $email = $_SESSION['email'];
-        $link_order = $this->db->query("SELECT * FROM order_detail WHERE costumers='$email' and confirm_by_admin=0 and tanggal_pesan IS NOT NULL GROUP BY tanggal_pesan");
+        $link_order = $this->db->query("SELECT * FROM order_detail WHERE costumers='$email' and confirm_by_admin IS NULL and tanggal_pesan IS NOT NULL GROUP BY tanggal_pesan");
         $total = $this->db->query("SELECT SUM(harga) as harga, kode, tanggal_pesan FROM order_detail WHERE costumers = '$email' and tanggal_pesan IS NOT NULL GROUP BY tanggal_pesan")->result();
 
         if($link_order->num_rows() > 0){
@@ -382,46 +436,16 @@ class Order extends CI_Controller {
         }
     }
 
-    public function count_message()
-    {
-        $email = $_SESSION['email'];
-        $count_message = $this->db->query("SELECT * FROM order_message WHERE costumers='$email' and message_status=0");
-
-        echo '('.$count_message->num_rows().')';
-    }
-
     private function add_pesan()
     {
-
         $email = $_SESSION['email'];
         $order_pesan = $this->db->query("SELECT * FROM order_detail WHERE costumers='$email'")->result();
 
         foreach($order_pesan as $op){
-            if($op->confirm_by_admin == 0){
+            if($op->confirm_by_admin == null){
                 $kode_pesan = $op->kode;
                 $isi_pesan = 'Segera lakukan pembayaran! kode pesanan anda <b>'.$op->kode.'.</b>';
-                $confirm_kode = 0;
-                $tanggal = date('d-m-Y h:i:s');
-                $costumers = $email;
-            }
-            elseif($op->confirm_by_admin == 1){
-                $kode_pesan = $op->kode;
-                $isi_pesan = 'Pesanan dengan kode <b>'.$op->kode.'.</b> telah dikonfirmasi! Terimakasih.';
-                $confirm_kode = 1;
-                $tanggal = date('d-m-Y h:i:s');
-                $costumers = $email;
-            }
-            elseif($op->confirm_by_admin == 2){
-                $kode_pesan = $op->kode;
-                $isi_pesan = 'Pesanan dengan kode <b>'.$op->kode.'.</b> telah kadaluarsa!';
-                $confirm_kode = 2;
-                $tanggal = date('d-m-Y h:i:s');
-                $costumers = $email;
-            }
-            elseif($op->confirm_by_admin == 3){
-                $kode_pesan = $op->kode;
-                $isi_pesan = 'Anda telah membatalkan pesanan dengan kode <b>'.$op->kode.'</b>.';
-                $confirm_kode = 3;
+                $confirm_kode = null;
                 $tanggal = date('d-m-Y h:i:s');
                 $costumers = $email;
             }
@@ -449,6 +473,15 @@ class Order extends CI_Controller {
             $this->db->insert('order_message', $insert);
         }
     }
+
+    public function count_message()
+    {
+        $email = $_SESSION['email'];
+        $count_message = $this->db->query("SELECT * FROM order_message WHERE costumers='$email' and message_status=0");
+
+        echo '('.$count_message->num_rows().')';
+    }
+
 
     public function link_message()
     {

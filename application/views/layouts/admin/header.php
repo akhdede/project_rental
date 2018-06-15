@@ -36,7 +36,7 @@
             </ul>
           </li>
           <li class="<?php if($this->uri->segment(2) == 'driver'){echo 'active';} ?>"><a href="<?php echo base_url('admin/driver'); ?>"><i class="glyphicon glyphicon-user"></i> Driver </a></li>
-          <li class="<?php if($this->uri->segment(2) == 'ordered'){echo 'active';} ?>"><a href="<?php echo base_url('admin/ordered'); ?>"><i class="glyphicon glyphicon-shopping-cart"></i> Ordered <span class="badge" style="background-color: #cc0000"><div id="count_ordered"></div></span></a></li>
+          <li class="<?php if($this->uri->segment(2) == 'ordered'){echo 'active';} ?>"><a href="<?php echo base_url('admin/ordered'); ?>"><i class="glyphicon glyphicon-shopping-cart"></i> Ordered <span class="badge" style="background-color: red"><div id="count_ordered"></div></span></a></li>
           <li class="mobile"><a href="<?php echo base_url('admin/passwd') ?>">Ganti password</a></li>
           <li class="mobile"><a href="<?php echo base_url('logout')?>">Logout</a></li>
         </ul>

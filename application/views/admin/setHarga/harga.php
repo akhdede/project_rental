@@ -20,7 +20,7 @@
           <tr>
             <td><?php echo $no++ ?></td>
             <td><?php echo $v->posisi ?></td>
-            <td><?php echo $v->harga ?></td>
+            <td><?php echo 'Rp. '.number_format($v->harga) ?></td>
             <td>
               <a href="<?php echo base_url('admin/setharga/editharga/').$v->id ?>">
                 <i class="glyphicon glyphicon-pencil"></i>
