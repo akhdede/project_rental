@@ -29,9 +29,9 @@ class Tersedia extends CI_Controller {
     $this->load->view('layouts/admin/wrapper', $data);
   }
 
-	public function kursi_tersedia()
+	public function kursi_dipesan()
 	{
-    $data = array('isi' => 'admin/tersedia/kursi_tersedia.php',
+    $data = array('isi' => 'admin/tersedia/kursi_dipesan.php',
                   'mblDetails' => $this->tersedia_model->mblDetails(),
                   'mblTersedia' => $this->tersedia_model->mblTersedia(),
                   'krsStatus' => $this->tersedia_model->krsStatus()
@@ -65,7 +65,7 @@ class Tersedia extends CI_Controller {
       $i = 1;
       for ($no_kursi = $i; $no_kursi < 8; $no_kursi++) {
          // code...
-        $this->tersedia_model->addKursi($plat_no, $no_kursi);
+        $this->tersedia_model->addKursi($plat_no, $no_kursi, $tanggal_tersedia);
       }
 
       $sukses = $this->session->set_flashdata('message', '<div class="alert alert-success" id="success-alert"> <button type="button" class="close" data-dismiss="alert">x</button><strong>Mobil telah tersedia!</strong></div>');
@@ -102,17 +102,6 @@ class Tersedia extends CI_Controller {
     redirect('admin/tersedia/kursi_tersedia');
   }
 
-  //update status bayar
-  public function stts_bayar(){
-    $plat_no = $this->uri->segment(4);
-    $no_kursi = $this->uri->segment(5);
-    $stts_bayar = 'Sudah';
-
-    $this->tersedia_model->stts_bayar($plat_no, $no_kursi, $stts_bayar);
-
-    redirect('admin/tersedia/kursi_tersedia');
-  }
-
   //status batal
   public function batalPesan(){
     $plat_no = $this->uri->segment(4);
@@ -121,9 +110,9 @@ class Tersedia extends CI_Controller {
     $costumer = null;
     $ket = null;
 
-    $this->tersedia_model->batalPesan($status, $plat_no, $no_kursi, $costumer, $ket);
+    $this->tersedia_model->batalPesan($plat_no, $no_kursi);
 
-    redirect('admin/tersedia/kursi_tersedia');
+    redirect('admin/tersedia/kursi_dipesan');
   }
 
   // mobil jalan

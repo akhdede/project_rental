@@ -3,15 +3,23 @@ class Ordered_model extends CI_Model
 {
     public function tampilOrdered()
     {
-        $this->db->where('confirm_by_admin', null);
+        $this->db->where('confirm_by_admin', 2);
         $this->db->group_by('kode', 'DESC');
         $sql = $this->db->get('order_detail');
-        return $sql->result();
+        return $sql;
+    }
+
+    public function filterOrdered($kode)
+    {
+        $this->db->where(array('confirm_by_admin' => 2, 'kode' => $kode));
+        $this->db->group_by('kode', 'DESC');
+        $sql = $this->db->get('order_detail');
+        return $sql;
     }
 
     public function uraiGroup()
     {
-        $this->db->where('confirm_by_admin', null);
+        $this->db->where('confirm_by_admin', 2);
         $sql = $this->db->get('order_detail');
         return $sql->result_array();
     }

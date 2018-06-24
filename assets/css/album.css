@@ -41,8 +41,6 @@ footer p {
 div .album-show {
   position: relative;
   float: left;
-  width: 100%;
-  height: 100%;
 }
 
 div .album-show:hover .album-light {

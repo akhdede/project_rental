@@ -1,8 +1,9 @@
 <?php echo $this->session->flashdata('message'); ?>
+<?php $tanggal_sekarang = date('d-m-Y'); ?>
 <div class="col-sm-12">
   <ul class="nav nav-tabs tersedia">
     <li role="presentation" class="active"><a href="#">Mobil Tersedia</a></li>
-    <li role="presentation"><a href="<?php echo base_url('admin/tersedia/kursi_tersedia')?>">Kursi Tersedia</a></li>
+    <li role="presentation"><a href="<?php echo base_url('admin/tersedia/kursi_dipesan')?>">Kursi dipesan</a></li>
   </ul>
 </div>
 <div class="col-sm-12">&nbsp;</div>
@@ -43,7 +44,7 @@
                                 <input type="hidden" name="plat_nomor" value="<?php echo $md->plat_nomor ?>">
                                 <input type="hidden" name="merek" value="<?php echo $md->merek ?>">
                                 <input type="hidden" name="img" value="<?php echo $md->img ?>">
-                                <?php $tanggal_tersedia = date('d-m-Y h:i:s'); ?>
+                                <?php $tanggal_tersedia = date('d-m-Y'); ?>
                                 <input type="hidden" name="tanggal_tersedia" value="<?php echo $tanggal_tersedia ?>">
                               <label for="driver_id" class="control-label">Nama Driver</label>
                                 <select class="form-control" name="driver_id">
@@ -64,30 +65,32 @@
                   </div>
                   <!-- end of modals -->
                   <button data-toggle="modal" data-target="#<?php echo $md->plat_nomor ?>" type="button" class="btn btn-primary btn-sm"
+
                       <?php foreach($mblTersedia as $mt) { ?>
-                        <?php if($md->plat_nomor == $mt->plat_nomor) { echo "disabled"; } ?>
+                        <?php if($md->plat_nomor == $mt->plat_nomor){ echo "disabled"; } ?>
                       <?php } ?>
                       >Ya</button>
                   <?php foreach($mblTersedia as $mt) { ?>
                     <?php if($md->plat_nomor == $mt->plat_nomor) { ?>
-                      <a href="<?php echo base_url('admin/tersedia/delete/').$mt->plat_nomor ?>" onclick="javascript: return confirm('Apakah anda yakin akan membatalkan mobil ini?')">
-                        <input type="button" class="btn btn-danger btn-sm" value="Batal">
-                      </a>
+                            <a href="<?php echo base_url('admin/tersedia/delete/').$mt->plat_nomor ?>" onclick="javascript: return confirm('Apakah anda yakin akan membatalkan mobil ini?')">
+                                <input <?php if($mt->sudah_jalan == 'y') echo 'disabled'; ?> type="button" class="btn btn-danger btn-sm" value="Batal">
+                            </a>
                     <?php } ?>
                   <?php } ?>
                 </td>
                 <td>
                 <?php foreach($mblTersedia as $mt) { ?>
-                  <?php if($md->plat_nomor == $mt->plat_nomor) { ?>
-                    <a href="<?php echo base_url().'admin/tersedia/mblJalan/'.$mt->plat_nomor.'/y' ?>" onclick="javascript: return confirm('Apakah anda yakin bahwa mobil ini sudah berangkat?')"><input type="button" class="btn btn-primary btn-sm" value="Ya" <?php if($mt->sudah_jalan == 'y'){echo "disabled";}?>></a>
-                  <?php } ?>
+                    <?php if($md->plat_nomor == $mt->plat_nomor) { ?>
+                        <a href="<?php echo base_url().'admin/tersedia/mblJalan/'.$mt->plat_nomor.'/y' ?>" onclick="javascript: return confirm('Apakah anda yakin bahwa mobil ini sudah berangkat?')">
+                            <input type="button" class="btn btn-primary btn-sm" value="Ya" <?php if($mt->sudah_jalan == 'y'){ echo "disabled";}?>></a>
+                    <?php } ?>
                 <?php } ?>
                 <?php foreach($mblTersedia as $mt) { ?>
-                  <?php if($md->plat_nomor == $mt->plat_nomor) { ?>
-                    <a href="<?php echo base_url().'admin/tersedia/mblJalan/'.$mt->plat_nomor.'/n' ?>" onclick="javascript: return confirm('Apakah anda yakin akan membatalkan keberangkatan mobil ini?')">
-                      <input type="button" class="btn btn-primary btn-sm" value="Batal" <?php if($mt->sudah_jalan == 'n'){echo "disabled";}?>>
-                    </a>
-                  <?php } ?>
+                    <?php if($md->plat_nomor == $mt->plat_nomor) { ?>
+                        <a href="<?php echo base_url().'admin/tersedia/mblJalan/'.$mt->plat_nomor.'/n' ?>" onclick="javascript: return confirm('Apakah anda yakin akan membatalkan keberangkatan mobil ini?')">
+                            <input type="button" class="btn btn-primary btn-sm" value="Batal" <?php if($mt->sudah_jalan == 'n'){echo "disabled";}?>>
+                        </a>
+                    <?php } ?>
                 <?php } ?>
                 </td>
               </tr>

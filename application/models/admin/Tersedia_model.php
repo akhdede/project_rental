@@ -7,7 +7,8 @@ class Tersedia_model extends CI_Model{
   }
 
   function mblTersedia() {
-    return $this->db->query('SELECT a.id_sopir, a.plat_nomor, a.sudah_jalan, b.merek FROM mobil_tersedia a, daftar_mobil b WHERE a.plat_nomor=b.plat_nomor ORDER BY plat_nomor ASC')->result();
+    $tanggal_sekarang = date('d-m-Y');
+    return $this->db->query("SELECT a.id_sopir, a.plat_nomor, a.sudah_jalan, a.tanggal_tersedia, b.merek FROM mobil_tersedia a, daftar_mobil b WHERE a.plat_nomor=b.plat_nomor and a.tanggal_tersedia LIKE '$tanggal_sekarang%' ORDER BY plat_nomor ASC")->result();
   }
 
   function get($table, $where){
@@ -28,9 +29,10 @@ class Tersedia_model extends CI_Model{
     $this->db->delete('mobil_tersedia');
   }
 
-  function addKursi($plat_nomor, $no_kursi){
+  function addKursi($plat_nomor, $no_kursi, $tanggal_tersedia){
     $this->db->set('plat_nomor', $plat_nomor);
     $this->db->set('nomor_kursi', $no_kursi);
+    $this->db->set('tanggal_tersedia', $tanggal_tersedia);
     $this->db->insert('kursi_tersedia');
   }
 
@@ -56,8 +58,8 @@ class Tersedia_model extends CI_Model{
 
   }
 
-  function batalPesan($status, $plat_nomor, $no_kursi, $costumer, $ket){
-    return $this->db->query("UPDATE kursi_tersedia SET status='$status', costumer='$costumer', keterangan='$ket' WHERE plat_nomor_mobil='$plat_nomor' AND no_kursi='$no_kursi'");
+  function batalPesan($plat_nomor, $no_kursi){
+    return $this->db->query("UPDATE kursi_tersedia SET status=0, costumer=null, kode_pesanan=null WHERE plat_nomor='$plat_nomor' AND nomor_kursi='$no_kursi'");
   }
 
   // mobil jalan

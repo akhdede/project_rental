@@ -47,7 +47,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <?php if(isset($_SESSION['nama_lengkap'])){ ?>
                     <div class="btn-group">
                         <a href="#" onclick="update_message_status()" class="text-white fa fa-envelope fa-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-decoration: none;"><span class="badge badge-danger"><div id="count_message"></div></span></a>
-                        <div class="dropdown-menu dropdown-menu-right" id="link_message"></div>
+                        <div class="dropdown-menu dropdown-menu-right" id="link_message" style="height: 400px; overflow-y: auto;"></div>
                     </div>
 
                     <div class="btn-group">
