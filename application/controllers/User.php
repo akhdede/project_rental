@@ -8,7 +8,7 @@ class User extends CI_Controller {
         parent::__construct();
 
         $data = array(
-            'title' => 'CV. New Garuda Jaya Totabuan'
+            'title' => 'CV. New Garuda Totabuan'
         );
 		$this->load->view('layouts/header', $data);
         $this->load->model('user_model');

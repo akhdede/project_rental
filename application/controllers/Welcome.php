@@ -12,7 +12,7 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
         $data = array(
-            'title' => 'CV. New Garuda Jaya Totabuan',
+            'title' => 'CV. New Garuda Totabuan',
             'content' => 'welcome_message'
         );
 		$this->load->view('layouts/wrapper', $data);
