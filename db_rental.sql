@@ -16,35 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `costumers`
---
-
-DROP TABLE IF EXISTS `costumers`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `costumers` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(100) NOT NULL,
-  `nama_lengkap` varchar(100) NOT NULL,
-  `nomor_handphone` int(14) NOT NULL,
-  `kabupaten_kota` varchar(30) NOT NULL,
-  `kecamatan` varchar(30) NOT NULL,
-  `desa_kelurahan` varchar(30) NOT NULL,
-  `alamat` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `costumers`
---
-
-LOCK TABLES `costumers` WRITE;
-/*!40000 ALTER TABLE `costumers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `costumers` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `daftar_mobil`
 --
 
@@ -58,7 +29,7 @@ CREATE TABLE `daftar_mobil` (
   `img` varchar(41) DEFAULT NULL,
   `tanggal_aktif` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +38,7 @@ CREATE TABLE `daftar_mobil` (
 
 LOCK TABLES `daftar_mobil` WRITE;
 /*!40000 ALTER TABLE `daftar_mobil` DISABLE KEYS */;
-INSERT INTO `daftar_mobil` VALUES (26,'DB1234KK','Daihatsu Xenia','./img_upload/15552587685b1fd92c3d76f.jpg','2018-06-12 14:31:08'),(27,'DB1234KI','Toyota Avanza','./img_upload/4303254975b205cf49995a.jpg','2018-06-12 23:53:24'),(28,'DB1111KK','Toyota Xenia','./img_upload/11458558605b205d22466f0.jpg','2018-06-12 23:54:10');
+INSERT INTO `daftar_mobil` VALUES (30,'DB1234KK','Toyota Avanza','./img_upload/1567487935b38cffef2044.jpg','2018-07-01 12:58:38'),(31,'DB1111KI','Kijang Innova','./img_upload/16503592395b38d018a6c62.jpg','2018-07-01 12:59:04');
 /*!40000 ALTER TABLE `daftar_mobil` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -133,11 +104,10 @@ CREATE TABLE `kursi_tersedia` (
   `nomor_kursi` int(1) NOT NULL,
   `status` int(1) NOT NULL DEFAULT '0',
   `costumer` varchar(100) DEFAULT NULL,
-  `keterangan` text,
-  `status_bayar` varchar(5) DEFAULT NULL,
   `kode_pesanan` varchar(30) DEFAULT NULL,
+  `tanggal_tersedia` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=331 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=737 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -146,7 +116,7 @@ CREATE TABLE `kursi_tersedia` (
 
 LOCK TABLES `kursi_tersedia` WRITE;
 /*!40000 ALTER TABLE `kursi_tersedia` DISABLE KEYS */;
-INSERT INTO `kursi_tersedia` VALUES (324,'DB1111KK',1,1,'akhdede@gmail.com',NULL,NULL,'18061602233208'),(325,'DB1111KK',2,1,'akhdede@gmail.com',NULL,NULL,'18061602275408'),(326,'DB1111KK',3,1,'akhdede@gmail.com',NULL,NULL,'18061602253508'),(327,'DB1111KK',4,1,'akhdede@gmail.com',NULL,NULL,'18061602303508'),(328,'DB1111KK',5,1,'akhdede@gmail.com',NULL,NULL,'18061602365008'),(329,'DB1111KK',6,1,'akhdede@gmail.com',NULL,NULL,'18061602385308'),(330,'DB1111KK',7,1,'akhdede@gmail.com',NULL,NULL,'18061602414408');
+INSERT INTO `kursi_tersedia` VALUES (723,'DB1111KI',1,0,NULL,NULL,'28-06-2018'),(724,'DB1111KI',2,0,NULL,NULL,'28-06-2018'),(725,'DB1111KI',3,0,NULL,NULL,'28-06-2018'),(726,'DB1111KI',4,0,NULL,NULL,'28-06-2018'),(727,'DB1111KI',5,0,NULL,NULL,'28-06-2018'),(728,'DB1111KI',6,0,NULL,NULL,'28-06-2018'),(729,'DB1111KI',7,0,NULL,NULL,'28-06-2018'),(730,'DB1234KK',1,0,NULL,NULL,'28-06-2018'),(731,'DB1234KK',2,0,NULL,NULL,'28-06-2018'),(732,'DB1234KK',3,0,NULL,NULL,'28-06-2018'),(733,'DB1234KK',4,0,NULL,NULL,'28-06-2018'),(734,'DB1234KK',5,0,NULL,NULL,'28-06-2018'),(735,'DB1234KK',6,0,NULL,NULL,'28-06-2018'),(736,'DB1234KK',7,0,NULL,NULL,'28-06-2018');
 /*!40000 ALTER TABLE `kursi_tersedia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,7 +136,7 @@ CREATE TABLE `mobil_tersedia` (
   `tanggal_tersedia` varchar(30) NOT NULL,
   `sudah_jalan` varchar(1) DEFAULT 'n',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,7 +145,7 @@ CREATE TABLE `mobil_tersedia` (
 
 LOCK TABLES `mobil_tersedia` WRITE;
 /*!40000 ALTER TABLE `mobil_tersedia` DISABLE KEYS */;
-INSERT INTO `mobil_tersedia` VALUES (36,'DB1111KK','Toyota Xenia','./img_upload/11458558605b205d22466f0.jpg',1,'16-06-2018 02:22:31','n');
+INSERT INTO `mobil_tersedia` VALUES (93,'DB1111KI','Kijang Innova','./img_upload/16503592395b38d018a6c62.jpg',5,'28-06-2018','n'),(94,'DB1234KK','Toyota Avanza','./img_upload/1567487935b38cffef2044.jpg',6,'28-06-2018','n');
 /*!40000 ALTER TABLE `mobil_tersedia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -197,8 +167,9 @@ CREATE TABLE `order_detail` (
   `kode` varchar(30) DEFAULT NULL,
   `confirm_by_admin` int(1) DEFAULT NULL,
   `tanggal_confirm` varchar(30) DEFAULT NULL,
+  `tanggal_mobil_tersedia` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -226,7 +197,7 @@ CREATE TABLE `order_message` (
   `costumers` varchar(100) NOT NULL,
   `tanggal_message` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=291 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -235,7 +206,6 @@ CREATE TABLE `order_message` (
 
 LOCK TABLES `order_message` WRITE;
 /*!40000 ALTER TABLE `order_message` DISABLE KEYS */;
-INSERT INTO `order_message` VALUES (264,'18061602210308','Segera lakukan pembayaran! kode pesanan anda <b>18061602210308.</b>',NULL,1,'akhdede@gmail.com','16-06-2018 02:21:04'),(265,'18061602210308','Pesanan dengan kode <b>18061602210308.</b> telah kadaluarsa!',5,1,'akhdede@gmail.com','16-06-2018 02:21:13'),(266,'18061602225208','Segera lakukan pembayaran! kode pesanan anda <b>18061602225208.</b>',NULL,1,'akhdede@gmail.com','16-06-2018 02:22:52'),(267,'18061602225208','Pesanan dengan kode <b>18061602225208.</b> telah kadaluarsa!',5,1,'akhdede@gmail.com','16-06-2018 02:23:00'),(268,'18061602233208','Segera lakukan pembayaran! kode pesanan anda <b>18061602233208.</b>',NULL,1,'akhdede@gmail.com','16-06-2018 02:23:32'),(269,'18061602233208','Pesanan dengan kode <b>18061602233208.</b> telah dikonfirmasi! Terimakasih.',1,1,'akhdede@gmail.com','16-06-2018 02:23:39'),(270,'18061602252308','Segera lakukan pembayaran! kode pesanan anda <b>18061602252308.</b>',NULL,1,'akhdede@gmail.com','16-06-2018 02:25:23'),(271,'18061602253508','Segera lakukan pembayaran! kode pesanan anda <b>18061602253508.</b>',NULL,1,'akhdede@gmail.com','16-06-2018 02:25:35'),(272,'18061602252308','Anda telah membatalkan pesanan dengan kode <b>18061602252308</b>.',2,1,'akhdede@gmail.com','16-06-2018 02:25:38'),(273,'18061602253508','Pesanan dengan kode <b>18061602253508.</b> telah dikonfirmasi! Terimakasih.',1,1,'akhdede@gmail.com','16-06-2018 02:26:01'),(274,'18061602275408','Segera lakukan pembayaran! kode pesanan anda <b>18061602275408.</b>',NULL,1,'akhdede@gmail.com','16-06-2018 02:27:54'),(275,'18061602275408','Pesanan dengan kode <b>18061602275408.</b> telah dikonfirmasi! Terimakasih.',1,1,'akhdede@gmail.com','16-06-2018 02:28:01'),(276,'18061602282308','Segera lakukan pembayaran! kode pesanan anda <b>18061602282308.</b>',NULL,1,'akhdede@gmail.com','16-06-2018 02:28:23'),(277,'18061602295408','Segera lakukan pembayaran! kode pesanan anda <b>18061602295408.</b>',NULL,1,'akhdede@gmail.com','16-06-2018 02:29:54'),(278,'18061602295408','Anda telah membatalkan pesanan dengan kode <b>18061602295408</b>.',2,1,'akhdede@gmail.com','16-06-2018 02:30:01'),(279,'18061602301108','Segera lakukan pembayaran! kode pesanan anda <b>18061602301108.</b>',NULL,1,'akhdede@gmail.com','16-06-2018 02:30:12'),(280,'18061602301108','Pesanan dengan kode <b>18061602301108.</b> telah kadaluarsa!',5,1,'akhdede@gmail.com','16-06-2018 02:30:19'),(281,'18061602303508','Segera lakukan pembayaran! kode pesanan anda <b>18061602303508.</b>',NULL,1,'akhdede@gmail.com','16-06-2018 02:30:35'),(282,'18061602303508','Pesanan dengan kode <b>18061602303508.</b> telah dikonfirmasi! Terimakasih.',1,1,'akhdede@gmail.com','16-06-2018 02:30:42'),(283,'18061602365008','Segera lakukan pembayaran! kode pesanan anda <b>18061602365008.</b>',NULL,1,'akhdede@gmail.com','16-06-2018 02:36:50'),(284,'18061602365008','Pesanan dengan kode <b>18061602365008.</b> telah dikonfirmasi! Terimakasih.',1,1,'akhdede@gmail.com','16-06-2018 02:37:03'),(285,'18061602385308','Segera lakukan pembayaran! kode pesanan anda <b>18061602385308.</b>',NULL,1,'akhdede@gmail.com','16-06-2018 02:38:54'),(286,'18061602385308','Pesanan dengan kode <b>18061602385308.</b> telah dikonfirmasi! Terimakasih.',1,1,'akhdede@gmail.com','16-06-2018 02:39:16'),(287,'18061602412008','Segera lakukan pembayaran! kode pesanan anda <b>18061602412008.</b>',NULL,1,'akhdede@gmail.com','16-06-2018 02:41:20'),(288,'18061602412008','Pesanan dengan kode <b>18061602412008.</b> telah kadaluarsa!',5,1,'akhdede@gmail.com','16-06-2018 02:41:27'),(289,'18061602414408','Segera lakukan pembayaran! kode pesanan anda <b>18061602414408.</b>',NULL,1,'akhdede@gmail.com','16-06-2018 02:41:44'),(290,'18061602414408','Pesanan dengan kode <b>18061602414408.</b> telah dikonfirmasi! Terimakasih.',1,1,'akhdede@gmail.com','16-06-2018 02:41:51');
 /*!40000 ALTER TABLE `order_message` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -254,7 +224,7 @@ CREATE TABLE `sopir` (
   `img` varchar(100) NOT NULL,
   `alamat` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -263,7 +233,7 @@ CREATE TABLE `sopir` (
 
 LOCK TABLES `sopir` WRITE;
 /*!40000 ALTER TABLE `sopir` DISABLE KEYS */;
-INSERT INTO `sopir` VALUES (1,'dede','ktg','1975-05-10','./img_upload/1347494515b1faf8a34a88.jpg','mongkonai'),(2,'arif','ktg','2005-05-11','./img_upload/14944750105b205d40b6f16.png','dfa'),(3,'angga','ktg','2001-05-11','./img_upload/8667762275b205d669b92d.png','df');
+INSERT INTO `sopir` VALUES (5,'Enal Nani','Kotamobagu','1995-03-01','./img_upload/7350843075b38cfba1a26c.jpg','Kel. Molinow'),(6,'Dede Irwanto','Kotamobagu','1992-03-01','./img_upload/21029404505b38d033c8a83.jpg','Kel. Mongkonai');
 /*!40000 ALTER TABLE `sopir` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -287,7 +257,7 @@ CREATE TABLE `users` (
   `alamat` text NOT NULL,
   `level` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -296,7 +266,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (8,'akhdede@gmail.com','$2y$10$uq1nBe99NNwoTrdJl72X1uSIVPSyrgOMQlTctHniUUzr.iXnxq1mu','Dede Irwanto','082348366034','71','7174','7174030','7174030001','Jl. Jendral Sudirman',0),(9,'ekha_potabuga@gmail.com','$2y$10$UD8enl5zt3.J7SSQytkgJOvEtfBh5qcSc3mJdYSatsXXVI6s5PSEO','Eka Potabuga','082348366034','71','7174','7174030','7174030001','Jl. Jendral Sudirman',0),(10,'admin@newgarudajaya.com','$2y$10$gilfZjWn.NJmo/tsSTCxsOizauwPrC744.NsCsV8pDsNCJQ3.ryaO','admin','082348366034','71','7174','7174030','7174030001','Jl. Gatot Subroto',1),(11,'dede@gmail.com','$2y$10$JAOX0gagKNMPVa34oU9WJOuxm1lNmSIO.c1aBJQuvov8yggu0h6Wq','dede','082348366034','71','7174','7174030','7174030001','df',0);
+INSERT INTO `users` VALUES (10,'admin@newgarudatotabuan.com','$2y$10$gilfZjWn.NJmo/tsSTCxsOizauwPrC744.NsCsV8pDsNCJQ3.ryaO','admin','082348366034','71','7174','7174030','7174030001','Jl. Gatot Subroto',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -410,4 +380,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-16  2:46:47
+-- Dump completed on 2018-07-05  1:41:24
