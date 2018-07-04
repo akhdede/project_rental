@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CV. New Garuda Jaya Totabuan | Rental</title>
+    <title>CV. New Garuda Totabuan | Rental</title>
     <link rel="stylesheet" href="<?php echo base_url('assets/css/select2.min.css'); ?>"/>
     <link rel="stylesheet" href="<?php echo base_url('assets/css/album.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">

@@ -15,8 +15,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-user"></i> <span class="username">admin</span></a>
           <ul class="dropdown-menu">
-            <li><a href="<?php echo base_url('admin/passwd') ?>"><i class="glyphicon glyphicon-lock"></i> Ganti password</a></li>
-            <li><a href="<?php echo base_url('logout')?>"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
+            <li><a href="<?php echo base_url('user/logout')?>"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
           </ul>
         </li>
       </ul>

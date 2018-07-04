@@ -2,7 +2,7 @@
 <?php if($this->uri->segment(2) != 'get_provinsi') { ?>
     <footer class="text-muted">
         <div class="container">
-            <p>Copyright &copy; <a href="https://newgarudajayatotabuan.com">New Garuda Jaya Totabuan</a></p>
+            <p>Copyright &copy; <a href="https://newgarudatotabuan.com">New Garuda Totabuan</a></p>
             <p>Jl. Hi. Zakaria Imban, Kel. Molinow, Kec. Kotamobagu Barat, Kota Kotamobagu.</p>
         </div>
     </footer>
