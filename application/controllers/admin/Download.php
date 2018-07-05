@@ -11,6 +11,7 @@ class Download extends CI_Controller {
         redirect(base_url('user/login'));
 
     $this->load->model('admin/download_model');
+    date_default_timezone_set('Asia/Makassar');
   }
 
   // start of fungsi list

@@ -12,6 +12,7 @@ class User extends CI_Controller {
         );
 		$this->load->view('layouts/header', $data);
         $this->load->model('user_model');
+        date_default_timezone_set('Asia/Makassar');
     }
 
 	public function index()

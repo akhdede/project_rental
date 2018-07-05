@@ -16,6 +16,7 @@ class Driver extends CI_Controller {
                  );
     $this->load->view('layouts/admin/header', $data);
     $this->load->model('admin/driver_model');
+    date_default_timezone_set('Asia/Makassar');
   }
 
   // start of fungsi list

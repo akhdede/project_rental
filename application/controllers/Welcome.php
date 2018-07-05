@@ -7,6 +7,7 @@ class Welcome extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('welcome_model');
+        date_default_timezone_set('Asia/Makassar');
     }
 
 	public function index()
@@ -22,6 +23,7 @@ class Welcome extends CI_Controller {
     {
         $tanggal_sekarang = date('d-m-Y').'%';
 
+        $mobil_list = $this->db->query("SELECT * FROM daftar_mobil")->result();
         $mobil_tersedia = $this->db->query("SELECT * FROM mobil_tersedia WHERE tanggal_tersedia LIKE '$tanggal_sekarang%'");
         if($mobil_tersedia->num_rows() > 0){
 
@@ -54,8 +56,12 @@ class Welcome extends CI_Controller {
                     }
                     echo'
                     <span class="album-light">
-                        <div class="card mb-4 mb-12 box-shadow">
-                            <img class="card-img-top" src="'.base_url('assets/img/avanza.jpg').'" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">'; #gambar mobil tersedia
+                        <div class="card mb-4 mb-12 box-shadow">';
+                            foreach($mobil_list as $ml){
+                                if($ml->plat_nomor == $mt->plat_nomor){
+                                    echo '<img class="card-img-top" src="'.base_url($ml->img).'" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">'; #gambar mobil tersedia
+                                }
+                            }
 
                             // jika total kursi yang dipesan sudah lebih dari 6 maka akan menampilkan gambar sold out
                             if($cek_full > 6){

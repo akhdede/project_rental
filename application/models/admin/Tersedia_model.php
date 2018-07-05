@@ -24,8 +24,8 @@ class Tersedia_model extends CI_Model{
     $this->db->insert('mobil_tersedia');
   }
 
-  function mblBatal($plat_nomor){
-    $this->db->where(array('plat_nomor' => $plat_nomor));
+  function mblBatal($plat_nomor, $tanggal_sekarang){
+    $this->db->where(array('plat_nomor' => $plat_nomor, 'tanggal_tersedia' => $tanggal_sekarang));
     $this->db->delete('mobil_tersedia');
   }
 
@@ -40,8 +40,8 @@ class Tersedia_model extends CI_Model{
     return $this->db->query("UPDATE kursi_tersedia SET stts_bayar='$stts_bayar' WHERE plat_nomor_mobil='$plat_nomor' AND no_kursi='$no_kursi'");
   }
 
-  function krsBatal($plat_nomor){
-    $this->db->where(array('plat_nomor' => $plat_nomor));
+  function krsBatal($plat_nomor, $tanggal_sekarang){
+    $this->db->where(array('plat_nomor' => $plat_nomor, 'tanggal_tersedia' => $tanggal_sekarang));
     $this->db->delete('kursi_tersedia');
   }
 

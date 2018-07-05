@@ -14,6 +14,7 @@ class Ordered extends CI_Controller{
         'header' => 'ADMINISTRATOR PAGE'
         );
         $this->load->model('admin/ordered_model');
+        date_default_timezone_set('Asia/Makassar');
     }
 
     // start of fungsi list

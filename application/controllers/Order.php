@@ -21,6 +21,7 @@ class Order extends CI_Controller {
         $cek_full2 = $this->db->query("SELECT * FROM kursi_tersedia WHERE plat_nomor='$plat_nomor' and status=2 and tanggal_tersedia LIKE '$tanggal_sekarang%'")->num_rows();
 
         $this->load->model('order_model');
+        date_default_timezone_set('Asia/Makassar');
     }
 
     public function mobil($plat_nomor)

@@ -15,6 +15,7 @@ class Tersedia extends CI_Controller {
                  );
     $this->load->view('layouts/admin/header', $data);
     $this->load->model('admin/tersedia_model');
+    date_default_timezone_set('Asia/Makassar');
   }
 
   // start of fungsi tersedia
@@ -75,9 +76,10 @@ class Tersedia extends CI_Controller {
   }
 
   public function delete(){
+    $tanggal_sekarang = date('d-m-Y');
     $plat_nomor = $this->uri->segment(4);
-    $this->tersedia_model->mblBatal($plat_nomor);
-    $this->tersedia_model->krsBatal($plat_nomor);
+    $this->tersedia_model->mblBatal($plat_nomor, $tanggal_sekarang);
+    $this->tersedia_model->krsBatal($plat_nomor, $tanggal_sekarang);
     redirect('admin/tersedia');
   }
 

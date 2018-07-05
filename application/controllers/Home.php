@@ -6,6 +6,7 @@ class Home extends CI_Controller {
   function __construct(){
     parent::__construct();
     $this->load->model('home_model');
+    date_default_timezone_set('Asia/Makassar');
   }
 
 	public function index()

@@ -16,6 +16,7 @@ class Lists extends CI_Controller {
                  );
     $this->load->view('layouts/admin/header', $data);
     $this->load->model('admin/list_model');
+    date_default_timezone_set('Asia/Makassar');
   }
 
   // start of fungsi list
