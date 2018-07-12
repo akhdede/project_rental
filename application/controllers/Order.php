@@ -80,13 +80,10 @@ class Order extends CI_Controller {
                                         foreach($kursi_tersedia as $kt){
                                             if($kt->nomor_kursi == 1){
                                                 if($kt->status == 0)
-                                                    // jika kursi belum dipesan akan menampilkan button primary
                                                     echo '<button class="btn btn-info btn-md" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
                                                 elseif($kt->status == 1)
-                                                    // jika kursi sudah dipesan akan menampilkan button secondary
                                                     echo '<button class="btn btn-secondary btn-md" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
                                                 elseif($kt->status == 2)
-                                                    // jika kursi dalam proses pemesanan akan menampilkan button warning
                                                     echo '<button class="btn btn-secondary btn-md" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
 
                                             }
@@ -96,13 +93,10 @@ class Order extends CI_Controller {
                                         foreach($kursi_tersedia as $kt){
                                             if(($kt->nomor_kursi > 1)  and ($kt->nomor_kursi < 5)){
                                                 if($kt->status == 0)
-                                                    // jika kursi belum dipesan akan menampilkan button primary
                                                     echo '<button class="btn btn-info btn-md" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
                                                 elseif($kt->status == 1)
-                                                    // jika kursi sudah dipesan akan menampilkan button secondary
                                                     echo '<button class="btn btn-secondary btn-md" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
                                                 elseif($kt->status == 2)
-                                                    // jika kursi dalam proses pemesanan akan menampilkan button warning
                                                     echo '<button class="btn btn-secondary btn-md" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
                                             }
                                         }
@@ -111,13 +105,10 @@ class Order extends CI_Controller {
                                         foreach($kursi_tersedia as $kt){
                                             if(($kt->nomor_kursi > 4)  and ($kt->nomor_kursi < 8)){
                                                 if($kt->status == 0)
-                                                    // jika kursi belum dipesan akan menampilkan button primary
                                                     echo '<button class="btn btn-info btn-md" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
                                                 elseif($kt->status == 1)
-                                                    // jika kursi sudah dipesan akan menampilkan button secondary
                                                     echo '<button class="btn btn-secondary btn-md" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
                                                 elseif($kt->status == 2)
-                                                    // jika kursi dalam proses pemesanan akan menampilkan button warning
                                                     echo '<button class="btn btn-secondary btn-md" disabled style="margin: 3px;">'.$kt->nomor_kursi.'</button>'; 
                                             }
                                         }
@@ -127,13 +118,10 @@ class Order extends CI_Controller {
                                     // menampilkan status nomor kursi
                                     foreach($kursi_tersedia as $kt){
                                         if($kt->status == 0) 
-                                            // jika kursi belum dipesan akan menampilkan checklist berwarna hijau dan button primary pesan
                                             echo '<span  class="text-secondary">Kursi '.$kt->nomor_kursi.' <a class="btn btn-info btn-sm" href="'.base_url('order/mobil/').strtolower($mt->plat_nomor).'/'.$kt->nomor_kursi.'/add" onclick="pesan_kursi()" style="margin-bottom: 3px;">pesan sekarang</a></span> <i class="fa fa-check text-success"></i><br />'; 
                                         elseif($kt->status == 1)
-                                            // jika kursi sudah dipesan akan menampilkan cross berwarna merah dan button secondary dipesan
                                             echo '<span  class="text-secondary">Kursi '.$kt->nomor_kursi.' <b><span class="btn btn-secondary btn-sm disabled" style="margin-bottom: 3px;">sudah dipesan</span></b></span> <i class="fa fa-times text-danger"></i><br />'; 
                                         elseif($kt->status == 2)
-                                            // jika kursi dalam proses pemesanan akan menampilkan exclamation berwarna kuning dan button secondary dipesan
                                             echo '<span  class="text-secondary">Kursi '.$kt->nomor_kursi.' <b><span class="btn btn-secondary btn-sm disabled" style="margin-bottom: 3px;">dalam proses</span></b></span> <i class="fa fa-exclamation text-warning"></i><br />'; 
                                     }
                                 echo'

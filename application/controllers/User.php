@@ -71,20 +71,37 @@ class User extends CI_Controller {
         $desa = $this->input->post('desa');
         $alamat = $this->input->post('alamat');
 
-        $data = array(
-            'email' => $email,
-            'password' => $password,
-            'nama_lengkap' => $nama_lengkap,
-            'nomor_handphone' => $nomor_handphone,
-            'provinsi' => $provinsi,
-            'kabupaten' => $kabupaten,
-            'kecamatan' => $kecamatan,
-            'desa' => $desa,
-            'alamat' => $alamat
-        );
+        $cek_email = $this->db->query("SELECT * FROM users WHERE email='$email'")->num_rows();
 
-        $this->user_model->signup_action($data, 'users');
-        redirect('user/login');
+        if($cek_email > 0){
+            $data = array(
+                'content' => 'user/terdaftar'
+            );
+
+            $this->load->view('layouts/wrapper', $data);
+        }
+        else{
+            $data = array(
+                'email' => $email,
+                'password' => $password,
+                'nama_lengkap' => $nama_lengkap,
+                'nomor_handphone' => $nomor_handphone,
+                'provinsi' => $provinsi,
+                'kabupaten' => $kabupaten,
+                'kecamatan' => $kecamatan,
+                'desa' => $desa,
+                'alamat' => $alamat
+            );
+
+            $this->user_model->signup_action($data, 'users');
+
+            $data = array(
+                'content' => 'user/view_login',
+                'message' => 'Pendaftaran berhasil! silahkan login.'
+            );
+
+            $this->load->view('layouts/wrapper', $data);
+        }
     }
 
     public function logout()
