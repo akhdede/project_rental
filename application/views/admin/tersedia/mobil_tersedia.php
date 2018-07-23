@@ -57,7 +57,7 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary">Pesan</button>
+                            <button type="submit" class="btn btn-primary">Sediakan</button>
                           </div>
                         </form>
                       </div>

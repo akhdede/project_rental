@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <nav class="navbar navbar-default navbar-fixed-top">
+  <nav class="navbar navbar-default navbar-fixed-top" style="background: #dc3545">
     <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -11,18 +11,14 @@
           <span class="icon-bar"></span>
         </button>
       </div>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-user"></i> <span class="username">admin</span></a>
-          <ul class="dropdown-menu">
-            <li><a href="<?php echo base_url('user/logout')?>"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
-          </ul>
-        </li>
+      <ul class="nav navbar-nav navbar-right" style="padding-top: 9px;">
+            <span style="color: #fff;">Welcome admin,</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="btn btn-primary" href="<?php echo base_url('user/logout')?>" style="background: #fff; border: none;color: #0f0f0f;"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
       </ul>
     <div>
   </nav>
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <aside class="sidebar">
+    <aside class="sidebar" style="background: #676a6c;">
       <div class="menu">
         <ul class="menu-content">
           <li class="<?php if($this->uri->segment(2) == 'dashboard'){echo 'active';} ?>"><a href="<?php echo base_url(); ?>admin/dashboard"><i class="glyphicon glyphicon-home" class="sMenu"></i> Home </a></li>

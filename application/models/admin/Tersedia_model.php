@@ -27,6 +27,9 @@ class Tersedia_model extends CI_Model{
   function mblBatal($plat_nomor, $tanggal_sekarang){
     $this->db->where(array('plat_nomor' => $plat_nomor, 'tanggal_tersedia' => $tanggal_sekarang));
     $this->db->delete('mobil_tersedia');
+    
+    $this->db->where(array('plat_nomor' => $plat_nomor, 'tanggal_mobil_tersedia' => $tanggal_sekarang));
+    $this->db->delete('order_detail');
   }
 
   function addKursi($plat_nomor, $no_kursi, $tanggal_tersedia){

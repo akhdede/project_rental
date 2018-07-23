@@ -32,6 +32,7 @@
         <div class="col-sm-3">
           <label>Gambar Mobil <span class="bintang">*</span></label>
           <img src="<?php echo base_url().$e->img; ?>" class="thumbnail" width="100px">
+            Ukuran : 18,5cm x 10,5cm
           <input type="file" name="img" id="fup" title="Gambar harus diupload!" >
         </div>
         </br>

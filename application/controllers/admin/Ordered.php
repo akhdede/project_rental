@@ -10,9 +10,6 @@ class Ordered extends CI_Controller{
         if($_SESSION['level'] != 1)
         redirect(base_url('user/login'));
 
-        $data = array( 'title' => 'Administrator page',
-        'header' => 'ADMINISTRATOR PAGE'
-        );
         $this->load->model('admin/ordered_model');
         date_default_timezone_set('Asia/Makassar');
     }
@@ -27,6 +24,8 @@ class Ordered extends CI_Controller{
             'filter' => $this->ordered_model->filterOrdered($kode),
             'user' => $this->ordered_model->user(),
             'urai' => $this->ordered_model->uraiGroup(),
+            'title' => 'Administrator page',
+            'header' => 'ADMINISTRATOR PAGE',
             'content_header' => 'CV. NEW GARUDA TOTABUAN'
         );
         $this->load->view('layouts/admin/wrapper', $data);

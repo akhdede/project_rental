@@ -34,13 +34,15 @@ class Welcome extends CI_Controller {
 
                 echo'
                 <div class="col-md-4 col-sm-12 album-show">';
+                    // hitung mobil yang sudah jalan
+                    $cek_jalan = $this->db->query("SELECT * FROM mobil_tersedia WHERE plat_nomor='$mt->plat_nomor' and sudah_jalan='y' and tanggal_tersedia='$tanggal_sekarang'")->num_rows();
                     // fungsi database untuk menghitung jumlah kursi yang di pesan
                     $cek_full = $this->db->query("SELECT * FROM kursi_tersedia WHERE plat_nomor='$mt->plat_nomor' and status=1 and tanggal_tersedia LIKE '$tanggal_sekarang%'")->num_rows();
 
                     $cek_full2 = $this->db->query("SELECT * FROM kursi_tersedia WHERE plat_nomor='$mt->plat_nomor' and status=2 and tanggal_tersedia LIKE '$tanggal_sekarang%'")->num_rows();
 
                     // jika jumlah kursi yang dipesan kurang dari 7 maka button pesan akan ditampilkan
-                    if($cek_full + $cek_full2 < 7){
+                    if($cek_full + $cek_full2 < 7 and $cek_jalan < 1){
                         echo '<a class="btn btn-primary btn-lg"';
                         //jika user belum login
                         if(!isset($_SESSION['nama_lengkap'])) 
@@ -152,17 +154,26 @@ class Welcome extends CI_Controller {
                                 </h6>
                                 <hr>
                                 <small class="text-muted">
-                                    <span class="text-secondary">Harga sewa : </span><br />';
+                                    <span class="text-secondary">Keterangan harga : </span><br />';
                                         // menampilkan keterangan harga sewa
                                         foreach($kursi_harga as $kh){
                                             echo '<span class="text-secondary">- Kursi '.$kh->posisi.'<i> ( '.$kh->keterangan.' )</i> - Rp.'.number_format("$kh->harga","0",",",".").' </span><br />';
                                         }
                                     echo'
                                     <hr>
-                                    <span class="text-secondary">Ket :</span><br />
+                                    <span class="text-secondary">Keterangan kursi :</span><br />
                                     <span class="fa fa-check text-success"></span> Belum dipesan<br />
                                     <span class="fa fa-times text-danger"></span> Sudah dipesan<br />
                                     <span class="fa fa-exclamation text-warning"></span> Dalam proses pemesanan
+                                    <hr>
+                                    <span class="text-secondary">Keterangan mobil :</span><br />';
+                                        if($cek_jalan > 0){
+                                            echo '<span class="fa fa-times text-danger"></span> Sudah jalan';
+                                        }
+                                        else{
+                                            echo '<span class="fa fa-check text-success"></span> Belum jalan';
+                                        }
+                                echo'
                                 </small>
                             </div>
                         </div>

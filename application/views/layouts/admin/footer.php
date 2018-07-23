@@ -38,6 +38,12 @@
   
   $('#plat').inputmask("AA 9999 AA");
 
+  $('#tanggal').inputmask("99");
+
+  $('#bulan').inputmask("99");
+
+  $('#tahun').inputmask("9999");
+
   $(document).ready(function() {
     $("#myForm").validate();
   })

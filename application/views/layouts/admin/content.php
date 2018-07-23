@@ -1,29 +1,36 @@
-  <?php
+<?php
 
-  //Array Hari
-  $array_hari = array(1=>"Senin","Selasa","Rabu","Kamis","Jumat", "Sabtu","Minggu");
-  $hari = $array_hari[date("N")];
+//Array Hari
+$array_hari = array(1=>"Senin","Selasa","Rabu","Kamis","Jumat", "Sabtu","Minggu");
+$hari = $array_hari[date("N")];
 
-  //Format Tanggal
-  $tanggal = date ("j");
+//Format Tanggal
+$tanggal = date ("j");
 
-  //Array Bulan
-  $array_bulan = array(1=>" Januari "," Februari "," Maret ", " April ", " Mei ", " Juni "," Juli "," Agustus "," September "," Oktober ", " November "," Desember ");
-  $bulan = $array_bulan[date("n")];
+//Array Bulan
+$array_bulan = array(1=>" Januari "," Februari "," Maret ", " April ", " Mei ", " Juni "," Juli "," Agustus "," September "," Oktober ", " November "," Desember ");
+$bulan = $array_bulan[date("n")];
 
-  //Format Tahun
-  $tahun = date("Y");
+//Format Tahun
+$tahun = date("Y");
 
-  ?>
-  <section class="content">
+if($this->uri->segment(2) == 'download'){
+    if($isi) $this->load->view($isi);
+}
+else{
+?>
+<section class="content">
     <h3 class="content-header">
-      <?php echo $content_header; ?><font size="3">&nbsp;&nbsp;<?php echo $hari . ", " . $tanggal . $bulan . $tahun ?></font>
+        <?php echo $content_header; ?><font size="3">&nbsp;&nbsp;<?php echo $hari . ", " . $tanggal . $bulan . $tahun ?></font>
     </h3>
     <hr>
     <div class="inner">
-      <div class="loading">
-      </div>
-      <?php if($isi) $this->load->view($isi)?>
+        <div class="loading">
+        </div>
+        <?php if($isi) $this->load->view($isi);?>
     </div>
-  </section>
+</section>
 </div>
+<?php
+}
+?>

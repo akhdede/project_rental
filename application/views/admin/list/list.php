@@ -30,6 +30,8 @@
       <div class="col-sm-3">
         <label>Gambar Mobil <span class="bintang">*</span></label>
         <input type="file" name="img" id="fup" class="required" title="Gambar harus diupload!" >
+        <br>
+        Ukuran : 18,5cm x 10,5cm
       </div>
       </br>
       <?php echo form_submit(array(
@@ -96,11 +98,8 @@
                 <img class="thumbnail" width="100px" src="<?php echo base_url($l->img); ?>">
               </td>
               <td>
-                <a href="<?php echo base_url().'admin/lists/edit/'.$l->id ?>">
-                  <i class="glyphicon glyphicon-pencil"></i>
-                </a> | 
-                <a href="<?php echo base_url().'admin/lists/delete/'.$l->id ?>" onclick="javascript: return confirm('Are you sure delete this data?')">
-                  <i class="glyphicon glyphicon-trash"> </i>
+                <a href="<?php echo base_url().'admin/lists/edit/'.$l->id ?>"><i class="glyphicon glyphicon-pencil"></i></a> | 
+                <a href="<?php echo base_url().'admin/lists/delete/'.$l->id ?>" onclick="javascript: return confirm('Are you sure delete this data?')"><i class="glyphicon glyphicon-trash"></i>
                 </a>
               </td>
             </tr>

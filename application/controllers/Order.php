@@ -54,18 +54,18 @@ class Order extends CI_Controller {
         $kursi_harga = $this->db->get('kursi_harga')->result();
 
         foreach($mobil_tersedia as $mt) {
-
+            if($mt->sudah_jalan == 'n'){
             echo'
             <div class="col-md-12">
                 <div class="col-md-5 col-sm-12 album-show">
                     <span class="album-light">
                         <div class="card mb-4 mb-12 box-shadow">
-                            <img class="card-img-top" src="'.base_url('assets/img/avanza.jpg').'" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">';
+                            <img class="card-img-top" src="'.base_url($mt->img).'" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">';
                             // fungsi database untuk menghitung jumlah kursi yang dipesan berdasarkan url yang ditangkap
                             $cek_full = $this->db->query("SELECT * FROM kursi_tersedia WHERE plat_nomor='$url' and status=1 and tanggal_tersedia LIKE '$tanggal_sekarang%'")->num_rows();
                             // jika total kursi yang dipesan lebih dari 6 maka akan menampilkan gambar sold out
                             if($cek_full > 6){
-                                echo '<img class="album-background2" src="'.base_url('assets/img/album-background-sold.png').'" alt="" style="z-index: 2000000;">';
+                                echo '<img class="album-background2" src="'.base_url('assets/img/album-background-sold.png').'" alt="" style="z-index: 2000000; margin-top: 120px; margin-left: 70%;">';
                             }
                             echo'
                             <div class="card-body">
@@ -242,6 +242,10 @@ class Order extends CI_Controller {
                 </div>
             </div>';
         }
+        }
+            else{
+                echo 'Mobil sudah jalan';
+            }
         }
     }
 
