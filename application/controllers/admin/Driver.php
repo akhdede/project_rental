@@ -12,7 +12,7 @@ class Driver extends CI_Controller {
 
     $data = array( 'title' => 'Administrator page',
                    'header' => 'ADMINISTRATOR PAGE',
-                   'content_header' => 'CV. NEW GARUDA JAYA TOTABUAN'
+                   'content_header' => 'CV. NEW GARUDA TOTABUAN'
                  );
     $this->load->view('layouts/admin/header', $data);
     $this->load->model('admin/driver_model');
@@ -48,6 +48,7 @@ class Driver extends CI_Controller {
     $tempat = $this->input->post('tempat_lhr');
     $tanggal = $this->input->post('tanggal_lhr');
     $alamat = $this->input->post('alamat');
+    $nomor_handphone = $this->input->post('nomor_handphone');
     $bknGbr = $this->bkn_gmbr();
 
     if($this->form_validation->run() == TRUE){
@@ -71,6 +72,7 @@ class Driver extends CI_Controller {
     $this->form_validation->set_rules('tempat_lhr', 'Tempat Lahir', 'required');
     $this->form_validation->set_rules('tanggal_lhr', 'Tanggal Lahir', 'required');
     $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+    $this->form_validation->set_rules('nomor_handphone', 'Nomor Handphone', 'required');
 
     $id = $this->input->post('id');
     $where = $id;
@@ -78,6 +80,7 @@ class Driver extends CI_Controller {
     $tempat = $this->input->post('tempat_lhr');
     $tanggal = $this->input->post('tanggal_lhr');
     $alamat = $this->input->post('alamat');
+    $nomor_handphone = $this->input->post('nomor_handphone');
 
     $type = explode('.', $_FILES["pas_foto"]["name"]);
     $type = $type[count($type)-1];
@@ -87,14 +90,14 @@ class Driver extends CI_Controller {
       if(is_uploaded_file($_FILES["pas_foto"]["tmp_name"])){
         if(in_array($type, array("jpg", "jpeg", "png"))){
           move_uploaded_file($_FILES["pas_foto"]["tmp_name"], $url);
-          $this->driver_model->update($nama, $tempat, $tanggal, $alamat, $url, $where);
+          $this->driver_model->update($nama, $tempat, $tanggal, $alamat, $nomor_handphone, $url, $where);
           $sukses = $this->session->set_flashdata('message', '<div class="alert alert-success" id="danger-alert"> <button type="button" class="close" data-dismiss="alert">x</button><strong>Data berhasil diubah!</strong></div>');
         }else{
           $sukses = $this->session->set_flashdata('message', '<div class="alert alert-danger" id="danger-alert"> <button type="button" class="close" data-dismiss="alert">x</button><strong>Data gagal diubah! type file gambar bukan salah satu dari jpg, jpeg atau png.</strong></div>');
         }
       }else{
         $url = $this->input->post('gambar');
-        $this->driver_model->update($nama, $tempat, $tanggal, $alamat, $url, $where);
+        $this->driver_model->update($nama, $tempat, $tanggal, $alamat, $nomor_handphone, $url, $where);
         $sukses = $this->session->set_flashdata('message', '<div class="alert alert-success" id="danger-alert"> <button type="button" class="close" data-dismiss="alert">x</button><strong>Data berhasil diubah!</strong></div>');
         
       }

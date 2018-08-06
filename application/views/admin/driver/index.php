@@ -10,6 +10,7 @@
         <th>Tempat Lahir</th>
         <th>Tanggal Lahir</th>
         <th>Alamat</th>
+        <th>Nomor Handphone</th>
         <th>Foto</th>
         <th>Aksi</th>
       </thead>
@@ -23,6 +24,7 @@
         <td><?php echo $t->tempat_lahir; ?></td>
         <td><?php echo $t->tanggal_lahir; ?></td>
         <td><?php echo $t->alamat; ?></td>
+        <td><?php echo $t->nomor_handphone; ?></td>
         <td><img src="<?php echo base_url($t->img) ?>" class="thumbnail" width="100px"></td>
         <td>
           <a href="<?php echo base_url('admin/driver/edit/'.$t->id); ?>"><span class="glyphicon glyphicon-pencil"><span></span></a> | 

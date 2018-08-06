@@ -11,7 +11,7 @@ class Tersedia extends CI_Controller {
         redirect(base_url('user/login'));
     $data = array( 'title' => 'Administrator page',
                    'header' => 'ADMINISTRATOR PAGE',
-                   'content_header' => 'CV. NEW GARUDA JAYA TOTABUAN'
+                   'content_header' => 'CV. NEW GARUDA TOTABUAN'
                  );
     $this->load->view('layouts/admin/header', $data);
     $this->load->model('admin/tersedia_model');
@@ -119,10 +119,10 @@ class Tersedia extends CI_Controller {
 
   // mobil jalan
   public function mblJalan(){
-    $plat_no = $this->uri->segment(4);
-    $sdh_jln= $this->uri->segment(5);
+    $plat_nomor = $this->uri->segment(4);
+    $sudah_jalan = $this->uri->segment(5);
 
-    $this->tersedia_model->mblJalan($plat_no, $sdh_jln);
+    $this->tersedia_model->mblJalan($plat_nomor, $sudah_jalan);
 
     redirect('admin/tersedia');
   }

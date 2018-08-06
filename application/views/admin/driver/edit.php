@@ -25,6 +25,11 @@
         <label for="alamat">Alamat</label>
         <textarea name="alamat" class="form-control" cols="30" rows="10"><?php echo $e->alamat ?></textarea>
       </div>
+      <div class="col-sm-4">
+        <label for="nomor_handphone">Nomor Handphone</label>
+        <input class="form-control" type="text" placeholder="Nomor Handphone" name="nomor_handphone" value="<?php echo $e->nomor_handphone ?>">
+      </div>
+      <div class="col-sm-12">&nbsp;</div>
       <div class="col-sm-2">
         <label for="pas_foto">Pas Foto</label>
         <img src="<?php echo base_url($e->img) ?>" class="thumbnail">

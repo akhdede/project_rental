@@ -137,6 +137,7 @@ class Order extends CI_Controller {
         $kursi = $this->uri->segment(4);
         $aksi = $this->uri->segment(5);
 
+        $harga = $this->db->query("SELECT harga FROM kursi_harga ORDER BY id ASC")->result();
 
         $email = $_SESSION['email'];
 
@@ -146,12 +147,11 @@ class Order extends CI_Controller {
           if(in_array($kursi, $kursi_array)) {
 
             if($kursi == 1)
-              $harga = 120000;
+                $harga = $harga[0]->harga;
             elseif($kursi == 2 or $kursi == 3 or $kursi == 4)
-              $harga = 110000;
+                $harga = $harga[1]->harga;
             elseif($kursi == 5 or $kursi == 6 or $kursi == 7)
-              $harga = 100000;
-
+                $harga = $harga[2]->harga;
 
             $insert_data = array(
               'plat_nomor' => strtoupper($mobil),
@@ -319,7 +319,7 @@ class Order extends CI_Controller {
 
 
         $data = array(
-            'title' => 'CV. New Garuda Jaya Totabuan',
+            'title' => 'CV. New Garuda Totabuan',
             'content' => 'order/confirm_order',
             'bayar' => $this->order_model->confirm_order($where),
             'group_order' => $this->order_model->group_order($where),

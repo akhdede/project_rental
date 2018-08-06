@@ -12,7 +12,7 @@ class Dashboard extends CI_Controller {
 
     $data = array( 'title' => 'Administrator page',
                    'header' => 'ADMINISTRATOR PAGE',
-                   'content_header' => 'CV. NEW GARUDA JAYA TOTABUAN'
+                   'content_header' => 'CV. NEW GARUDA TOTABUAN'
                  );
     $this->load->view('layouts/admin/header', $data);
     $this->load->model('admin/dashboard_model');

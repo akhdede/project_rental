@@ -21,10 +21,10 @@ class Welcome extends CI_Controller {
 
     public function kursi_tersedia()
     {
-        $tanggal_sekarang = date('d-m-Y').'%';
+        $tanggal_sekarang = date('d-m-Y');
 
         $mobil_list = $this->db->query("SELECT * FROM daftar_mobil")->result();
-        $mobil_tersedia = $this->db->query("SELECT * FROM mobil_tersedia WHERE tanggal_tersedia LIKE '$tanggal_sekarang%'");
+        $mobil_tersedia = $this->db->query("SELECT * FROM mobil_tersedia WHERE tanggal_tersedia LIKE '$tanggal_sekarang'");
         if($mobil_tersedia->num_rows() > 0){
 
             // fungsi database untuk menampilkan harga sewa 
