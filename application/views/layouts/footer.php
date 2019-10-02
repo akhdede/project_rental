@@ -89,7 +89,7 @@
     }
 
     function startRefresh() {
-        setTimeout(startRefresh,1000);
+        setTimeout(startRefresh,1500);
         $.get('<?php echo base_url('welcome/kursi_tersedia'); ?>', function(data) {
             $('#responsecontainer').html(data);    
         });
