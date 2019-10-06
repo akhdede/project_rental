@@ -1,8 +1,8 @@
--- MySQL dump 10.15  Distrib 10.0.34-MariaDB, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.16  Distrib 10.1.41-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: rental
 -- ------------------------------------------------------
--- Server version	10.0.34-MariaDB-0ubuntu0.16.04.1
+-- Server version	10.1.41-MariaDB-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -91,7 +91,7 @@ CREATE TABLE `kursi_tersedia` (
   KEY `nomor_kursi` (`nomor_kursi`),
   KEY `kode_pesanan_2` (`kode_pesanan`),
   CONSTRAINT `kursi_tersedia_ibfk_1` FOREIGN KEY (`plat_nomor`) REFERENCES `daftar_mobil` (`plat_nomor`)
-) ENGINE=InnoDB AUTO_INCREMENT=358 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=470 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,7 +100,7 @@ CREATE TABLE `kursi_tersedia` (
 
 LOCK TABLES `kursi_tersedia` WRITE;
 /*!40000 ALTER TABLE `kursi_tersedia` DISABLE KEYS */;
-INSERT INTO `kursi_tersedia` VALUES (316,'DB1111KK',1,2,'enalnani@gmail.com','18072602540334','26-07-2018'),(317,'DB1111KK',2,1,'akhdede@gmail.com','18072602543434','26-07-2018'),(318,'DB1111KK',3,0,NULL,NULL,'26-07-2018'),(319,'DB1111KK',4,0,NULL,NULL,'26-07-2018'),(320,'DB1111KK',5,0,NULL,NULL,'26-07-2018'),(321,'DB1111KK',6,0,NULL,NULL,'26-07-2018'),(322,'DB1111KK',7,0,NULL,NULL,'26-07-2018'),(323,'DB1234KK',1,0,NULL,NULL,'26-07-2018'),(324,'DB1234KK',2,0,NULL,NULL,'26-07-2018'),(325,'DB1234KK',3,0,NULL,NULL,'26-07-2018'),(326,'DB1234KK',4,0,NULL,NULL,'26-07-2018'),(327,'DB1234KK',5,0,NULL,NULL,'26-07-2018'),(328,'DB1234KK',6,0,NULL,NULL,'26-07-2018'),(329,'DB1234KK',7,0,NULL,NULL,'26-07-2018'),(330,'DB3333KK',1,0,NULL,NULL,'26-07-2018'),(331,'DB3333KK',2,0,NULL,NULL,'26-07-2018'),(332,'DB3333KK',3,0,NULL,NULL,'26-07-2018'),(333,'DB3333KK',4,0,NULL,NULL,'26-07-2018'),(334,'DB3333KK',5,0,NULL,NULL,'26-07-2018'),(335,'DB3333KK',6,0,NULL,NULL,'26-07-2018'),(336,'DB3333KK',7,0,NULL,NULL,'26-07-2018'),(337,'DB1111KK',1,1,'enalnani@gmail.com','18073002190137','30-07-2018'),(338,'DB1111KK',2,0,NULL,NULL,'30-07-2018'),(339,'DB1111KK',3,0,NULL,NULL,'30-07-2018'),(340,'DB1111KK',4,0,NULL,NULL,'30-07-2018'),(341,'DB1111KK',5,0,NULL,NULL,'30-07-2018'),(342,'DB1111KK',6,0,NULL,NULL,'30-07-2018'),(343,'DB1111KK',7,0,NULL,NULL,'30-07-2018'),(344,'DB1234KK',1,0,NULL,NULL,'30-07-2018'),(345,'DB1234KK',2,0,NULL,NULL,'30-07-2018'),(346,'DB1234KK',3,0,NULL,NULL,'30-07-2018'),(347,'DB1234KK',4,0,NULL,NULL,'30-07-2018'),(348,'DB1234KK',5,0,NULL,NULL,'30-07-2018'),(349,'DB1234KK',6,0,NULL,NULL,'30-07-2018'),(350,'DB1234KK',7,0,NULL,NULL,'30-07-2018'),(351,'DB3333KK',1,0,NULL,NULL,'30-07-2018'),(352,'DB3333KK',2,0,NULL,NULL,'30-07-2018'),(353,'DB3333KK',3,0,NULL,NULL,'30-07-2018'),(354,'DB3333KK',4,0,NULL,NULL,'30-07-2018'),(355,'DB3333KK',5,0,NULL,NULL,'30-07-2018'),(356,'DB3333KK',6,0,NULL,NULL,'30-07-2018'),(357,'DB3333KK',7,0,NULL,NULL,'30-07-2018');
+INSERT INTO `kursi_tersedia` VALUES (316,'DB1111KK',1,2,'id.dedeirwanto@gmail.com','18072602540334','26-07-2018'),(317,'DB1111KK',2,2,'id.dedeirwanto@gmail.com','18072602543434','26-07-2018'),(318,'DB1111KK',3,0,NULL,NULL,'26-07-2018'),(319,'DB1111KK',4,0,NULL,NULL,'26-07-2018'),(320,'DB1111KK',5,0,NULL,NULL,'26-07-2018'),(321,'DB1111KK',6,0,NULL,NULL,'26-07-2018'),(322,'DB1111KK',7,0,NULL,NULL,'26-07-2018'),(323,'DB1234KK',1,2,'id.dedeirwanto@gmail.com',NULL,'26-07-2018'),(324,'DB1234KK',2,2,'id.dedeirwanto@gmail.com',NULL,'26-07-2018'),(325,'DB1234KK',3,2,'id.dedeirwanto@gmail.com',NULL,'26-07-2018'),(326,'DB1234KK',4,2,'id.dedeirwanto@gmail.com',NULL,'26-07-2018'),(327,'DB1234KK',5,0,NULL,NULL,'26-07-2018'),(328,'DB1234KK',6,0,NULL,NULL,'26-07-2018'),(329,'DB1234KK',7,0,NULL,NULL,'26-07-2018'),(330,'DB3333KK',1,0,NULL,NULL,'26-07-2018'),(331,'DB3333KK',2,0,NULL,NULL,'26-07-2018'),(332,'DB3333KK',3,0,NULL,NULL,'26-07-2018'),(333,'DB3333KK',4,0,NULL,NULL,'26-07-2018'),(334,'DB3333KK',5,0,NULL,NULL,'26-07-2018'),(335,'DB3333KK',6,0,NULL,NULL,'26-07-2018'),(336,'DB3333KK',7,0,NULL,NULL,'26-07-2018'),(337,'DB1111KK',1,2,'id.dedeirwanto@gmail.com','18073002190137','30-07-2018'),(338,'DB1111KK',2,2,'id.dedeirwanto@gmail.com',NULL,'30-07-2018'),(339,'DB1111KK',3,0,NULL,NULL,'30-07-2018'),(340,'DB1111KK',4,0,NULL,NULL,'30-07-2018'),(341,'DB1111KK',5,0,NULL,NULL,'30-07-2018'),(342,'DB1111KK',6,0,NULL,NULL,'30-07-2018'),(343,'DB1111KK',7,0,NULL,NULL,'30-07-2018'),(344,'DB1234KK',1,2,'id.dedeirwanto@gmail.com',NULL,'30-07-2018'),(345,'DB1234KK',2,2,'id.dedeirwanto@gmail.com',NULL,'30-07-2018'),(346,'DB1234KK',3,2,'id.dedeirwanto@gmail.com',NULL,'30-07-2018'),(347,'DB1234KK',4,2,'id.dedeirwanto@gmail.com',NULL,'30-07-2018'),(348,'DB1234KK',5,0,NULL,NULL,'30-07-2018'),(349,'DB1234KK',6,0,NULL,NULL,'30-07-2018'),(350,'DB1234KK',7,0,NULL,NULL,'30-07-2018'),(351,'DB3333KK',1,0,NULL,NULL,'30-07-2018'),(352,'DB3333KK',2,0,NULL,NULL,'30-07-2018'),(353,'DB3333KK',3,0,NULL,NULL,'30-07-2018'),(354,'DB3333KK',4,0,NULL,NULL,'30-07-2018'),(355,'DB3333KK',5,0,NULL,NULL,'30-07-2018'),(356,'DB3333KK',6,0,NULL,NULL,'30-07-2018'),(357,'DB3333KK',7,0,NULL,NULL,'30-07-2018'),(358,'DB1111KK',1,2,'id.dedeirwanto@gmail.com','19100211405139','02-10-2019'),(359,'DB1111KK',2,2,'id.dedeirwanto@gmail.com',NULL,'02-10-2019'),(360,'DB1111KK',3,0,NULL,NULL,'02-10-2019'),(361,'DB1111KK',4,0,NULL,NULL,'02-10-2019'),(362,'DB1111KK',5,0,NULL,NULL,'02-10-2019'),(363,'DB1111KK',6,0,NULL,NULL,'02-10-2019'),(364,'DB1111KK',7,0,NULL,NULL,'02-10-2019'),(365,'DB1234KK',1,2,'id.dedeirwanto@gmail.com','19100211503439','02-10-2019'),(366,'DB1234KK',2,2,'id.dedeirwanto@gmail.com','19100211513739','02-10-2019'),(367,'DB1234KK',3,2,'id.dedeirwanto@gmail.com',NULL,'02-10-2019'),(368,'DB1234KK',4,2,'id.dedeirwanto@gmail.com',NULL,'02-10-2019'),(369,'DB1234KK',5,0,NULL,NULL,'02-10-2019'),(370,'DB1234KK',6,0,NULL,NULL,'02-10-2019'),(371,'DB1234KK',7,0,NULL,NULL,'02-10-2019'),(372,'DB3333KK',1,0,NULL,NULL,'02-10-2019'),(373,'DB3333KK',2,0,NULL,NULL,'02-10-2019'),(374,'DB3333KK',3,0,NULL,NULL,'02-10-2019'),(375,'DB3333KK',4,0,NULL,NULL,'02-10-2019'),(376,'DB3333KK',5,0,NULL,NULL,'02-10-2019'),(377,'DB3333KK',6,0,NULL,NULL,'02-10-2019'),(378,'DB3333KK',7,0,NULL,NULL,'02-10-2019'),(379,'DB1111KK',1,2,'id.dedeirwanto@gmail.com','19100410412939','04-10-2019'),(380,'DB1111KK',2,2,'id.dedeirwanto@gmail.com',NULL,'04-10-2019'),(381,'DB1111KK',3,0,NULL,NULL,'04-10-2019'),(382,'DB1111KK',4,0,NULL,NULL,'04-10-2019'),(383,'DB1111KK',5,0,NULL,NULL,'04-10-2019'),(384,'DB1111KK',6,0,NULL,NULL,'04-10-2019'),(385,'DB1111KK',7,0,NULL,NULL,'04-10-2019'),(449,'DB1111KK',1,0,'id.dedeirwanto@gmail.com','19100603491039','06-10-2019'),(450,'DB1111KK',2,0,NULL,NULL,'06-10-2019'),(451,'DB1111KK',3,0,NULL,NULL,'06-10-2019'),(452,'DB1111KK',4,0,NULL,NULL,'06-10-2019'),(453,'DB1111KK',5,0,NULL,NULL,'06-10-2019'),(454,'DB1111KK',6,0,NULL,NULL,'06-10-2019'),(455,'DB1111KK',7,0,NULL,NULL,'06-10-2019'),(456,'DB1234KK',1,0,NULL,NULL,'06-10-2019'),(457,'DB1234KK',2,0,NULL,NULL,'06-10-2019'),(458,'DB1234KK',3,0,NULL,NULL,'06-10-2019'),(459,'DB1234KK',4,0,NULL,NULL,'06-10-2019'),(460,'DB1234KK',5,0,NULL,NULL,'06-10-2019'),(461,'DB1234KK',6,0,NULL,NULL,'06-10-2019'),(462,'DB1234KK',7,0,NULL,NULL,'06-10-2019'),(463,'DB3333KK',1,0,NULL,NULL,'06-10-2019'),(464,'DB3333KK',2,0,NULL,NULL,'06-10-2019'),(465,'DB3333KK',3,0,NULL,NULL,'06-10-2019'),(466,'DB3333KK',4,0,NULL,NULL,'06-10-2019'),(467,'DB3333KK',5,0,NULL,NULL,'06-10-2019'),(468,'DB3333KK',6,0,NULL,NULL,'06-10-2019'),(469,'DB3333KK',7,0,NULL,NULL,'06-10-2019');
 /*!40000 ALTER TABLE `kursi_tersedia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -124,7 +124,7 @@ CREATE TABLE `mobil_tersedia` (
   KEY `id_sopir` (`id_sopir`),
   CONSTRAINT `mobil_tersedia_ibfk_1` FOREIGN KEY (`plat_nomor`) REFERENCES `daftar_mobil` (`plat_nomor`),
   CONSTRAINT `mobil_tersedia_ibfk_2` FOREIGN KEY (`id_sopir`) REFERENCES `sopir` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -133,7 +133,7 @@ CREATE TABLE `mobil_tersedia` (
 
 LOCK TABLES `mobil_tersedia` WRITE;
 /*!40000 ALTER TABLE `mobil_tersedia` DISABLE KEYS */;
-INSERT INTO `mobil_tersedia` VALUES (46,'DB1111KK','Toyota Avanza','./img_upload/2309871435b48054bab019.jpg',4,'26-07-2018','y'),(47,'DB1234KK','Toyota Avanza','./img_upload/14301815855b44c9d43b297.jpg',5,'26-07-2018','n'),(48,'DB3333KK','Toyota Avanza','./img_upload/14416531545b49e6d96da20.jpg',6,'26-07-2018','n'),(49,'DB1111KK','Toyota Avanza','./img_upload/2309871435b48054bab019.jpg',4,'30-07-2018','y'),(50,'DB1234KK','Toyota Avanza','./img_upload/14301815855b44c9d43b297.jpg',5,'30-07-2018','n'),(51,'DB3333KK','Toyota Avanza','./img_upload/14416531545b49e6d96da20.jpg',6,'30-07-2018','n');
+INSERT INTO `mobil_tersedia` VALUES (46,'DB1111KK','Toyota Avanza','./img_upload/2309871435b48054bab019.jpg',4,'26-07-2018','n'),(47,'DB1234KK','Toyota Avanza','./img_upload/14301815855b44c9d43b297.jpg',5,'26-07-2018','n'),(48,'DB3333KK','Toyota Avanza','./img_upload/14416531545b49e6d96da20.jpg',6,'26-07-2018','n'),(49,'DB1111KK','Toyota Avanza','./img_upload/2309871435b48054bab019.jpg',4,'30-07-2018','n'),(50,'DB1234KK','Toyota Avanza','./img_upload/14301815855b44c9d43b297.jpg',5,'30-07-2018','n'),(51,'DB3333KK','Toyota Avanza','./img_upload/14416531545b49e6d96da20.jpg',6,'30-07-2018','n'),(52,'DB1111KK','Toyota Avanza','./img_upload/2309871435b48054bab019.jpg',4,'02-10-2019','n'),(53,'DB1234KK','Toyota Avanza','./img_upload/14301815855b44c9d43b297.jpg',5,'02-10-2019','n'),(54,'DB3333KK','Toyota Avanza','./img_upload/14416531545b49e6d96da20.jpg',6,'02-10-2019','n'),(55,'DB1111KK','Toyota Avanza','./img_upload/2309871435b48054bab019.jpg',4,'04-10-2019','n'),(65,'DB1111KK','Toyota Avanza','./img_upload/2309871435b48054bab019.jpg',4,'06-10-2019','n'),(66,'DB1234KK','Toyota Avanza','./img_upload/14301815855b44c9d43b297.jpg',5,'06-10-2019','n'),(67,'DB3333KK','Toyota Avanza','./img_upload/14416531545b49e6d96da20.jpg',6,'06-10-2019','n');
 /*!40000 ALTER TABLE `mobil_tersedia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -153,6 +153,7 @@ CREATE TABLE `order_detail` (
   `tanggal_pesan` varchar(30) DEFAULT NULL,
   `is_proses` int(1) NOT NULL DEFAULT '0',
   `kode` varchar(30) DEFAULT NULL,
+  `img_transfer` varchar(50) DEFAULT NULL,
   `confirm_by_admin` int(1) DEFAULT NULL,
   `tanggal_confirm` varchar(30) DEFAULT NULL,
   `tanggal_mobil_tersedia` varchar(30) DEFAULT NULL,
@@ -164,7 +165,7 @@ CREATE TABLE `order_detail` (
   CONSTRAINT `order_detail_ibfk_1` FOREIGN KEY (`costumers`) REFERENCES `users` (`email`),
   CONSTRAINT `order_detail_ibfk_2` FOREIGN KEY (`harga`) REFERENCES `kursi_harga` (`harga`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `order_detail_ibfk_3` FOREIGN KEY (`plat_nomor`) REFERENCES `kursi_tersedia` (`plat_nomor`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=126 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -173,7 +174,6 @@ CREATE TABLE `order_detail` (
 
 LOCK TABLES `order_detail` WRITE;
 /*!40000 ALTER TABLE `order_detail` DISABLE KEYS */;
-INSERT INTO `order_detail` VALUES (103,'DB1111KK',1,'akhdede@gmail.com',110000,'26-07-2018 02:54:03',1,'18072602540334',1,'26-07-2018 02:55:33','26-07-2018'),(104,'DB1111KK',2,'akhdede@gmail.com',100000,'26-07-2018 02:54:34',1,'18072602543434',1,'26-07-2018 02:55:37','26-07-2018'),(105,'DB1111KK',1,'enalnani@gmail.com',110000,'30-07-2018 02:19:01',1,'18073002190137',1,'30-07-2018 02:24:00','30-07-2018');
 /*!40000 ALTER TABLE `order_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -187,6 +187,7 @@ DROP TABLE IF EXISTS `order_message`;
 CREATE TABLE `order_message` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode` varchar(30) NOT NULL,
+  `title` varchar(50) NOT NULL,
   `isi_pesan` text NOT NULL,
   `confirm_kode` int(1) DEFAULT NULL,
   `message_status` int(1) NOT NULL,
@@ -196,7 +197,7 @@ CREATE TABLE `order_message` (
   KEY `kode` (`kode`),
   KEY `costumers` (`costumers`),
   CONSTRAINT `order_message_ibfk_1` FOREIGN KEY (`costumers`) REFERENCES `users` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -205,7 +206,7 @@ CREATE TABLE `order_message` (
 
 LOCK TABLES `order_message` WRITE;
 /*!40000 ALTER TABLE `order_message` DISABLE KEYS */;
-INSERT INTO `order_message` VALUES (65,'18072512321919','Segera lakukan pembayaran! kode pesanan anda <b>18072512321919</b>',2,1,'admin@newgarudatotabuan.com','25-07-2018 12:32:19'),(66,'18072512321919','Pesanan dengan kode <b>18072512321919</b> telah dikonfirmasi! Terimakasih.',1,1,'admin@newgarudatotabuan.com','25-07-2018 12:32:31'),(67,'18072512325819','Segera lakukan pembayaran! kode pesanan anda <b>18072512325819</b>',2,1,'admin@newgarudatotabuan.com','25-07-2018 12:32:58'),(68,'18072512325819','Anda telah membatalkan orderan dengan kode <b>18072512325819</b>',0,1,'admin@newgarudatotabuan.com','25-07-2018 12:33:12'),(69,'18072512333119','Segera lakukan pembayaran! kode pesanan anda <b>18072512333119</b>',2,1,'admin@newgarudatotabuan.com','25-07-2018 12:33:31'),(70,'18072512333119','Pesanan dengan kode <b>18072512333119</b> telah dikonfirmasi! Terimakasih.',1,1,'admin@newgarudatotabuan.com','25-07-2018 12:33:44'),(71,'18072512341519','Segera lakukan pembayaran! kode pesanan anda <b>18072512341519</b>',2,1,'admin@newgarudatotabuan.com','25-07-2018 12:34:15'),(72,'18072512341519','Pesanan dengan kode <b>18072512341519</b> telah dikonfirmasi! Terimakasih.',1,1,'admin@newgarudatotabuan.com','25-07-2018 12:34:25'),(73,'18072512495519','Segera lakukan pembayaran! kode pesanan anda <b>18072512495519</b>',2,1,'admin@newgarudatotabuan.com','25-07-2018 12:49:55'),(74,'18072512495519','Pesanan dengan kode <b>18072512495519</b> telah dikonfirmasi! Terimakasih.',1,1,'admin@newgarudatotabuan.com','25-07-2018 12:50:03'),(75,'18072602540334','Segera lakukan pembayaran! kode pesanan anda <b>18072602540334</b>',2,1,'akhdede@gmail.com','26-07-2018 02:54:03'),(76,'18072602543434','Segera lakukan pembayaran! kode pesanan anda <b>18072602543434</b>',2,1,'akhdede@gmail.com','26-07-2018 02:54:34'),(77,'18072602540334','Pesanan dengan kode <b>18072602540334</b> telah dikonfirmasi! Terimakasih.',1,1,'akhdede@gmail.com','26-07-2018 02:55:33'),(78,'18072602543434','Pesanan dengan kode <b>18072602543434</b> telah dikonfirmasi! Terimakasih.',1,1,'akhdede@gmail.com','26-07-2018 02:55:37'),(79,'18073002190137','Segera lakukan pembayaran! kode pesanan anda <b>18073002190137</b>',2,1,'enalnani@gmail.com','30-07-2018 02:19:01'),(80,'18073002190137','Pesanan dengan kode <b>18073002190137</b> telah dikonfirmasi! Terimakasih.',1,1,'enalnani@gmail.com','30-07-2018 02:24:00');
+INSERT INTO `order_message` VALUES (81,'19100211405139','','Segera lakukan pembayaran! kode pesanan anda <b>19100211405139</b>',2,1,'id.dedeirwanto@gmail.com','02-10-2019 11:40:51'),(82,'19100211405139','','Pesanan dengan kode <b>19100211405139</b> telah dikonfirmasi! Terimakasih.',1,1,'id.dedeirwanto@gmail.com','02-10-2019 11:42:35'),(83,'19100211503439','','Segera lakukan pembayaran! kode pesanan anda <b>19100211503439</b>',2,1,'id.dedeirwanto@gmail.com','02-10-2019 11:50:34'),(84,'19100211513739','','Segera lakukan pembayaran! kode pesanan anda <b>19100211513739</b>',2,1,'id.dedeirwanto@gmail.com','02-10-2019 11:51:37'),(85,'19100211503439','','Pesanan dengan kode <b>19100211503439</b> telah kadaluarsa!',0,1,'id.dedeirwanto@gmail.com','03-10-2019 12:19:57'),(86,'19100211513739','','Pesanan dengan kode <b>19100211513739</b> telah kadaluarsa!',0,1,'id.dedeirwanto@gmail.com','03-10-2019 12:19:59'),(87,'19100410400739','','Segera lakukan pembayaran! kode pesanan anda <b>19100410400739</b>',2,1,'id.dedeirwanto@gmail.com','04-10-2019 10:40:07'),(88,'19100410400739','','Anda telah membatalkan orderan dengan kode <b>19100410400739</b>',0,1,'id.dedeirwanto@gmail.com','04-10-2019 10:41:16'),(89,'19100410412939','','Segera lakukan pembayaran! kode pesanan anda <b>19100410412939</b>',2,1,'id.dedeirwanto@gmail.com','04-10-2019 10:41:29'),(90,'19100410412939','','Anda telah membatalkan orderan dengan kode <b>19100410412939</b>',0,1,'id.dedeirwanto@gmail.com','06-10-2019 06:09:33'),(91,'19100606215039','','Segera lakukan pembayaran! kode pesanan anda <b>19100606215039</b>',2,1,'id.dedeirwanto@gmail.com','06-10-2019 06:21:50'),(92,'19100606215039','','Pesanan dengan kode <b>19100606215039</b> telah kadaluarsa!',0,1,'id.dedeirwanto@gmail.com','06-10-2019 06:21:59'),(93,'19100606275539','','Segera lakukan pembayaran! kode pesanan anda <b>19100606275539</b>',2,1,'id.dedeirwanto@gmail.com','06-10-2019 06:27:55'),(94,'19100606275539','Pesanan telah kadaluarsa!','Pesanan dengan kode <b>19100606275539</b> telah kadaluarsa!',0,1,'id.dedeirwanto@gmail.com','06-10-2019 08:12:25'),(95,'19100608151839','Segera lakukan pembayaran!','Segera lakukan pembayaran! kode pesanan anda <b>19100608151839</b>',2,1,'id.dedeirwanto@gmail.com','06-10-2019 08:15:18'),(96,'19100608151839','Pesanan telah kadaluarsa!','Pesanan dengan kode <b>19100608151839</b> telah kadaluarsa!',0,1,'id.dedeirwanto@gmail.com','06-10-2019 08:15:41'),(97,'19100608155739','Segera lakukan pembayaran!','Segera lakukan pembayaran! kode pesanan anda <b>19100608155739</b>',2,1,'id.dedeirwanto@gmail.com','06-10-2019 08:15:57'),(98,'19100608155739','Pesanan telah kadaluarsa!','Pesanan dengan kode <b>19100608155739</b> telah kadaluarsa!',0,1,'id.dedeirwanto@gmail.com','06-10-2019 08:16:10'),(99,'19100608170639','Segera lakukan pembayaran!','Segera lakukan pembayaran! kode pesanan anda <b>19100608170639</b>',2,1,'id.dedeirwanto@gmail.com','06-10-2019 08:17:06'),(100,'19100608170639','Pesanan telah kadaluarsa!','Pesanan dengan kode <b>19100608170639</b> telah kadaluarsa!',0,1,'id.dedeirwanto@gmail.com','06-10-2019 08:17:19'),(101,'19100608224139','Segera lakukan pembayaran!','Segera lakukan pembayaran! kode pesanan anda <b>19100608224139</b>',2,1,'id.dedeirwanto@gmail.com','06-10-2019 08:22:41'),(102,'19100608224139','Pesanan telah dibatalkan!','Anda telah membatalkan orderan dengan kode <b>19100608224139</b>',0,1,'id.dedeirwanto@gmail.com','06-10-2019 08:35:37'),(103,'19100608361039','Segera lakukan pembayaran!','Segera lakukan pembayaran! kode pesanan anda <b>19100608361039</b>',2,1,'id.dedeirwanto@gmail.com','06-10-2019 08:36:10'),(104,'19100608361039','Pesanan telah dibatalkan!','Anda telah membatalkan orderan dengan kode <b>19100608361039</b>',0,1,'id.dedeirwanto@gmail.com','06-10-2019 08:36:31'),(105,'19100608431839','Segera lakukan pembayaran!','Segera lakukan pembayaran! kode pesanan anda <b>19100608431839</b>',2,1,'id.dedeirwanto@gmail.com','06-10-2019 08:43:18'),(106,'19100608431839','Pesanan telah dibatalkan!','Anda telah membatalkan orderan dengan kode <b>19100608431839</b>',0,1,'id.dedeirwanto@gmail.com','06-10-2019 08:44:18'),(107,'19100609473039','Segera lakukan pembayaran!','Segera lakukan pembayaran! kode pesanan anda <b>19100609473039</b>',2,1,'id.dedeirwanto@gmail.com','06-10-2019 09:47:30'),(108,'19100609473039','','Pesanan dengan kode <b>19100609473039</b> telah dikonfirmasi! Terimakasih.',1,1,'id.dedeirwanto@gmail.com','06-10-2019 09:49:09'),(109,'19100611390239','Segera lakukan pembayaran!','Segera lakukan pembayaran! kode pesanan anda <b>19100611390239</b>',2,1,'id.dedeirwanto@gmail.com','06-10-2019 11:39:02'),(110,'19100611390239','Pesanan telah dibatalkan!','Anda telah membatalkan orderan dengan kode <b>19100611390239</b>',0,1,'id.dedeirwanto@gmail.com','06-10-2019 11:40:45'),(111,'19100611432939','Segera lakukan pembayaran!','Segera lakukan pembayaran! kode pesanan anda <b>19100611432939</b>',2,1,'id.dedeirwanto@gmail.com','06-10-2019 11:43:29'),(112,'19100611432939','Pesanan telah dibatalkan!','Anda telah membatalkan orderan dengan kode <b>19100611432939</b>',0,1,'id.dedeirwanto@gmail.com','06-10-2019 11:52:08'),(113,'19100612021839','Segera lakukan pembayaran!','Segera lakukan pembayaran! kode pesanan anda <b>19100612021839</b>',2,1,'id.dedeirwanto@gmail.com','06-10-2019 12:02:18'),(114,'19100612021839','Pesanan telah dikonfirmasi!','Pesanan dengan kode <b>19100612021839</b> telah dikonfirmasi! Terimakasih.',1,1,'id.dedeirwanto@gmail.com','06-10-2019 12:02:48'),(115,'19100612060539','Segera lakukan pembayaran!','Segera lakukan pembayaran! kode pesanan anda <b>19100612060539</b>',2,1,'id.dedeirwanto@gmail.com','06-10-2019 12:06:05'),(116,'19100612060539','Pesanan telah dikonfirmasi!','Pesanan dengan kode <b>19100612060539</b> telah dikonfirmasi! Terimakasih.',1,1,'id.dedeirwanto@gmail.com','06-10-2019 12:06:53'),(117,'19100612125239','Segera lakukan pembayaran!','Segera lakukan pembayaran! kode pesanan anda <b>19100612125239</b>',2,1,'id.dedeirwanto@gmail.com','06-10-2019 12:12:52'),(118,'19100612125239','Pesanan telah kadaluarsa!','Pesanan dengan kode <b>19100612125239</b> telah kadaluarsa!',0,1,'id.dedeirwanto@gmail.com','06-10-2019 03:40:15'),(119,'19100603403539','Segera lakukan pembayaran!','Segera lakukan pembayaran! kode pesanan anda <b>19100603403539</b>',2,1,'id.dedeirwanto@gmail.com','06-10-2019 03:40:35'),(120,'19100603403539','Pesanan telah dikonfirmasi!','Pesanan dengan kode <b>19100603403539</b> telah dikonfirmasi! Terimakasih.',1,1,'id.dedeirwanto@gmail.com','06-10-2019 03:45:49'),(121,'19100603491039','Segera lakukan pembayaran!','Segera lakukan pembayaran! kode pesanan anda <b>19100603491039</b>',2,1,'id.dedeirwanto@gmail.com','06-10-2019 03:49:11'),(122,'19100603491039','Pesanan telah kadaluarsa!','Pesanan dengan kode <b>19100603491039</b> telah kadaluarsa!',0,1,'id.dedeirwanto@gmail.com','06-10-2019 03:57:17');
 /*!40000 ALTER TABLE `order_message` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -235,7 +236,7 @@ CREATE TABLE `sopir` (
 
 LOCK TABLES `sopir` WRITE;
 /*!40000 ALTER TABLE `sopir` DISABLE KEYS */;
-INSERT INTO `sopir` VALUES (4,'Dede Irwanto','Kotamobagu','1992-03-03','./img_upload/20137862105b44c7c264d86.jpg','Molinow','082348366038'),(5,'Enal Nani','Kotamobagu','1995-03-01','./img_upload/974397555b454a98bb1cc.jpg','Molinow','082348366033'),(6,'andik','Kotamobagu','1993-03-01','./img_upload/10297127125b4808db53f9e.jpg','Molinow','082348366035');
+INSERT INTO `sopir` VALUES (4,'Dede Irwanto','Kotamobagu','1992-03-03','./img_upload/1200661735d99173e946c6.jpg','Molinow','082348366038'),(5,'Enal Nani','Kotamobagu','1995-03-01','./img_upload/17960236215d9917468e886.jpg','Molinow','082348366033'),(6,'Andika','Kotamobagu','1993-03-01','./img_upload/18139338035d99175134e0f.jpg','Molinow','082348366035');
 /*!40000 ALTER TABLE `sopir` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -268,7 +269,7 @@ CREATE TABLE `users` (
   CONSTRAINT `users_ibfk_2` FOREIGN KEY (`kabupaten`) REFERENCES `wilayah_kabupaten` (`id`),
   CONSTRAINT `users_ibfk_3` FOREIGN KEY (`kecamatan`) REFERENCES `wilayah_kecamatan` (`id`),
   CONSTRAINT `users_ibfk_4` FOREIGN KEY (`desa`) REFERENCES `wilayah_desa` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -277,7 +278,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (19,'admin@newgarudatotabuan.com','$2y$10$/KTdAS6YAZsuBTM3WKVmN.ZHByXhYDeRHivDCJ8G5aHxq7xLQsZom','Admin New Garuda Totabuan','082348366034',71,7174,7174030,7174030001,'Jl. Adampe Dolot',1),(21,'test123@gmail.com','$2y$10$WFEL9aj5hAx8DG6jMyqgOurDlYNOL0ftDh2oRrVmtWVykHTHC8gY.','test','1234',71,7174,7174030,7174030001,'jl garuda',0),(23,'Test123@yahoo.com','$2y$10$KTeinNPBW/HXTfHtIAX1suSrdlZ0IoTwPwXZr6usCq/kN2WZR2j0a','test','1234567890',71,7174,7174030,7174030001,'Jl. Garuda',0),(31,'enalnani23@gmail.com','$2y$10$Y1h5LvCSwcpMtkYffCRIg.J8dIRITFBiQEPj9UpmkOcQseQ/sXwzm','Enal nani','081524605468',71,7174,7174030,7174030001,'Jln.adampedolot',0),(34,'akhdede@gmail.com','$2y$10$2Ap3kFDkdYdya/xXRlgVQONzEZVsoggghBXit4VREi6yVljKYnu8y','dede irwanto','082348366034',71,7174,7174030,7174030001,'dd',0),(37,'enalnani@gmail.com','$2y$10$pZrnUeRLQONOTp7Z6ZHshuqSjzGWOr08XCM.J6L5saTHMxLjPDErW','enal','12345678',71,7174,7174030,7174030002,'molinow',0);
+INSERT INTO `users` VALUES (38,'admin@newgarudatotabuan.com','$2y$10$AyWtumecXrDQeKPhQgcgveevaOvlCQfZMaAelEvzNUtyFZQGIDssC','dede irwanto','082348366034',71,7174,7174030,7174030001,'Jl. Gatot Subroto',1),(39,'id.dedeirwanto@gmail.com','$2y$10$TNEdJ/Hv8tgQsdkWYlUQBO4msQaaD/ma5dRUP1heRbCc/IbXae2w.','dede irwanto','082348366034',71,7174,7174030,7174030005,'Jl. Manoppo',0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -393,4 +394,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-08-06 18:43:38
+-- Dump completed on 2019-10-06 16:10:32
