@@ -29,4 +29,9 @@ class User_model extends CI_Model {
         }
         return NULL;
     }
+
+    function activate($email, $hash)
+    {
+        return $this->db->query("UPDATE users SET active='y' WHERE email='$email' AND hash='$hash'");
+    }
 }

@@ -53,7 +53,7 @@ class Driver extends CI_Controller {
 
     if($this->form_validation->run() == TRUE){
       if(in_array($bknGbr, array("jpg", "jpeg", "png"))){
-        $this->driver_model->save($nama, $tempat, $tanggal, $alamat, $url);
+        $this->driver_model->save($nama, $tempat, $tanggal, $alamat, $nomor_handphone, $url);
         $sukses = '<div class="alert alert-success" id="success-alert"> <button type="button" class="close" data-dismiss="alert">x</button><strong>Data berhasil ditambahkan!</strong></div>';
         echo $this->session->set_flashdata('message', $sukses);
         redirect('admin/driver');

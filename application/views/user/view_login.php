@@ -9,11 +9,7 @@ if(isset($_SESSION['email'])){
 ?>
 <div class="container" style="margin: 100px auto;">
     <div class="col-md-4 offset-md-4" style="padding: 20px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.10);">
-        <?php
-        if(isset($message)){
-            echo '<span class="text-success">'.$message.'</span>';
-        }
-        ?>
+        <?php echo $this->session->flashdata('message'); ?>
         <form action="<?php echo base_url('user/login_action'); ?>" method="post">
             <?php if(isset($error)){ ?>
                 <div class="form-group">
