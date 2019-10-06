@@ -281,6 +281,7 @@ class Order extends CI_Controller {
                 foreach($order_detail_cek->result() as $odc){
                     $insert = array(
                         'kode' => $odc->kode,
+                        'title' => 'Segera lakukan pembayaran!',
                         'isi_pesan' => 'Segera lakukan pembayaran! kode pesanan anda <b>'.$kode.'</b>',
                         'costumers' => $_SESSION['email'],
                         'tanggal_message' => date('d-m-Y h:i:s'),
@@ -297,8 +298,10 @@ class Order extends CI_Controller {
                         $array_confirm[] = $com['confirm_kode'];
                     }
 
-                    if(!in_array($insert['kode'], $array_kode))
-                            $this->db->insert('order_message', $insert);
+                    if(!in_array($insert['kode'], $array_kode)){
+                        $this->db->insert('order_message', $insert);
+                        $this->send_mail($insert['costumers'], $insert['title'], $insert['isi_pesan']);
+                    }
                 }
 
                 $cek_order_detail = $this->db->query("SELECT * FROM order_detail WHERE costumers='$email' and tanggal_pesan LIKE '$tanggal_sekarang%' ORDER by kode DESC")->result();
@@ -345,6 +348,7 @@ class Order extends CI_Controller {
             // tambah data pada order message
             $insert = array(
                 'kode' => $kode,
+                'title' => 'Pesanan telah dibatalkan!',
                 'isi_pesan' => 'Anda telah membatalkan orderan dengan kode <b>'.$kode.'</b>',
                 'costumers' => $_SESSION['email'],
                 'tanggal_message' => date('d-m-Y h:i:s'),
@@ -354,8 +358,10 @@ class Order extends CI_Controller {
 
             $cek_pesan = $this->db->query("SELECT * FROM order_message WHERE kode='$kode' and confirm_kode=0")->num_rows();
 
-            if($cek_pesan < 1)
+            if($cek_pesan < 1) {
                 $this->db->insert('order_message', $insert);
+                $this->send_mail($insert['costumers'], $insert['title'], $insert['isi_pesan']);
+            }
 
         }
 
@@ -532,6 +538,61 @@ class Order extends CI_Controller {
         );
 		$this->load->view('layouts/wrapper', $data);
 
+    }
+
+    public function upload_bukti_pembayaran() {
+
+        $where = $this->input->post('kode_pesanan');
+
+        $type = explode('.', $_FILES["img_transfer"]["name"]);
+        
+        $type = $type[count($type)-1];
+
+        $url = "./img_upload/".uniqid(rand()).'.'.$type;
+
+        if(is_uploaded_file($_FILES["img_transfer"]["tmp_name"])){
+
+            if(in_array($type, array("jpg", "jpeg", "png"))){
+
+                move_uploaded_file($_FILES["img_transfer"]["tmp_name"], $url);
+
+                $this->order_model->upload_bukti_pembayaran($url, $where);
+
+                $sukses = $this->session->set_flashdata('message', '<div class="alert alert-success" id="danger-alert"> <button type="button" class="close" data-dismiss="alert">x</button><strong>Bukti pembayaran berhasil diupload!</strong></div>');
+
+            }else{
+
+                $sukses = $this->session->set_flashdata('message', '<div class="alert alert-danger" id="danger-alert"> <button type="button" class="close" data-dismiss="alert">x</button><strong>Bukti pembayaran gagal diupload! type file gambar bukan salah satu dari jpg, jpeg atau png.</strong></div>');
+
+            }
+
+        }
+
+        redirect(base_url('order/confirm_order'));
+    }
+
+    private function send_mail($costumers, $title, $isi_pesan) {
+		$from_email = "garudatotabuannew@gmail.com"; 
+		$to_email = $costumers; 
+
+		$config = Array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_port' => 465,
+            'smtp_user' => $from_email,
+            'smtp_pass' => 'kotamobagu',
+            'mailtype'  => 'html', 
+            'charset'   => 'iso-8859-1'
+		);
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");   
+
+        $this->email->from($from_email, 'New Garuda Totabuan'); 
+        $this->email->to($to_email);
+        $this->email->subject($title); 
+        $this->email->message($isi_pesan); 
+
+        return $this->email->send();
     }
 
 }
