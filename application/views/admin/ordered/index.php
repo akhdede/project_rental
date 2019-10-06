@@ -27,6 +27,7 @@
                 <th>Plat nomor</th>
                 <th>Total bayar</th>
                 <th>Kode pesanan</th>
+                <th>Bukti pembayaran</th>
                 <th>Konfirmasi</th>
               </tr>
             </thead>
@@ -151,11 +152,37 @@
                         </td>
                         <td><?php echo $o->kode ?></td>
                         <td>
+                            <?php if(empty($o->img_transfer)) { ?>
+                                <span class="text-danger">Belum ada</span>
+                            <?php } else { ?>
+                                <a href="#" class="" data-toggle="modal" data-target="#bukti">Lihat</a>
+                            <?php } ?>
+                        </td>
+                        <td>
                             <a href="<?php echo base_url('admin/ordered/konfirmasi/').$o->kode.'/true' ?>" onclick="javascript: return confirm('Anda yakin costumer ini sudah melakukan pembayaran?')" class="btn btn-primary btn-sm">ya</a> 
                             <a href="<?php echo base_url('admin/ordered/konfirmasi/').$o->kode.'/false' ?>" onclick="javascript: return confirm('Anda yakin ingin membatalkan transaksi costumer ini?')" class="btn btn-danger btn-sm">tidak</a>
                         </td>
                       </tr>
                     </tbody>
+
+                    <!-- modals for lihat bukti-->
+                    <div class="modal fade" id="bukti" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <?php echo form_open_multipart('order/upload_bukti_pembayaran', 'id=myForm');?>
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                              <img src="<?php echo base_url($o->img_transfer) ?>" class="img-thumbnail">
+                              </div>
+                            </form>
+                        </div>
+                      </div>
+                    </div>
+
                 <?php } ?>
             <?php } ?>
           </table>

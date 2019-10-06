@@ -61,6 +61,7 @@ class Ordered extends CI_Controller{
                 if($order_detail_cek->num_rows() > 0){
                     $insert = array(
                         'kode' => $kode,
+                        'title' => 'Pesanan telah dikonfirmasi!',
                         'isi_pesan' => 'Pesanan dengan kode <b>'.$kode.'</b> telah dikonfirmasi! Terimakasih.',
                         'costumers' => $costumers[0]->costumers,
                         'tanggal_message' => date('d-m-Y h:i:s'),
@@ -68,6 +69,7 @@ class Ordered extends CI_Controller{
                         'message_status' => 0
                     );
                     $this->db->insert('order_message', $insert);
+                    $this->send_mail($insert['costumers'], $insert['title'], $insert['isi_pesan']);
                 }
             }
         }
@@ -85,6 +87,7 @@ class Ordered extends CI_Controller{
                 if($order_detail_cek->num_rows() > 0){
                     $insert = array(
                         'kode' => $kode,
+                        'title' => 'Pesanan telah kadaluarsa!',
                         'isi_pesan' => 'Pesanan dengan kode <b>'.$kode.'</b> telah kadaluarsa!',
                         'costumers' => $costumers[0]->costumers,
                         'tanggal_message' => date('d-m-Y h:i:s'),
@@ -95,10 +98,35 @@ class Ordered extends CI_Controller{
 
                     // delete order detail
                     $this->db->query("DELETE FROM order_detail WHERE kode='$kode' and confirm_by_admin=2");
+                    $this->send_mail($insert['costumers'], $insert['title'], $insert['isi_pesan']);
                 }
             }
         }
         redirect('admin/ordered');
         return true;
+    }
+
+    private function send_mail($costumers, $title, $isi_pesan) {
+		$from_email = "garudatotabuannew@gmail.com"; 
+		$to_email = $costumers; 
+
+		$config = Array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_port' => 465,
+            'smtp_user' => $from_email,
+            'smtp_pass' => 'kotamobagu',
+            'mailtype'  => 'html', 
+            'charset'   => 'iso-8859-1'
+		);
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");   
+
+        $this->email->from($from_email, 'New Garuda Totabuan'); 
+        $this->email->to($to_email);
+        $this->email->subject($title); 
+        $this->email->message($isi_pesan); 
+
+        return $this->email->send();
     }
 }

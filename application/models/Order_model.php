@@ -56,5 +56,11 @@ class Order_model extends CI_Model {
         return $this->db->get_where('order_message', $where);
     }
 
+    public function upload_bukti_pembayaran($url, $where) {
+
+        $query = $this->db->query("UPDATE order_detail SET img_transfer='$url' WHERE kode='$where'");
+        return $query;
+    }
+
 }
 
