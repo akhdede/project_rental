@@ -137,7 +137,10 @@ class User extends CI_Controller {
 
         $this->user_model->activate($email, $hash);
         $this->session->set_flashdata('message', '<span class="text-success">Akun anda sudah aktif! silahkan login</span>');
-        redirect(base_url('user/login'));
+
+        $data = array( 'content' => 'user/view_login.php');
+
+        $this->load->view('layouts/wrapper', $data);
 
     }
 
