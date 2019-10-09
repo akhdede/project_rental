@@ -78,7 +78,7 @@ class Ordered extends CI_Controller{
 
             $cek = $this->db->query("SELECT * FROM order_detail WHERE kode='$kode' and confirm_by_admin=2")->num_rows();
             if($cek > 0){
-                $this->db->query("UPDATE kursi_tersedia SET status=0 WHERE kode_pesanan='$kode'");
+                $this->db->query("UPDATE kursi_tersedia SET status=0, kode_pesanan=NULL, costumer=NULL WHERE kode_pesanan='$kode'");
 
                 // insert data di message
                 $order_detail_cek = $this->db->query("SELECT * FROM order_detail WHERE kode='$kode' and confirm_by_admin=2");
