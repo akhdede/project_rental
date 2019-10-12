@@ -34,7 +34,7 @@
                   <div class="col-sm-1 col-sm-offset-6 text-center"><font size="2"><?php echo "No. ".$ks->nomor_kursi ?></font></div>
                   <div class="col-sm-2 text-center"><font size="2"><?php echo $ks->nama_lengkap ?></font></div>
                   <div class="col-sm-1 col-sm-offset-2 text-center">
-                  <a href="<?php if($mt->sudah_jalan == 'y'){echo "#";}else{echo base_url('admin/tersedia/batalPesan/').$ks->plat_nomor."/".$ks->nomor_kursi;} ?>" title="Batal" <?php if($mt->sudah_jalan == 'y'){echo ""; }else{?>onclick="javascript: return confirm('Apakah anda akan membatalkan transaksi ini?')" <?php }?>><span class="glyphicon glyphicon-remove"></span></a>
+                  <a href="<?php if($mt->sudah_jalan == 'y'){echo "#";}else{echo base_url('admin/tersedia/batalPesan/').$ks->plat_nomor."/".$ks->nomor_kursi."/".$ks->kode_pesanan;} ?>" title="Batal" <?php if($mt->sudah_jalan == 'y'){echo ""; }else{?>onclick="javascript: return confirm('Apakah anda akan membatalkan transaksi ini?')" <?php }?>><span class="glyphicon glyphicon-remove"></span></a>
                   </div>
               <div class="col-sm-12">&nbsp;</div>
                 <?php } ?>

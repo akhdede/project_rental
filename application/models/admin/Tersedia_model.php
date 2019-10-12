@@ -61,8 +61,10 @@ class Tersedia_model extends CI_Model{
 
   }
 
-  function batalPesan($plat_nomor, $no_kursi){
-    return $this->db->query("UPDATE kursi_tersedia SET status=0, costumer=null, kode_pesanan=null WHERE plat_nomor='$plat_nomor' AND nomor_kursi='$no_kursi'");
+  function batalPesan($plat_nomor, $no_kursi, $kode_pesanan){
+    $this->db->query("UPDATE kursi_tersedia SET status=0, costumer=null, kode_pesanan=null WHERE plat_nomor='$plat_nomor' AND nomor_kursi='$no_kursi' AND kode_pesanan='$kode_pesanan'");
+    $this->db->query("DELETE FROM order_detail WHERE plat_nomor='$plat_nomor' AND nomor_kursi='$no_kursi' AND kode='$kode_pesanan'");
+    return true;
   }
 
   // mobil jalan

@@ -108,11 +108,12 @@ class Tersedia extends CI_Controller {
   public function batalPesan(){
     $plat_no = $this->uri->segment(4);
     $no_kursi = $this->uri->segment(5);
+    $kode_pesanan = $this->uri->segment(6);
     $status = null;
     $costumer = null;
     $ket = null;
 
-    $this->tersedia_model->batalPesan($plat_no, $no_kursi);
+    $this->tersedia_model->batalPesan($plat_no, $no_kursi, $kode_pesanan);
 
     redirect('admin/tersedia/kursi_dipesan');
   }
